@@ -1,0 +1,18 @@
+language:
+- node_js
+node_js:
+- 6.2.2
+env:
+  global:
+  - NODE_ENV=test
+install:
+- npm install
+- npm install -g codecov istanbul mocha
+script:
+ - istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec
+# - codecov
+branches:
+  only:
+    - master
+    - stable
+    - develop
