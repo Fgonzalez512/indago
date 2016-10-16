@@ -1,8 +1,12 @@
 const lint = require('mocha-eslint');
 const options = require('../.eslintrc');
 const paths = [
-  'tests/**/*Test.js',
-  'src/**/*.js'
+  'test/*.js',
+  'test/**/*.js',
+  'src/**/*.js',
+  'src/**/*.ejs',
+  'src/**/*.html',
+  'src/**/*.htm'
 ];
 
 // Run the tests
