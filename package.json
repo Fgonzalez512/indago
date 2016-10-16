@@ -2,15 +2,12 @@
   "name": "Indago",
   "description": "...",
   "version": "0.1.0",
-  "engines": {
-    "node": "6.2.2"
-  },
   "private": false,
   "author": "",
   "license": "ISC",
   "main": "./src/server/server.js",
   "scripts": {
-    "start": "pm2 start ./src/server/server.js",
+    "start":"node ./src/server/server.js",
     "test": "NODE_ENV=test ./node_modules/mocha/bin/_mocha",
     "stop": "pm2 delete all",
     "dev": "NODE_ENV=development nodemon /src/server/server.js",
@@ -29,7 +26,6 @@
     "connect-flash": ">=0.1.1",
     "cookie-session": ">=2.0.0-alpha.1",
     "debug": ">=2.2.0",
-    "dotenv": ">=2.0.0",
     "ejs": "^2.5.2",
     "express": ">=4.13.4",
     "helmet": "^2.3.0",
