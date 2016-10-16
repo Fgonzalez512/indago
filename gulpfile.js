@@ -11,6 +11,7 @@ const server = require('tiny-lr')();
 
 // *** config *** //
 
+
 const paths = {
   scripts: [
     path.join('src', '**', '*.js'),
@@ -51,16 +52,16 @@ gulp.task('default', () => {
 });
 
 // *** sub tasks ** //
-
+console.log('__dirname',__dirname);
 gulp.task('eslint', () => {
   return gulp.src(paths.scripts)
     .pipe(plumber())
-    .pipe(eslint('.eslintrc.js'))
-    .pipe(eslint.format())
+    .pipe(eslint('.eslintrc.json'))
+    .pipe(eslint.format());
     // .pipe(eslint.format(friendlyFormatter))
-    .pipe(notify({
-      message: 'eslint done'
-    }));
+    // .pipe(notify({
+    //   message: 'eslint done'
+    // }));
 });
 
 
@@ -91,3 +92,5 @@ gulp.task('watch', () => {
   gulp.watch(paths.scripts, ['eslint']);
   gulp.watch(paths.styles, ['styles']);
 });
+
+console.log('process.env.NODE_ENV',process.env.NODE_ENV);
