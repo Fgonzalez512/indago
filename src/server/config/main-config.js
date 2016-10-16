@@ -4,12 +4,12 @@
 
   // *** main dependencies *** //
   const path = require('path');
-  const cookieParser = require('cookie-parser');
   const bodyParser = require('body-parser');
-  const session = require('express-session');
+  const session = require('cookie-session');
   const flash = require('connect-flash');
   const morgan = require('morgan');
   const nunjucks = require('nunjucks');
+  const helmet = require('helmet');
 
   // *** view folders *** //
   const viewFolders = [
@@ -26,13 +26,34 @@
       express: app,
       autoescape: true
     });
+
+
     app.set('view engine', 'html');
+    // app.set('view engine', 'ejs');
+
+    // *** load helmet and cookie-session *** //
+    // express security best practices to use helmet
+    // https://expressjs.com/en/advanced/best-practice-security.html
+    app.use(helmet());
+
+    // cookie-session
+    app.use(session({
+      name: 'session',
+      secret: process.env.SESSION_SECRET
+    }));
+
+    // This allows you to set req.session.maxAge to let certain sessions
+    // have a different value than the default.
+    app.use((req, res, next) => {
+      req.sessionOptions.maxAge = req.session.maxAge || req.sessionOptions.maxAge;
+      next();
+    });
 
     // *** app middleware *** //
     if (process.env.NODE_ENV !== 'test') {
       app.use(morgan('dev'));
     }
-    app.use(cookieParser());
+    // app.use(cookieParser());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(flash());
