@@ -6,7 +6,7 @@
   const path = require('path');
   const cookieParser = require('cookie-parser');
   const bodyParser = require('body-parser');
-  // const session = require('express-session');
+  const session = require('express-session');
   const flash = require('connect-flash');
   const morgan = require('morgan');
   const nunjucks = require('nunjucks');
@@ -17,9 +17,7 @@
   ];
 
   // *** load environment variables *** //
-  if (process.env.NODE_ENV !== 'test') {
-    require('dotenv').config();
-  }
+  require('dotenv').config();
 
   appConfig.init = function(app, express) {
 
@@ -37,12 +35,6 @@
     app.use(cookieParser());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
-    // // uncomment if using express-session
-    // app.use(session({
-    //   secret: process.env.SECRET_KEY,
-    //   resave: false,
-    //   saveUninitialized: true
-    // }));
     app.use(flash());
     app.use(express.static(path.join(__dirname, '..', '..', 'client')));
 
