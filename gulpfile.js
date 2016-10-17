@@ -52,7 +52,6 @@ gulp.task('default', () => {
 });
 
 // *** sub tasks ** //
-console.log('__dirname',__dirname);
 gulp.task('eslint', () => {
   return gulp.src(paths.scripts)
     .pipe(plumber())
@@ -92,5 +91,3 @@ gulp.task('watch', () => {
   gulp.watch(paths.scripts, ['eslint']);
   gulp.watch(paths.styles, ['styles']);
 });
-
-console.log('process.env.NODE_ENV',process.env.NODE_ENV);

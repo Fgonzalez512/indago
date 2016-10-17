@@ -11,7 +11,9 @@
 
   const server = http.createServer(app);
 
-  server.listen(port);
+  server.listen(port, ()=>{
+    console.log(process.env.NODE_ENV, 'listening on port: ' + port);
+  });
   server.on('error', onError);
   server.on('listening', onListening);
 
