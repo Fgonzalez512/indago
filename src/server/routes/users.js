@@ -29,8 +29,13 @@ router.post('/signup', function(req, res) {
           password: hashed_password
         }).then(function() {
           knex('users').where('email', req.body.email).first().then(function(newuser) {
+
             req.session.user = newuser;
-            res.cookie('loggedIn', true);
+            req.session.loggedIn = true;
+
+            res.locals.user = newuser;
+            res.locals.loggedIn = true;
+
             res.redirect('/index');
           });
         });
@@ -52,8 +57,13 @@ router.post('/login', function(req, res) {
     }
     bcrypt.compareSync(req.body.password, user.password)
       .then(function() {
+
         req.session.user = user;
-        res.cookie('loggedIn', true);
+        req.session.loggedIn = true;
+
+        res.locals.user = user;
+        res.locals.loggedIn = true;
+
         res.redirect('/index');
       }, function() {
         res.redirect('back');
@@ -62,8 +72,7 @@ router.post('/login', function(req, res) {
 });
 
 router.get('/logout', function(req, res) {
-  req.session.destroy();
-  res.clearCookie('loggedIn');
+  req.session = null;
   res.redirect('pages/login');
 });
 
