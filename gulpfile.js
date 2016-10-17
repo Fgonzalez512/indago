@@ -6,7 +6,6 @@ const eslint = require('gulp-eslint');
 const runSequence = require('run-sequence');
 const nodemon = require('gulp-nodemon');
 const plumber = require('gulp-plumber');
-const notify = require('gulp-notify');
 const server = require('tiny-lr')();
 
 // *** config *** //
