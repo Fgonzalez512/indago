@@ -1,18 +1,64 @@
+'use strict';
+
+
 const express = require('express');
 const router = express.Router();
+const knex = require('../db/connection.js');
+const bcrypt = require('bcrypt-nodejs');
+const methodOverride = require('method-override');
 
-const indexController = require('../controllers/index');
+router.get('/signup', function(req, res) {
+  res.render('pages/signup');
+});
 
-router.get('/', function (req, res, next) {
-  const renderObject = {};
-  renderObject.title = 'Welcome to Express!';
-  indexController.sum(1, 2, (error, results) => {
-    if (error) return next(error);
-    if (results) {
-      renderObject.sum = results;
-      res.render('index', renderObject);
+router.post('/signup', function(req, res) {
+  knex('users').where('email', req.body.email).first().then(function(user) {
+    if (!user) {
+      bcrypt.hash(req.body.password, 12).then(function(hashed_password, err) {
+        knex('users').insert({
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
+          email: req.body.email,
+          username: req.body.username,
+          password: hashed_password
+        }).then(function() {
+          knex('users').where('email', req.body.email).first().then(function(newuser) {
+            req.session.user = newuser;
+            res.cookie('loggedIn', true);
+            res.redirect('/index');
+          });
+        });
+      });
+    } else {
+      res.send('User created');
     }
   });
+});
+
+router.get('/login', function(req, res) {
+  res.render('pages/login');
+});
+
+router.post('/login', function(req, res) {
+  knex('users').where('email', req.body.email).first().then(function(user) {
+    if (!user) {
+      res.redirect('/signup');
+    }
+    bcrypt.compare(req.body.password, user.password)
+      .then(function() {
+        req.session.user = user;
+        res.cookie('loggedIn', true);
+        res.redirect('/index');
+      }, function() {
+        res.redirect('back');
+      });
+  });
+});
+
+router.get('/logout', function(req, res) {
+  req.session.destroy();
+  res.clearCookie('loggedIn');
+  res.redirect('pages/login');
 });
 
 module.exports = router;
