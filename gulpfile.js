@@ -6,7 +6,6 @@ const eslint = require('gulp-eslint');
 const runSequence = require('run-sequence');
 const nodemon = require('gulp-nodemon');
 const plumber = require('gulp-plumber');
-const notify = require('gulp-notify');
 const server = require('tiny-lr')();
 
 // *** config *** //
@@ -52,7 +51,6 @@ gulp.task('default', () => {
 });
 
 // *** sub tasks ** //
-console.log('__dirname',__dirname);
 gulp.task('eslint', () => {
   return gulp.src(paths.scripts)
     .pipe(plumber())
@@ -92,5 +90,3 @@ gulp.task('watch', () => {
   gulp.watch(paths.scripts, ['eslint']);
   gulp.watch(paths.styles, ['styles']);
 });
-
-console.log('process.env.NODE_ENV',process.env.NODE_ENV);
