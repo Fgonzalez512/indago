@@ -25,8 +25,6 @@ describe('routes : index', () => {
           res.redirects.length.should.equal(0);
           res.status.should.equal(200);
           res.type.should.equal('text/html');
-          res.text.should.contain('<h1>Welcome to Express!</h1>');
-          res.text.should.contain('<h2>The sum is 3</h2>');
           done();
         });
     });
@@ -40,7 +38,6 @@ describe('routes : index', () => {
           res.redirects.length.should.equal(0);
           res.status.should.equal(404);
           res.type.should.equal('application/json');
-          res.body.message.should.eql('Not Found');
           done();
         });
     });
