@@ -7,6 +7,12 @@ const knex = require('../db/connection.js');
 const bcrypt = require('bcrypt-nodejs');
 const methodOverride = require('method-override');
 
+
+
+router.get('/', function(req, res) {
+  res.render('index');
+});
+
 router.get('/signup', function(req, res) {
   res.render('pages/signup');
 });
@@ -14,7 +20,7 @@ router.get('/signup', function(req, res) {
 router.post('/signup', function(req, res) {
   knex('users').where('email', req.body.email).first().then(function(user) {
     if (!user) {
-      bcrypt.hash(req.body.password, 12).then(function(hashed_password, err) {
+      bcrypt.hashSync(req.body.password, 12).then(function(hashed_password, err) {
         knex('users').insert({
           first_name: req.body.first_name,
           last_name: req.body.last_name,
@@ -23,8 +29,13 @@ router.post('/signup', function(req, res) {
           password: hashed_password
         }).then(function() {
           knex('users').where('email', req.body.email).first().then(function(newuser) {
+
             req.session.user = newuser;
-            res.cookie('loggedIn', true);
+            req.session.loggedIn = true;
+
+            res.locals.user = newuser;
+            res.locals.loggedIn = true;
+
             res.redirect('/index');
           });
         });
@@ -44,10 +55,15 @@ router.post('/login', function(req, res) {
     if (!user) {
       res.redirect('/signup');
     }
-    bcrypt.compare(req.body.password, user.password)
+    bcrypt.compareSync(req.body.password, user.password)
       .then(function() {
+
         req.session.user = user;
-        res.cookie('loggedIn', true);
+        req.session.loggedIn = true;
+
+        res.locals.user = user;
+        res.locals.loggedIn = true;
+
         res.redirect('/index');
       }, function() {
         res.redirect('back');
@@ -56,8 +72,7 @@ router.post('/login', function(req, res) {
 });
 
 router.get('/logout', function(req, res) {
-  req.session.destroy();
-  res.clearCookie('loggedIn');
+  req.session = null;
   res.redirect('pages/login');
 });
 

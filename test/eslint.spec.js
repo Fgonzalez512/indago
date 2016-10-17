@@ -4,7 +4,7 @@ const paths = [
   'test/*.js',
   'test/**/*.js',
   'src/**/*.js',
-  'src/**/*.ejs',
+  // 'src/**/*.ejs',
   'src/**/*.html',
   'src/**/*.htm'
 ];

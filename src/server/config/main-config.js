@@ -32,8 +32,8 @@
     // *** load environment variables *** //
     require('dotenv').config();
 
-    app.set('view engine', 'html');
-    // app.set('view engine', 'ejs');
+    // app.set('view engine', 'html');
+    app.set('view engine', 'ejs');
 
     // *** load helmet and cookie-session *** //
     // express security best practices to use helmet
