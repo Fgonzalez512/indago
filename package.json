@@ -7,10 +7,10 @@
   "license": "ISC",
   "main": "./src/server/server.js",
   "scripts": {
-    "start":"node ./src/server/server.js",
+    "start": "node ./src/server/server.js",
     "test": "NODE_ENV=test ./node_modules/mocha/bin/_mocha",
     "stop": "pm2 delete all",
-    "dev": "NODE_ENV=development nodemon /src/server/server.js",
+    "dev": "NODE_ENV=development nodemon ./src/server/server.js",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
     "codecov": "codecov",
     "knex": "knex",
@@ -22,10 +22,12 @@
     "url": "git+https://github.com/diegogoding/scout.git"
   },
   "dependencies": {
+    "bcrypt-as-promised": "^1.1.0",
     "body-parser": ">=1.15.1",
     "connect-flash": ">=0.1.1",
     "cookie-session": ">=2.0.0-alpha.1",
     "debug": ">=2.2.0",
+    "dotenv": "^2.0.0",
     "ejs": "^2.5.2",
     "express": ">=4.13.4",
     "helmet": "^2.3.0",
@@ -45,7 +47,6 @@
     "gulp-codecov": "^2.0.2",
     "gulp-eslint": ">=3.0.1",
     "gulp-nodemon": ">=2.1.0",
-    "gulp-notify": ">=2.2.0",
     "gulp-plumber": ">=1.1.0",
     "istanbul": "^0.4.5",
     "mocha": ">=3.1.2",

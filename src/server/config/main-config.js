@@ -1,3 +1,5 @@
+// SET SESSION SECRET
+// bash -c 'echo "SESSION_SECRET="$(openssl rand -hex 64)' >> .env
 
 (function(appConfig) {
 
@@ -27,6 +29,8 @@
       autoescape: true
     });
 
+    // *** load environment variables *** //
+    require('dotenv').config();
 
     app.set('view engine', 'html');
     // app.set('view engine', 'ejs');
