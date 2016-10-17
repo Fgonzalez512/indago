@@ -5,10 +5,20 @@
   routeConfig.init = function (app) {
 
     // *** routes *** //
-    const routes = require('../routes/index');
-
+    const auth = require('../routes/auth');
+    const index = require('../routes/index');
+    const users = require('../routes/users');
+    const places = require('../routes/places');
+    const trips = require('../routes/trips');
+    const search = require('../routes/search');
+    
     // *** register routes *** //
-    app.use('/', routes);
+    app.use('/', auth);
+    app.use('/', index);
+    app.use('/users', users);
+    app.use('/places', places);
+    app.use('/trips', trips);
+    app.use('/search', search);
 
   };
 
