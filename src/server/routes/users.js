@@ -10,6 +10,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/signup', function(req, res) {
+  res.locals.loggedIn = req.session.loggedIn || false;
   res.render('pages/signup');
 });
 
@@ -50,6 +51,7 @@ router.post('/signup', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
+  res.locals.loggedIn = req.session.loggedIn || false;
   res.render('pages/login');
 });
 
