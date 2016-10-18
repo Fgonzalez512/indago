@@ -1,18 +1,15 @@
 const express = require('express');
 const router = express.Router();
-
-const indexController = require('../controllers/index');
+const googlePlaces = require('../../../src/server/modules/google-places.js');
+const radarSearch = googlePlaces.radarSearch;
+const placeDetails = googlePlaces.details;
 
 router.get('/', function (req, res, next) {
-  const renderObject = {};
-  renderObject.title = 'Welcome to Express!';
-  indexController.sum(1, 2, (error, results) => {
-    if (error) return next(error);
-    if (results) {
-      renderObject.sum = results;
-      res.render('index', renderObject);
-    }
-  });
+  res.render('pages/search');
+});
+
+router.post('/', function(req, res, next) {
+  console.log(req.body);
 });
 
 module.exports = router;
