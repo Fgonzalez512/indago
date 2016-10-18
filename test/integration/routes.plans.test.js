@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 const server = require('../../src/server/app');
 
-describe('routes : trips', () => {
+describe('routes : plans', () => {
 
   beforeEach((done) => {
     done();
@@ -17,10 +17,10 @@ describe('routes : trips', () => {
     done();
   });
 
-  describe('GET /trips', () => {
-    it('should render the trips', (done) => {
+  describe('GET /plans', () => {
+    it('should render the plans', (done) => {
       chai.request(server)
-        .get('/trips')
+        .get('/plans')
         .end((err, res) => {
           res.redirects.length.should.equal(0);
           res.status.should.equal(200);
