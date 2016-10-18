@@ -2,33 +2,31 @@
 <html>
 
     <head>
-        <!-- jquery -->
-        <script src="http://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
-        <!-- semantic ui js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.js" charset="utf-8"></script>
-        <!-- semantic ui css -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.css">
-        <!-- my js -->
-        <script src="/app.js" charset="utf-8"></script>
-        <!-- my css -->
-        <link rel="stylesheet" href="/style.css">
-
-        <meta charset="utf-8">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+      <link rel="stylesheet" type="text/css" href="/css/main.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Raleway:300" rel="stylesheet">
         <title>Sign Up</title>
     </head>
-
     <body>
-        <div class=""></div>
-        <div class="">
-            <div class="">
-                <h2>Sign Up Page</h2>
+      <div class="navBar">
+          <a href="/">indago</a>
+          <input type="text" name="searchNav" value placeholder="City">
+          <a href="users/signup"> Sign Up </a>
+          <a href="users/login"> Login </a>
+      </div>
+        <div class="bigContainer">
+            <div class="smallContainer">
+                <h3>Sign Up Page</h3>
                 <form class="formEdit" action="/users/signup" method="POST">
                     <input type="text" name="first_name" value placeholder="First Name">
                     <input type="text" name="last_name" value placeholder="Last Name">
                     <input type="text" name="username" value placeholder="Username">
                     <input type="text" name="email" value placeholder="Email">
                     <input type="password" name="password" value placeholder="Password">
-                    <button class="ui white button" type="submit">Sign Up</button>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
                 </form>
             </div>
         </div>
