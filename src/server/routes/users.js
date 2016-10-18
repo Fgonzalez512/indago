@@ -15,6 +15,7 @@ router.get('/signup', function(req, res) {
 });
 
 router.post('/signup', function(req, res) {
+
   User.withEmail(req.body.email)
     .then(function(user) {
       if (!user) {
@@ -30,7 +31,7 @@ router.post('/signup', function(req, res) {
             username: req.body.username,
             password: hashed_password
           }).then(function(newUser) {
-            
+
             req.session.user = newUser;
             req.session.loggedIn = true;
 
@@ -40,6 +41,7 @@ router.post('/signup', function(req, res) {
             res.redirect('/index');
 
           });
+
         });
       } else {
         res.send('User created');
