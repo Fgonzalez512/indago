@@ -29,17 +29,17 @@ describe('routes : places', () => {
         });
     });
   });
-  describe('POST /places', () => {
-    it('should add a place to the database', (done) => {
-      chai.request(server)
-        .post('/places')
-        .send()
-        .end((err, res) => {
-          res.redirects.length.should.equal(0);
-          res.status.should.equal(200);
-          // res.type.should.equal('text/html');
-          done();
-        });
-    });
-  });
+  // describe('POST /places', () => {
+  //   it('should add a place to the database', (done) => {
+  //     chai.request(server)
+  //       .post('/places')
+  //       .send()
+  //       .end((err, res) => {
+  //         res.redirects.length.should.equal(0);
+  //         res.status.should.equal(200);
+  //         // res.type.should.equal('text/html');
+  //         done();
+  //       });
+  //   });
+  // });
 });
