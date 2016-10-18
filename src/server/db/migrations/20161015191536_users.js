@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.string('last_name',35).defaultTo('');
     table.string('username',20).unique();
     table.string('email').unique();
-    table.string('password',60).defaultTo('');
+    table.specificType('password','char(60)').defaultTo('');
     table.integer('user_type_id').notNullable().defaultTo(1);
     table.timestamps(true,true);
   });
