@@ -11,7 +11,7 @@
   const session = require('cookie-session');
   const flash = require('connect-flash');
   const morgan = require('morgan');
-  const nunjucks = require('nunjucks');
+  // const nunjucks = require('nunjucks');
   const helmet = require('helmet');
 
   // *** view folders *** //
@@ -20,18 +20,19 @@
   ];
 
   // *** load environment variables *** //
-
+  console.log(viewFolders);
   appConfig.init = function(app, express) {
 
     // *** view engine *** //
-    nunjucks.configure(viewFolders, {
-      express: app,
-      autoescape: true
-    });
+    // nunjucks.configure(viewFolders, {
+    //   express: app,
+    //   autoescape: true
+    // });
 
     // *** load environment variables *** //
-    require('dotenv').config();
-
+    require('dotenv')
+      .config();
+    app.set('views', viewFolders);
     // app.set('view engine', 'html');
     app.set('view engine', 'ejs');
 
