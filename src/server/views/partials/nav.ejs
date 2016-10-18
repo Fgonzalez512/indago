@@ -1,0 +1,26 @@
+
+<%if (loggedIn) {%>
+<div class="navBar">
+    <a class="logo" href="/">indago</a>
+    <input type="text" name="searchNav" value placeholder="City">
+    <a class="dropdown-button" href="#" data-activates="dropdown1"> Plans </a>
+    <a class="dropdown-button" href="#" data-activates="dropdown2"href="#" data-activates="dropdown2"> User </a>
+</div>
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="#">My Plans</a></li>
+  <li><a href="#">Favorite Plans</a></li>
+  <li><a href="#">Favorite Places</a></li>
+  <li><a href="#">Create Plan</a></li>
+</ul>
+<ul id="dropdown2" class="dropdown-content">
+  <li><a href="#">Edit</a></li>
+  <li><a href="/users/logout">Log Out</a></li>
+</ul>
+<% } else { %>
+<div class="navBar">
+    <a href="/">indago</a>
+    <input type="text" name="searchNav" value placeholder="City">
+    <a href="users/signup"> Sign Up </a>
+    <a href="users/login"> Login </a>
+</div>
+<% } %>
