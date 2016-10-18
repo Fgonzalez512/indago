@@ -39,7 +39,7 @@ router.post('/signup', function(req, res) {
             res.locals.user = newUser;
             res.locals.loggedIn = true;
 
-            res.redirect('/index');
+            res.redirect('/');
 
           });
 
@@ -60,7 +60,7 @@ router.post('/login', function(req, res) {
     .then(function(user) {
 
       if (!user) {
-        res.redirect('/signup');
+        res.redirect('/users/signup');
       }
 
       let pBcryptCompare = new Promise((resolve)=>{
@@ -89,7 +89,7 @@ router.post('/login', function(req, res) {
 
 router.get('/logout', function(req, res) {
   req.session = null;
-  res.redirect('pages/login');
+  res.redirect('/users/login');
 });
 
 module.exports = router;
