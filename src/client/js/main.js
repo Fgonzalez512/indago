@@ -1,5 +1,7 @@
-(function () {
+(function() {
 
-  console.log('sanity check!');
+  $(".dropdown-button").dropdown({
+    hover: false
+  });
 
 })();
