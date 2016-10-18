@@ -24,6 +24,7 @@ router.post('/signup', function(req, res) {
         });
 
         pBcryptHash.then((hashed_password) =>{
+
           User.insert({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
@@ -57,6 +58,7 @@ router.post('/login', function(req, res) {
 
   User.withEmail(req.body.email)
     .then(function(user) {
+
       if (!user) {
         res.redirect('/signup');
       }
@@ -66,14 +68,19 @@ router.post('/login', function(req, res) {
       });
 
       pBcryptCompare.then((result) => {
+
         if (result) {
+
           req.session.user = user;
           req.session.loggedIn = true;
 
           res.locals.user = user;
           res.locals.loggedIn = true;
+
           res.redirect('/');
+
         }else {
+
           res.render('pages/login');
         }
       });
