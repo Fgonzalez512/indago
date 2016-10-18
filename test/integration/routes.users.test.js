@@ -1,32 +1,62 @@
+
 process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
-// const should = chai.should();
+const should = chai.should();
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 const server = require('../../src/server/app');
+const agent = chai.request.agent(server);
 
-describe('routes : users', () => {
+describe('signup page', () => {
 
-  beforeEach((done) => {
-    done();
+  it('should exist', (done) => {
+    chai.request(server)
+      .get('/users/signup')
+      .end((err, res) => {
+        res.status.should.equal(200);
+        done();
+      });
   });
 
-  afterEach((done) => {
-    done();
+  it('form on page', (done) => {
+    chai.request(server)
+      .get('/users/signup')
+      .end((err, res) => {
+        res.text.should.include('</form>');
+        done();
+      });
+
   });
 
-  describe('GET /users', () => {
-    it('should render the users', (done) => {
-      chai.request(server)
-        .get('/users')
-        .end((err, res) => {
-          res.redirects.length.should.equal(0);
-          res.status.should.equal(200);
-          res.type.should.equal('text/html');
-          done();
-        });
-    });
+  it('last name field', (done) => {
+    chai.request(server)
+      .get('/users/signup')
+      .end((err, res) => {
+        res.text.should.include('name="last_name"');
+        done();
+      });
+
+  });
+
+  it('email field', (done) => {
+    chai.request(server)
+      .get('/users/signup')
+      .end((err, res) => {
+        res.text.should.include('name="email"');
+        done();
+      });
+
+  });
+
+  it('password field', (done) => {
+    chai.request(server)
+      .get('/users/signup')
+      .end((err, res) => {
+        res.text.should.include('input type="password"');
+        done();
+      });
+
   });
 });
