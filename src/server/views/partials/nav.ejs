@@ -1,12 +1,5 @@
-<!-- Logged Out -->
-<div class="navBar">
-    <a href="/">indago</a>
-    <input type="text" name="searchNav" value placeholder="City">
-    <a href="users/signup"> Sign Up </a>
-    <a href="users/login"> Login </a>
-</div>
 
-<!-- Logged In -->
+<%if (loggedIn) {%>
 <div class="navBar">
     <a class="logo" href="/">indago</a>
     <input type="text" name="searchNav" value placeholder="City">
@@ -21,5 +14,13 @@
 </ul>
 <ul id="dropdown2" class="dropdown-content">
   <li><a href="#">Edit</a></li>
-  <li><a href="#">Log Out</a></li>
+  <li><a href="/users/logout">Log Out</a></li>
 </ul>
+<% } else { %>
+<div class="navBar">
+    <a href="/">indago</a>
+    <input type="text" name="searchNav" value placeholder="City">
+    <a href="users/signup"> Sign Up </a>
+    <a href="users/login"> Login </a>
+</div>
+<% } %>
