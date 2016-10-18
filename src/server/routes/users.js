@@ -1,10 +1,9 @@
 'use strict';
 
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const bcrypt = require('bcrypt-nodejs');
 const methodOverride = require('method-override');
-const User = require('../modules/users');
+const Users = require('../modules/users');
 
 router.get('/', function(req, res) {
   res.render('index');
@@ -16,16 +15,16 @@ router.get('/signup', function(req, res) {
 
 router.post('/signup', function(req, res) {
 
-  User.withEmail(req.body.email)
+  Users.withEmail(req.body.email)
     .then(function(user) {
       if (!user) {
-        let pBcryptHash = new Promise((resolve)=> {
+        let pBcryptHash = new Promise((resolve) => {
           resolve(bcrypt.hashSync(req.body.password));
         });
 
-        pBcryptHash.then((hashed_password) =>{
+        pBcryptHash.then((hashed_password) => {
 
-          User.insert({
+          Users.insert({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             email: req.body.email,
@@ -56,14 +55,14 @@ router.get('/login', function(req, res) {
 
 router.post('/login', function(req, res) {
 
-  User.withEmail(req.body.email)
+  Users.withEmail(req.body.email)
     .then(function(user) {
 
       if (!user) {
         res.redirect('/signup');
       }
 
-      let pBcryptCompare = new Promise((resolve)=>{
+      let pBcryptCompare = new Promise((resolve) => {
         resolve(bcrypt.compareSync(req.body.password, user.password));
       });
 
@@ -79,7 +78,7 @@ router.post('/login', function(req, res) {
 
           res.redirect('/');
 
-        }else {
+        } else {
 
           res.render('pages/login');
         }
