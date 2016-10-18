@@ -1,15 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Signup Page</title>
+        <!-- jquery -->
+        <script src="http://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+        <!-- semantic ui js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.js" charset="utf-8"></script>
+        <!-- semantic ui css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.css">
+        <!-- my js -->
+        <script src="/app.js" charset="utf-8"></script>
+        <!-- my css -->
+        <link rel="stylesheet" href="/style.css">
+
+        <meta charset="utf-8">
+        <title>Sign Up</title>
     </head>
 
     <body>
-
+        <div class=""></div>
+        <div class="">
+            <div class="">
+                <h2>Sign Up Page</h2>
+                <form class="formEdit" action="/users/signup" method="POST">
+                    <input type="text" name="first_name" value placeholder="First Name">
+                    <input type="text" name="last_name" value placeholder="Last Name">
+                    <input type="text" name="username" value placeholder="Username">
+                    <input type="text" name="email" value placeholder="Email">
+                    <input type="password" name="password" value placeholder="Password">
+                    <button class="ui white button" type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
     </body>
 
 </html>
