@@ -60,3 +60,46 @@ describe('signup page', () => {
 
   });
 });
+
+describe('login page', () => {
+
+  it('should exist', (done) => {
+    chai.request(server)
+      .get('/users/login')
+      .end((err, res) => {
+        res.status.should.equal(200);
+        done();
+      });
+  });
+
+  it('form on page', (done) => {
+    chai.request(server)
+      .get('/users/login')
+      .end((err, res) => {
+        res.text.should.include('</form>');
+        done();
+      });
+
+  });
+
+
+  it('email field', (done) => {
+    chai.request(server)
+      .get('/users/login')
+      .end((err, res) => {
+        res.text.should.include('name="email"');
+        done();
+      });
+
+  });
+
+  it('password field', (done) => {
+    chai.request(server)
+      .get('/users/login')
+      .end((err, res) => {
+        res.text.should.include('input type="password"');
+        done();
+      });
+
+  });
+});
