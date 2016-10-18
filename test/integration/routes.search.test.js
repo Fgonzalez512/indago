@@ -36,11 +36,11 @@ describe('routes : search', () => {
     it('should poplulate the page with search results', (done) => {
       chai.request(server)
         .post('/search')
-        //add in form data here
-        .send({ location : '51.503186,-0.126446' })
+      //add in form data here
+        .send({ location : '51.503186,-0.126446'})
         .send({ keyword : 'museum' })
         .end((err, res) => {
-          // res.redirects.length.should.equal(1);
+        // res.redirects.length.should.equal(1);
           res.status.should.equal(200);
           res.type.should.equal('text/html');
           res.text.should.include('<input type="text" name="keyword">');
@@ -62,4 +62,16 @@ describe('routes : search', () => {
   //       });
   //   });
   // });
+  describe('GET /search/details/:google_places_id', () => {
+    it('should show the details for a specific search item', (done) => {
+      chai.request(server)
+        .get('/search/details/ChIJ7dgNbsvLRIYRFhpmxL4qLVA')
+        .end((err, res) => {
+          res.status.should.equal(200);
+          res.type.should.equal('text/html');
+          res.text.should.include('Scubaland Adventures');
+          done();
+        });
+    });
+  });
 });
