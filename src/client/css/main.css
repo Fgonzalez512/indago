@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6, p {
   font-size: 1.25em;
 }
 
-input[type=text]:focus {
+.navBar input[type=text]:focus {
   border-bottom: 0 !important;
   box-shadow: 0 0 0 0 !important;
 }
@@ -72,7 +72,6 @@ input[type=text]:focus {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  /*border: 1px solid red;*/
 }
 
 .homeImagesContainer a {
@@ -107,4 +106,36 @@ input[type=text]:focus {
   .homeImage {
     height: auto;
   }
+}
+
+/* -------------------- Signup.ejs --------------------*/
+
+.bigContainer {
+  display: flex;
+}
+.smallContainer {
+  border: 1px solid #dce0e0;
+  margin: auto;
+  margin-top: 1em;
+  width: 35%
+}
+
+.smallContainer h3 {
+  text-align: center;
+}
+
+.formEdit input[type=text],
+.formEdit input[type=password] {
+  font-size: 1.25em;
+}
+
+.formEdit input[type=text]:focus,
+.formEdit input[type=password]:focus {
+  border-bottom: 1px solid #1560bd !important;
+}
+
+.formEdit button {
+  background-color: #1560bd !important;
+  display: flex;
+  margin: auto;
 }

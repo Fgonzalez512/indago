@@ -9,9 +9,9 @@ const methodOverride = require('method-override');
 
 
 
-router.get('/', function(req, res) {
-  res.render('index');
-});
+// router.get('/', function(req, res) {
+//   res.render('index');
+// });
 
 router.get('/signup', function(req, res) {
   res.render('pages/signup');
@@ -20,7 +20,8 @@ router.get('/signup', function(req, res) {
 router.post('/signup', function(req, res) {
   knex('users').where('email', req.body.email).first().then(function(user) {
     if (!user) {
-      bcrypt.hashSync(req.body.password, 12).then(function(hashed_password, err) {
+      bcrypt.hashSync(req.body.password, 12).then(function(
+        hashed_password, err) {
         knex('users').insert({
           first_name: req.body.first_name,
           last_name: req.body.last_name,
@@ -28,16 +29,17 @@ router.post('/signup', function(req, res) {
           username: req.body.username,
           password: hashed_password
         }).then(function() {
-          knex('users').where('email', req.body.email).first().then(function(newuser) {
+          knex('users').where('email', req.body.email).first().then(
+            function(newuser) {
 
-            req.session.user = newuser;
-            req.session.loggedIn = true;
+              req.session.user = newuser;
+              req.session.loggedIn = true;
 
-            res.locals.user = newuser;
-            res.locals.loggedIn = true;
+              res.locals.user = newuser;
+              res.locals.loggedIn = true;
 
-            res.redirect('/index');
-          });
+              res.redirect('/index');
+            });
         });
       });
     } else {
