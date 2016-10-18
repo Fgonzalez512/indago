@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
 router.get('/details/:google_places_id', (req, res, next) => {
   googlePlaces.details(req.params.google_places_id, (data) => {
     res.render('pages/search_details', {
-      data : data,
+      result : data.result,
     });
   });
 });

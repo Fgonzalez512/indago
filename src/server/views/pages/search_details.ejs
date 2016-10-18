@@ -5,6 +5,28 @@
     <title>search details</title>
   </head>
   <body>
-    <%= JSON.stringify(data) %>
+    <div>
+      <%= result.name %>
+      <%= result.formatted_address %>
+      <%= result.formatted_phone_number %>
+      <%= result.rating %>
+      <form action="/places" method="POST">
+        <select>
+          <option value="tripA">trip A</option>
+          <option value="tripB">trip B</option>
+          <option value="tripC">trip C</option>
+        </select>
+        <input type="submit" name="name" value="add to trip">
+      </form>
+      <% result.reviews.forEach((review) => { %>
+        <% if (result.reviews.indexOf(review) < 5) { %>
+          <%= review.author_name %>
+          <%= review.profile_photo_url %>
+          <%= review.rating %>
+          <%= review.text %>
+          <%= review.time %>
+        <% } %>
+      <% }); %>
+    </div>
   </body>
 </html>
