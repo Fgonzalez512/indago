@@ -19,13 +19,31 @@
         <input type="submit" name="name" value="add to trip">
       </form>
       <% result.reviews.forEach((review) => { %>
+        <div class="review">
         <% if (result.reviews.indexOf(review) < 5) { %>
-          <%= review.author_name %>
-          <%= review.profile_photo_url %>
-          <%= review.rating %>
-          <%= review.text %>
-          <%= review.time %>
+          <li>
+            author:
+            <%= review.author_name %>
+          </li>
+          <li>
+            photo url:
+            <%= review.profile_photo_url %>
+          </li>
+          <li>
+            rating
+            <%= review.rating %>
+          </li>
+          <li>
+            review:
+            <%= review.text %>
+          </li>
+          <li>
+            posted:
+            <%= review.time %>
+          </li>
         <% } %>
+        </div>
+        <hr>
       <% }); %>
     </div>
   </body>
