@@ -79,11 +79,6 @@ h1, h2, h3, h4, h5, h6, p {
   display: flex;
 }
 
->>>>>>>c154a088caaa7ff79b5c11ad823b5809031f4fa8:src/client/css/main.css .homeImagesContainer a {
-  color: rgba(0, 0, 0, 0.6);
-  margin: 1px;
-}
-
 .homeImage {
   border: 1px solid #dce0e0;
   width: 300px;
