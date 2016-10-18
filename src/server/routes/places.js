@@ -1,18 +1,25 @@
 const express = require('express');
 const router = express.Router();
+const Places = require('../modules/places');
 
-const indexController = require('../controllers/index');
+router.get('/', function(req, res, next) {
+  Places.get.list()
+    .then((places) => {
 
-router.get('/', function (req, res, next) {
-  const renderObject = {};
-  renderObject.title = 'Welcome to Express!';
-  indexController.sum(1, 2, (error, results) => {
-    if (error) return next(error);
-    if (results) {
-      renderObject.sum = results;
-      res.render('index', renderObject);
-    }
-  });
+      res.render('pages/places', {
+        places: 'asdasdasasd'
+      });
+
+    });
 });
+
+// router.post('/', function(req, res, next) {
+//   Places.insert()
+//     .then((places) => {
+//
+//       res.render('pages/places', places);
+//
+//     });
+// });
 
 module.exports = router;

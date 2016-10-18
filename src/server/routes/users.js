@@ -1,13 +1,9 @@
 'use strict';
 
-
-const express = require('express');
-const router = express.Router();
-const knex = require('../db/connection.js');
+const router = require('express').Router();
 const bcrypt = require('bcrypt-nodejs');
 const methodOverride = require('method-override');
-
-
+const Users = require('../modules/users');
 
 router.get('/', function(req, res) {
   res.render('index');
@@ -18,32 +14,39 @@ router.get('/signup', function(req, res) {
 });
 
 router.post('/signup', function(req, res) {
-  knex('users').where('email', req.body.email).first().then(function(user) {
-    if (!user) {
-      bcrypt.hashSync(req.body.password, 12).then(function(hashed_password, err) {
-        knex('users').insert({
-          first_name: req.body.first_name,
-          last_name: req.body.last_name,
-          email: req.body.email,
-          username: req.body.username,
-          password: hashed_password
-        }).then(function() {
-          knex('users').where('email', req.body.email).first().then(function(newuser) {
 
-            req.session.user = newuser;
+  Users.withEmail(req.body.email)
+    .then(function(user) {
+      if (!user) {
+        let pBcryptHash = new Promise((resolve) => {
+          resolve(bcrypt.hashSync(req.body.password));
+        });
+
+        pBcryptHash.then((hashed_password) => {
+
+          Users.insert({
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email,
+            username: req.body.username,
+            password: hashed_password
+          }).then(function(newUser) {
+
+            req.session.user = newUser;
             req.session.loggedIn = true;
 
-            res.locals.user = newuser;
+            res.locals.user = newUser;
             res.locals.loggedIn = true;
 
-            res.redirect('/index');
+            res.redirect('/');
+
           });
+
         });
-      });
-    } else {
-      res.send('User created');
-    }
-  });
+      } else {
+        res.send('User created');
+      }
+    });
 });
 
 router.get('/login', function(req, res) {
@@ -51,29 +54,41 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', function(req, res) {
-  knex('users').where('email', req.body.email).first().then(function(user) {
-    if (!user) {
-      res.redirect('/signup');
-    }
-    bcrypt.compareSync(req.body.password, user.password)
-      .then(function() {
 
-        req.session.user = user;
-        req.session.loggedIn = true;
+  Users.withEmail(req.body.email)
+    .then(function(user) {
 
-        res.locals.user = user;
-        res.locals.loggedIn = true;
+      if (!user) {
+        res.redirect('/users/signup');
+      }
 
-        res.redirect('/index');
-      }, function() {
-        res.redirect('back');
+      let pBcryptCompare = new Promise((resolve) => {
+        resolve(bcrypt.compareSync(req.body.password, user.password));
       });
-  });
+
+      pBcryptCompare.then((result) => {
+
+        if (result) {
+
+          req.session.user = user;
+          req.session.loggedIn = true;
+
+          res.locals.user = user;
+          res.locals.loggedIn = true;
+
+          res.redirect('/');
+
+        } else {
+
+          res.render('pages/login');
+        }
+      });
+    });
 });
 
 router.get('/logout', function(req, res) {
   req.session = null;
-  res.redirect('pages/login');
+  res.redirect('/users/login');
 });
 
 module.exports = router;
