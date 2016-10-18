@@ -4,10 +4,9 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt-nodejs');
 const methodOverride = require('method-override');
 const Users = require('../modules/users');
+const users_profile = require('./users_profile');
 
-router.get('/', function(req, res) {
-  res.render('index');
-});
+router.use('/profile',users_profile);
 
 router.get('/signup', function(req, res) {
   res.render('pages/signup');
