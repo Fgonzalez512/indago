@@ -1,8 +1,110 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Raleway', sans-serif;
 }
 
-a {
-  color: #00B7FF;
+/* -------------------- Nav Bar --------------------*/
+.navBar {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #dce0e0;
+}
+
+.navBar a {
+  width: 25%;
+  color: #000;
+}
+
+.navBar a:first-child {
+  font-size: 2.5em;
+  color: #1560bd;
+  border-right: 1px solid #dce0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBar a:nth-child(1n+2) {
+  font-size: 1em;
+  color: rgba(0, 0, 0, 0.6);
+  border-left: 1px solid #dce0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBar a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.navBar input[type=text] {
+  border-bottom: none;
+  padding-top: 1em;
+  font-size: 1.25em;
+}
+
+input[type=text]:focus {
+  border-bottom: 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+
+.navBar ::-webkit-input-placeholder {
+  padding-left: 2%;
+}
+
+.navBar ::-moz-placeholder {
+  padding-left: 2%;
+}
+
+/* -------------------- Index.ejs --------------------*/
+
+.cont {
+  width: 71.5%;
+  margin: auto;
+}
+
+.homePage h3 {
+  margin-top: 1em;
+}
+
+/* -------------------- Index.ejs (images) --------------------*/
+
+.homeImagesContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  /*border: 1px solid red;*/
+}
+
+.homeImagesContainer a {
+  color: rgba(0, 0, 0, 0.6);
+  margin: 1px;
+}
+
+.homeImage {
+  border: 1px solid #dce0e0;
+  width: 300px;
+  height: 200px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  /*position: relative;*/
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeImage h5{
+  font-size: 2em;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  text-align: center;
+}
+
+@media screen and (max-width: 736px) and (-webkit-min-device-pixel-ratio: 2){
+  .homeImage {
+    height: auto;
+  }
 }
