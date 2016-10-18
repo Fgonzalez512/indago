@@ -2,7 +2,7 @@ const should = require('chai').should();
 const googlePlaces = require('../../src/server/modules/google-places.js');
 
 describe('the google places module', () => {
-  describe('the radarSearch method', () => {
+  describe('radarSearch method', () => {
     it('should return an object with the proper keys', (done) => {
       googlePlaces.radarSearch('51.503186', '-0.126446', 'museum', (body) => {
         body.should.have.all.keys('html_attributions', 'results', 'status');
@@ -11,7 +11,7 @@ describe('the google places module', () => {
       });
     });
   });
-  describe('the details method', () => {
+  describe('details method', () => {
     it('should return an object with the proper keys', (done) => {
       googlePlaces.details('ChIJN1t_tDeuEmsRUsoyG83frY4', (body) => {
         body.should.have.all.keys('html_attributions', 'result', 'status');
@@ -20,11 +20,11 @@ describe('the google places module', () => {
       });
     });
   });
-  describe('the nearbySearch method', () => {
+  describe('nearbySearch method', () => {
     it('should return an object with the proper keys', (done) => {
-      googlePlaces.nearbySearch('-33.8670522', '151.1957362', 'cruise', (body) => {
+      googlePlaces.nearbySearch('-33.8670522', '151.1957362', 'food', (body) => {
         body.should.have.all.keys('html_attributions', 'next_page_token', 'results', 'status');
-        body.results[0].should.have.all.keys('geometry', 'icon', 'id', 'name',
+        body.results[0].should.have.keys('geometry', 'icon', 'id', 'name',
         'opening_hours', 'photos', 'place_id', 'rating', 'scope', 'reference', 'types', 'vicinity');
         done();
       });
