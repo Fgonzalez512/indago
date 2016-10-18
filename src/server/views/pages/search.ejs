@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SEARCH</title>
+  </head>
+  <body>
+    <form action="/search" method="POST">
+      <label for="keyword">
+        I'm looking for
+      </label>
+      <input type="text" name="keyword">
+      <label for="city">
+        in
+      </label>
+      <select name="location">
+        <option value="30.2729,-97.7444">Austin</option>
+        <option vlaue="37.773972,-122.431297">San Francisco</option>
+        <option value="40.730610,-73.935242">New York</option>
+        <option value="47.608013,-122.335167">Seattle</option>
+        <option value="25.761681,-80.191788">Miami</option>
+        <option value="41.881832,-87.623177">Chicago</option>
+      </select>
+      <input type="submit">
+    </form>
+    <% results.forEach((el) => { %>
+      <p class="search-result">
+        <%= JSON.stringify(el); %>
+      </p>
+    <% }); %>
+  </body>
+</html>

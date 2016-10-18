@@ -69,17 +69,17 @@ h1, h2, h3, h4, h5, h6, p {
   margin-top: 1em;
 }
 
-
-/* -------------------- Index.ejs (images) --------------------*/
-
-
-/*.homeImagesContainer {
+.s3 {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-}*/
+}
 
-.homeImagesContainer a {
+.homeImagesContainer {
+  width: 100%;
+  display: flex;
+}
+
+>>>>>>>c154a088caaa7ff79b5c11ad823b5809031f4fa8:src/client/css/main.css .homeImagesContainer a {
   color: rgba(0, 0, 0, 0.6);
   margin: 1px;
 }
@@ -107,16 +107,6 @@ h1, h2, h3, h4, h5, h6, p {
   position: relative;
   top: 50%;
 }
-
-
-/*@media screen and (max-width: 736px) and (-webkit-min-device-pixel-ratio: 2){
-  .homeImage {
-    height: auto;
-  }
-}*/
-
-
-/* -------------------- Signup.ejs --------------------*/
 
 .bigContainer {
   display: flex;

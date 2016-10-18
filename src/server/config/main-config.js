@@ -43,7 +43,8 @@
 
     if (!process.env.SESSION_SECRET) {
       process.env.SESSION_SECRET = '59494a82c746f1a9e5614a94e95a578f';
-      console.warn('!!!SERVER IS NOT SECURE - NO ENV SESSION_SECRET PROVIDED!!!');
+      console.warn(
+        '!!!SERVER IS NOT SECURE - NO ENV SESSION_SECRET PROVIDED!!!');
     }
     // cookie-session
     app.use(session({
@@ -54,7 +55,8 @@
     // This allows you to set req.session.maxAge to let certain sessions
     // have a different value than the default.
     app.use((req, res, next) => {
-      req.sessionOptions.maxAge = req.session.maxAge || req.sessionOptions.maxAge;
+      req.sessionOptions.maxAge = req.session.maxAge || req.sessionOptions
+        .maxAge;
       next();
     });
 
