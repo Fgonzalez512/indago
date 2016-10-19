@@ -13,6 +13,11 @@ const User = {
       .insert(user)
       .returning(['id', 'first_name', 'last_name', 'email', 'username']);
   },
+  update: function(user) {
+    return knex('users')
+      .update(user)
+      .where({id:user.id});
+  },
   all: function() {
     return knex('users');
   }
