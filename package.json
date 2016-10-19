@@ -63,15 +63,13 @@
         "mocha-eslint": ">=3.0.1",
         "nodemon": ">=1.11.0",
         "run-sequence": ">=1.2.2",
+        "tiny-lr": ">=0.2.1",
+        "gulp-plumber": ">=1.1.0",
+        "istanbul": ">=0.4.5",
+        "mocha": ">=3.1.2",
+        "mocha-eslint": ">=3.0.1",
+        "nodemon": ">=1.11.0",
+        "run-sequence": ">=1.2.2",
         "tiny-lr": ">=0.2.1"
     }
-}
-"gulp-plumber": ">=1.1.0",
-"istanbul": ">=0.4.5",
-"mocha": ">=3.1.2",
-"mocha-eslint": ">=3.0.1",
-"nodemon": ">=1.11.0",
-"run-sequence": ">=1.2.2",
-"tiny-lr": ">=0.2.1"
-}
 }
