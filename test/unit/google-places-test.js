@@ -1,3 +1,5 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'test';
+
 const should = require('chai').should();
 const googlePlaces = require('../../src/server/modules/google-places.js');
 
