@@ -33,7 +33,7 @@ router.post('/:plan_id', (req, res) => {
 
 router.get('/cities/:city', function(req, res) {
   let cityID = req.params.city;
-  
+
   res.locals.page_type = cityID;
 
   console.log(res.locals.page_type);
@@ -58,6 +58,7 @@ router.post('/:id/upvote', (req, res)=> {
     });
   });
 });
+
 
 
 module.exports = router;
