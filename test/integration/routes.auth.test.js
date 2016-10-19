@@ -15,7 +15,7 @@ describe('routes : auth', () => {
     done();
   });
 
-  describe.only('GET /auth', () => {
+  describe('GET /auth', () => {
     console.log('process.env.NODE_ENV', process.env.NODE_ENV);
     console.log('process.env.DB_NAME', process.env.DB_NAME);
     it('should render the auth', (done) => {

@@ -12,7 +12,7 @@
     "scripts": {
         "start": "nodemon ./src/server/server.js",
         "pretest": "knex migrate:latest && knex seed:run",
-        "test": "mocha",
+        "test": "./node_modules/mocha/bin/_mocha",
         "posttest": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
         "awsStart": "node ./node_modules/.bin/pm2 start ./src/server/server.js --name indago",
         "stop": "pm2 delete all",
