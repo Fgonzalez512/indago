@@ -18,7 +18,7 @@ describe('routes : plans', () => {
   });
 
   describe('GET /plans', () => {
-    it('should render the plans', (done) => {
+    xit('should render the plans', (done) => {
       chai.request(server)
         .get('/plans')
         .end((err, res) => {
