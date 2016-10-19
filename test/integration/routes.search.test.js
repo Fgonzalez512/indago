@@ -31,7 +31,6 @@ describe('routes : search', () => {
     });
   });
 
-  // deprecated
   describe('POST /search', () => {
     it('should poplulate the page with search results', (done) => {
       chai.request(server)
