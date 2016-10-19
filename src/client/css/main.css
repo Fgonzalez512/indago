@@ -11,17 +11,20 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .navBar a {
-  width: 25%;
+  width: 20%;
   color: #000;
 }
 
 .navBar .logo {
   font-size: 2.5em;
   color: #1560bd;
-  border-right: 1px solid #dce0e0;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.navBar .navBarDrop {
+  width: 75% !important;
 }
 
 .navBar a:nth-child(1n+2) {
