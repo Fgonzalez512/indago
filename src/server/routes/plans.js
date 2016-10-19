@@ -10,10 +10,10 @@ router.get('/', function(req, res) {
 
 router.get('/cities/:city', function(req, res, next) {
   let cityID = req.params.city;
-  knex('plans').where('city', cityID).first().then((city)=>{
+  knex('plans').where('city', cityID).first().then((city) => {
     res.render('pages/plans', {
-      city:city,
-      name:city,
+      city: city,
+      name: city,
     });
   });
 });
