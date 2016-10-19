@@ -18,4 +18,41 @@ router.get('/cities/:city', function(req, res, next) {
   });
 });
 
+
+// router.post('/:plan_id/upvote', (req, res)=> {
+//   knex('plans').where({
+//     id : req.params.id,
+//   })
+//     .first()
+//     .then((id) => {
+//       var newScore = (++id.upvote);
+//       knex('plans').where({
+//         id : req.params.id,
+//       })
+//         .update({
+//           upvote : newScore,
+//         }).then(() => {
+//           res.redirect('back');
+//         });
+//     });
+// });
+//
+// router.post('/:plan_id/downvote', (req, res)=> {
+//   knex('plans').where({
+//     id : req.params.id,
+//   })
+//     .first()
+//     .then((id) => {
+//       var newScore = (--id.downvote);
+//       knex('plans').where({
+//         id : req.params.id,
+//       })
+//         .update({
+//           downvote : newScore,
+//         }).then(() => {
+//           res.redirect('back');
+//         });
+//     });
+// });
+
 module.exports = router;
