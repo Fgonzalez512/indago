@@ -5,17 +5,22 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
-const server = require('../../src/server/app');
+// const bcrypt = require('bcrypt-nodejs');
+// const password_hash = bcrypt.hashSync('password');
+// console.log(password_hash);
+// console.log('^^^^^password_hash above^^^^^');
 
+const server = require('../../src/server/app');
 const knex = require('../../src/server/db/connection');
+
+const agent = chai.request.agent(server);
+
+    // let cookie = response.res.req._headers.cookie.slice(8, 382);
 
 describe('routes : plans', () => {
 
   beforeEach((done) => {
-    knex('plans').del()
-      .then(() => {
-        done();
-      });
+    done();
   });
 
   afterEach((done) => {
@@ -34,55 +39,67 @@ describe('routes : plans', () => {
         });
     });
   });
-  xdescribe('POST /plans', () => {
+  describe('POST /plans', () => {
     it('should add a new plan to the database', (done) => {
-      chai.request(server)
-        .post('/plans')
-        .send({
-          name : 'New Plan 1',
-          place_name : 'Stiles Switch',
-          address : '6066 N Lamar Blvd',
-          city : 'Austin',
-          state : 'TX',
-          zipcode : 78751,
+      agent.post('/users/login')
+        .send( {
+          email : 'margo',
+          password : 'password',
         })
-        .end((err, res) => {
-          res.redirects.length.should.equal(1);
-          res.status.should.equal(302);
-          res.type.should.equal('text/html');
-          knex('plans').where({
-            name : 'New Plan 1',
-          })
-            .first()
-            .then((data) => {
-              data.should.not.be(null);
-              done();
+        .then(() => {
+          agent.post('/plans')
+            .send({
+              plan_name : 'New Plan 1',
+              place_name : 'Stiles Switch',
+              place_address : '6066 N Lamar Blvd',
+              place_city : 'Austin',
+              place_state : 'TX',
+              place_zipcode : 78751,
+            })
+            .end((err, res) => {
+              res.status.should.equal(200);
+              res.redirects.length.should.equal(1);
+              res.type.should.equal('text/html');
+              knex('plans').where({
+                name : 'New Plan 1',
+              })
+                .first()
+                .then((data) => {
+                  data.shoud.not.be.undefined;
+                  data.address.should.equal('6066 N Lamar Blvd');
+                  done();
+                });
             });
         });
     });
   });
-  xdescribe('POST /plans/:id', () => {
-    it('should add a new place to the database ', (done) => {
-      chai.request(server)
-        .post('/plans/0')
-        .send({
-          place_name : 'Stiles Switch',
-          address : '6066 N Lamar Blvd',
-          city : 'Austin',
-          state : 'TX',
-          zipcode : 78751,
-          plan_id : 0,
+  describe('POST /plans/:id', () => {
+    it('should add a new place to the database', (done) => {
+      agent.post('/users/login')
+        .send( {
+          email : 'margo',
+          password : 'password',
         })
-        .end((err, res) => {
-          res.redirects.length.should.equal(1);
-          res.status.should.equal(302);
-          res.type.should.equal('text/html');
-          knex('plans').where({
-            name : 'New Plan 1',
-          }).first().then((data) => {
-            data.should.not.be(null);
-            done();
-          });
+        .then(() => {
+          agent.post('/plans/1')
+            .send({
+              place_name : 'Stiles Switch',
+              address : '6066 N Lamar Blvd',
+              city : 'Austin',
+              state : 'TX',
+              zipcode : 78751,
+            })
+            .end((err, res) => {
+              res.status.should.equal(200);
+              res.type.should.equal('text/html');
+              knex('places').where({
+                plan_id : 1,
+              }).then((data) => {
+                data.should.not.be.undefined;
+                data.should.include('Stiles Switch');
+                done();
+              });
+            });
         });
     });
   });
