@@ -48,16 +48,17 @@
       <div class="bigContainer">
           <div class="smallContainer">
               <h3>Edit Your Profile</h3>
-                  <input type="text" name="first_name" value placeholder="First Name">
-                  <input type="text" name="last_name" value placeholder="Last Name">
-                  <input type="text" name="username" value placeholder="Username">
-                  <input type="text" name="email" value placeholder="Email">
+              <form class="formEdit" action="/users/profile/<%= user.id %>?_method=PATCH" method="POST">
+                  <input type="hidden" name="id" value="<%= user.id %>">
+                  <input type="text" value="<%= user.first_name %>" name="first_name" value placeholder="First Name">
+                  <input type="text" value="<%= user.last_name %>" name="last_name" value placeholder="Last Name">
+                  <input type="text" value="<%= user.username %>" name="username" value placeholder="Username">
+                  <input type="text" value="<%= user.email %>" name="email" value placeholder="Email">
                   <input type="password" name="password" value placeholder="Password">
-                  <button class="btn waves-effect waves-light" type="submit" name="action">Change Information</button>
-                  <form class="formEdit" action="/users/profile/user_id" method="PATCH">
-                    <form method="PATCH" action="/user?_method=DELETE">
-                      <button type="submit">Delete user</button>
-                    </form>
+                  <button class="btn waves-effect waves-light" type="submit">Change Information</button>
+              </form>
+              <form method="POST" action="/users/profile/<%= user.id %>?_method=DELETE">
+                <button type="submit">Delete user</button>
               </form>
           </div>
     </div>
