@@ -7,10 +7,15 @@ chai.use(chaiHttp);
 
 const server = require('../../src/server/app');
 
+const knex = require('../../src/server/db/connection');
+
 describe('routes : plans', () => {
 
   beforeEach((done) => {
-    done();
+    knex('plans').del()
+      .then(() => {
+        done();
+      });
   });
 
   afterEach((done) => {
@@ -26,6 +31,58 @@ describe('routes : plans', () => {
           res.status.should.equal(200);
           res.type.should.equal('text/html');
           done();
+        });
+    });
+  });
+  xdescribe('POST /plans', () => {
+    it('should add a new plan to the database', (done) => {
+      chai.request(server)
+        .post('/plans')
+        .send({
+          name : 'New Plan 1',
+          place_name : 'Stiles Switch',
+          address : '6066 N Lamar Blvd',
+          city : 'Austin',
+          state : 'TX',
+          zipcode : 78751,
+        })
+        .end((err, res) => {
+          res.redirects.length.should.equal(1);
+          res.status.should.equal(302);
+          res.type.should.equal('text/html');
+          knex('plans').where({
+            name : 'New Plan 1',
+          })
+            .first()
+            .then((data) => {
+              data.should.not.be(null);
+              done();
+            });
+        });
+    });
+  });
+  xdescribe('POST /plans/:id', () => {
+    it('should add a new place to the database ', (done) => {
+      chai.request(server)
+        .post('/plans/0')
+        .send({
+          place_name : 'Stiles Switch',
+          address : '6066 N Lamar Blvd',
+          city : 'Austin',
+          state : 'TX',
+          zipcode : 78751,
+          plan_id : 0,
+        })
+        .end((err, res) => {
+          res.redirects.length.should.equal(1);
+          res.status.should.equal(302);
+          res.type.should.equal('text/html');
+          knex('plans').where({
+            name : 'New Plan 1',
+          }).first().then((data) => {
+            data.should.not.be(null);
+            done();
+          });
         });
     });
   });

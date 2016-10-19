@@ -8,6 +8,29 @@ router.get('/', function(req, res) {
   res.render('pages/plans');
 });
 
+//handles adding a new plan with a new place
+router.post('/', (req, res) => {
+  // let user = req.session.user;
+  //
+  // if(!user) {
+  //   return res.redirect('back');
+  // }
+
+  res.sendStatus(404);
+
+});
+
+router.post('/:plan_id', (req, res) => {
+  // let user = req.sesson.user;
+  //
+  // if(!user) {
+  //   return res.redirect('back');
+  // }
+
+  res.sendStatus('404');
+});
+
+
 router.get('/cities/:city', function(req, res) {
   let cityID = req.params.city;
 
@@ -33,6 +56,7 @@ router.get('/:id/upvote', (req, res)=> {
     });
   });
 });
+
 
 
 module.exports = router;

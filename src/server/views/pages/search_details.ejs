@@ -6,32 +6,50 @@
   </head>
   <body>
     <div>
-      <%= result.name %>
+      <ul>
+      <li>
+        <%= result.name %>
+      </li>
+      <li>
       <%= result.formatted_address %>
+      </li>
+      <li>
       <%= result.formatted_phone_number %>
+      </li>
+      <li>
       <%= result.rating %>
+      </li>
+    </ul>
       <% if(user_plans) { %>
       <form action="/plans" method="POST">
         <select>
           <% user_plans.forEach((plan) => { %>
-            <option name="plan" value=<%plan.id%>>
+            <option name="plan_id" value=<%plan.id%>>
               <%= plan.name %>
             </option>
           <% }); %>
         </select>
-        <input type="submit" name="name" value="add to trip">
+        <input type="hidden" name="name" value=<%= result.name %>>
+        <input type="hidden" name="address" value=<%= result.address_components[0].long_name + ' ' + result.address_components[1].long_name %>
+        <input type="hidden" name="city" value=<%= result.address_components[2].long_name %>>
+        <input type="hidden" name="state" value=<%=result.address_components[3].long_name%>>
+        <input type="hidden" name="zipcode" value=<%=result.address_components[4].short_name%>>
+        <input type="submit" value="add to trip">
       </form>
       <% } %>
       <!-- need route here -->
       <form action="index.html" method="POST">
         <fieldset>
           <legend>add to new plan</legend>
-          <label for="name">title</label>
+          <label for="name">plan title</label>
           <input type="text" name="name">
           <!-- fill out proper data for new trip and new place here -->
           <input type="hidden" name="city" value="<%=result.city%>">
+          <input type="submit" value="add">
         </fieldset>
       </form>
+      <h3>reviews:</h3>
+      <hr>
       <% result.reviews.forEach((review) => { %>
         <div class="review">
         <% if (result.reviews.indexOf(review) < 5) { %>
