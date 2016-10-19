@@ -1,3 +1,5 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'test';
+
 const lint = require('mocha-eslint');
 const options = require('../.eslintrc');
 const paths = [
@@ -10,4 +12,4 @@ const paths = [
 ];
 
 // Run the tests
-lint(paths, options);
+// lint(paths, options);

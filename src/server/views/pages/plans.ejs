@@ -8,15 +8,21 @@
     <% include ../partials/nav %>
     <div class="container">
       <header class="homePage">
-        <h3> Austin </h3>
+        <h3><%= page_type %></h3>
       </header>
+      <% plans.forEach((plan)=> { %>
+      <div>
         <div class="col s1 m1 l1">
           <div class="card">
-          <div class="card-image"><a href="#"><img class="homeImage"  src="../../../src/client/images/atx3.jpg">
-            <div class="city-title card-title card-left">Weekend at bernie's</div>
-              <div class="city-t card-title card-right1">0</div>
-              <div class="city-t card-title card-right2"><i class="fa fa-angle-up fa-2x" aria-hidden="true"></i></div>
+          <div class="card-image"><a href="#"><img class="homeImage"  src="/images/atxBW.jpg">
+            <div class="city-title card-title card-left"><%= plan.name %></div>
        </div></a></div></div>
+        <div class="card-bottom">
+           <div class=""><%= plan.upvote %></div>
+           <div class=""><a href="/plans/<%=plan.id%>/upvote"><i class="fa fa-angle-up fa-2x" aria-hidden="true"></i></div>
+        </div>
+      </div>
+      <%}) %>
     </div>
   </body>
 </html>
