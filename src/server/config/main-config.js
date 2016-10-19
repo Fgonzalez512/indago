@@ -20,14 +20,9 @@
   ];
 
   // *** load environment variables *** //
-  // console.log(viewFolders);
   appConfig.init = function(app, express) {
 
     // *** view engine *** //
-    // nunjucks.configure(viewFolders, {
-    //   express: app,
-    //   autoescape: true
-    // });
 
     // *** load environment variables *** //
     // require('dotenv').config();
@@ -41,10 +36,12 @@
     // https://expressjs.com/en/advanced/best-practice-security.html
     app.use(helmet());
 
+    if(!process.env.NODE_ENV){
+      process.env.NODE_ENV = 'development';
+    }
+
     if (!process.env.SESSION_SECRET) {
       process.env.SESSION_SECRET = '59494a82c746f1a9e5614a94e95a578f';
-      // console.warn(
-      //   '!!!SERVER IS NOT SECURE - NO ENV SESSION_SECRET PROVIDED!!!');
     }
     // cookie-session
     app.use(session({
