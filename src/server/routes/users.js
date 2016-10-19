@@ -1,31 +1,30 @@
 'use strict';
 
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const bcrypt = require('bcrypt-nodejs');
 const methodOverride = require('method-override');
-const User = require('../modules/users');
+const Users = require('../modules/users');
+const users_profile = require('./users_profile');
 
-router.get('/', function(req, res) {
-  res.render('index');
-});
+router.use('/profile',users_profile);
 
 router.get('/signup', function(req, res) {
+  res.locals.loggedIn = req.session.loggedIn || false;
   res.render('pages/signup');
 });
 
 router.post('/signup', function(req, res) {
 
-  User.withEmail(req.body.email)
+  Users.withEmail(req.body.email)
     .then(function(user) {
       if (!user) {
-        let pBcryptHash = new Promise((resolve)=> {
+        let pBcryptHash = new Promise((resolve) => {
           resolve(bcrypt.hashSync(req.body.password));
         });
 
-        pBcryptHash.then((hashed_password) =>{
+        pBcryptHash.then((hashed_password) => {
 
-          User.insert({
+          Users.insert({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             email: req.body.email,
@@ -39,7 +38,7 @@ router.post('/signup', function(req, res) {
             res.locals.user = newUser;
             res.locals.loggedIn = true;
 
-            res.redirect('/index');
+            res.redirect('/');
 
           });
 
@@ -51,19 +50,20 @@ router.post('/signup', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
+  res.locals.loggedIn = req.session.loggedIn || false;
   res.render('pages/login');
 });
 
 router.post('/login', function(req, res) {
 
-  User.withEmail(req.body.email)
+  Users.withEmail(req.body.email)
     .then(function(user) {
 
       if (!user) {
-        res.redirect('/signup');
+        res.redirect('/users/signup');
       }
 
-      let pBcryptCompare = new Promise((resolve)=>{
+      let pBcryptCompare = new Promise((resolve) => {
         resolve(bcrypt.compareSync(req.body.password, user.password));
       });
 
@@ -79,7 +79,7 @@ router.post('/login', function(req, res) {
 
           res.redirect('/');
 
-        }else {
+        } else {
 
           res.render('pages/login');
         }
@@ -89,7 +89,7 @@ router.post('/login', function(req, res) {
 
 router.get('/logout', function(req, res) {
   req.session = null;
-  res.redirect('pages/login');
+  res.redirect('/users/login');
 });
 
 module.exports = router;
