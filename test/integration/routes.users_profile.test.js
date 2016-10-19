@@ -34,7 +34,7 @@ describe('routes : users_profile', () => {
   });
 
   describe('GET /user/profile/:user_id', () => {
-    it('should render the user profile', (done) => {
+    xit('should render the user profile', (done) => {
       chai.request(server)
         .get('/user/profile/' + userOne.id)
         .end((err, res) => {
@@ -48,7 +48,7 @@ describe('routes : users_profile', () => {
   });
 
   describe('DELETE /user/profile/:user_id', () => {
-    it('should delete the user', (done) => {
+    xit('should delete the user', (done) => {
 
       userTwo = {
         id: 4,

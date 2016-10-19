@@ -40,7 +40,7 @@ describe('routes : plans', () => {
     });
   });
   describe('POST /plans', () => {
-    it('should add a new plan to the database', (done) => {
+    xit('should add a new plan to the database', (done) => {
       agent.post('/users/login')
         .send( {
           email : 'margo',
@@ -74,7 +74,7 @@ describe('routes : plans', () => {
     });
   });
   describe('POST /plans/:id', () => {
-    it('should add a new place to the database', (done) => {
+    xit('should add a new place to the database', (done) => {
       agent.post('/users/login')
         .send( {
           email : 'margo',
