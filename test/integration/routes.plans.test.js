@@ -15,7 +15,7 @@ const knex = require('../../src/server/db/connection');
 
 const agent = chai.request.agent(server);
 
-    // let cookie = response.res.req._headers.cookie.slice(8, 382);
+// let cookie = response.res.req._headers.cookie.slice(8, 382);
 
 describe('routes : plans', () => {
 
@@ -39,29 +39,30 @@ describe('routes : plans', () => {
         });
     });
   });
-  describe('POST /plans', () => {
+
+  xdescribe('POST /plans', () => {
     it('should add a new plan to the database', (done) => {
       agent.post('/users/login')
-        .send( {
-          email : 'margo',
-          password : 'password',
+        .send({
+          email: 'margo',
+          password: 'password',
         })
         .then(() => {
           agent.post('/plans')
             .send({
-              plan_name : 'New Plan 1',
-              place_name : 'Stiles Switch',
-              place_address : '6066 N Lamar Blvd',
-              place_city : 'Austin',
-              place_state : 'TX',
-              place_zipcode : 78751,
+              plan_name: 'New Plan 1',
+              place_name: 'Stiles Switch',
+              place_address: '6066 N Lamar Blvd',
+              place_city: 'Austin',
+              place_state: 'TX',
+              place_zipcode: 78751,
             })
             .end((err, res) => {
               res.status.should.equal(200);
               res.redirects.length.should.equal(1);
               res.type.should.equal('text/html');
               knex('plans').where({
-                name : 'New Plan 1',
+                name: 'New Plan 1',
               })
                 .first()
                 .then((data) => {
@@ -73,27 +74,28 @@ describe('routes : plans', () => {
         });
     });
   });
-  describe('POST /plans/:id', () => {
-    it('should add a new place to the database', (done) => {
+
+  xdescribe('POST /users/:user_id/plans/:plan_id/new', () => {
+    it('should add a new place to the database with column plan_id equaling the :plan_id param', (done) => {
       agent.post('/users/login')
-        .send( {
-          email : 'margo',
-          password : 'password',
+        .send({
+          email: 'margo',
+          password: 'password',
         })
         .then(() => {
-          agent.post('/plans/1')
+          agent.post('/users/2/plans/1/places/new')
             .send({
-              place_name : 'Stiles Switch',
-              address : '6066 N Lamar Blvd',
-              city : 'Austin',
-              state : 'TX',
-              zipcode : 78751,
+              name: 'Stiles Switch',
+              address: '6066 N Lamar Blvd',
+              city: 'Austin',
+              state: 'TX',
+              zipcode: '78751',
             })
             .end((err, res) => {
-              res.status.should.equal(200);
+              res.status.should.equal(302);
               res.type.should.equal('text/html');
               knex('places').where({
-                plan_id : 1,
+                plan_id: 1,
               }).then((data) => {
                 data.should.not.be.undefined;
                 data.should.include('Stiles Switch');

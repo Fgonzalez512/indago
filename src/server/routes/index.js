@@ -4,19 +4,12 @@ const knex = require('../db/connection.js');
 
 
 router.get('/', function(req, res, next) {
-  if (req.session.loggedIn) {
-    var userID = Number.parseInt(req.session.user.id);
-    knex('users').where('id', '=', userID).then(function(info) {
-      res.render('index', {
-        info: info
-      });
-    });
-  } else {
-    res.render('index');
-  }
+
+  res.render('index');
+
 });
 
-router.get('/myplan', function(req, res, next) {
+router.get('/robertCSS', function(req, res, next) {
   res.render('pages/myplan');
 });
 

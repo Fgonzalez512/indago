@@ -22,8 +22,8 @@
       <input type="submit">
     </form>
     <% results.forEach((place) => { %>
+      <!-- filter out convenience stores -->
         <p class="search-result">
-          <!-- <%= JSON.stringify(place) %> -->
           <div class="place-name">
             <%= place.name; %>
           </div>

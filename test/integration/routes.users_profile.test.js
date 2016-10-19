@@ -23,7 +23,6 @@ describe('routes : users_profile', () => {
     };
     Users.insert(userOne).then(function(user) {
       userOneID = user[0].id;
-      console.log('user.id', userOne);
       done();
     });
   });
@@ -36,14 +35,10 @@ describe('routes : users_profile', () => {
   });
 
   describe('GET /user/profile/:user_id', () => {
-    xit('should render the user profile', (done) => {
-      console.log('user.id', userOne);
+    it('should render the user profile', (done) => {
       chai.request(server)
         .get('/user/profile/' + userOneID)
         .end((err, res) => {
-          // res.redirects.length.should.equal(0);
-          // res.status.should.equal(200);
-          // res.type.should.equal('text/html');
           res.text.should.include(userOne.username);
           done();
         });
@@ -55,11 +50,8 @@ describe('routes : users_profile', () => {
       chai.request(server)
         .delete('/user/profile/' + userOneID)
         .end((err, res) => {
-          console.log('yo');
           Users.all().where('id', userOneID)
             .then(function(err) {
-              console.log('error!', err);
-              console.log('redirects!', res.redirects);
               res.redirects[0].should.include('users/login');
               res.text.should.include('login');
               done();
