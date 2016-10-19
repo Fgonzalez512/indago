@@ -5,85 +5,98 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
-const server = require('../../src/server/app');
+// const bcrypt = require('bcrypt-nodejs');
+// const password_hash = bcrypt.hashSync('password');
+// console.log(password_hash);
+// console.log('^^^^^password_hash above^^^^^');
 
+const server = require('../../src/server/app');
 const knex = require('../../src/server/db/connection');
 
-describe('routes : plans', () => {
+const agent = chai.request.agent(server);
 
-  beforeEach((done) => {
-    knex('plans').del()
-      .then(() => {
+agent.post('/users/login')
+  .send( {
+    email : 'margo',
+    password : 'password',
+  })
+  .then((response) => {
+
+    // let cookie = response.res.req._headers.cookie.slice(8, 382);
+
+    describe('routes : plans', () => {
+
+      beforeEach((done) => {
         done();
       });
-  });
 
-  afterEach((done) => {
-    done();
-  });
+      afterEach((done) => {
+        done();
+      });
 
-  describe('GET /plans', () => {
-    xit('should render the plans', (done) => {
-      chai.request(server)
-        .get('/plans')
-        .end((err, res) => {
-          res.redirects.length.should.equal(0);
-          res.status.should.equal(200);
-          res.type.should.equal('text/html');
-          done();
-        });
-    });
-  });
-  xdescribe('POST /plans', () => {
-    it('should add a new plan to the database', (done) => {
-      chai.request(server)
-        .post('/plans')
-        .send({
-          name : 'New Plan 1',
-          place_name : 'Stiles Switch',
-          address : '6066 N Lamar Blvd',
-          city : 'Austin',
-          state : 'TX',
-          zipcode : 78751,
-        })
-        .end((err, res) => {
-          res.redirects.length.should.equal(1);
-          res.status.should.equal(302);
-          res.type.should.equal('text/html');
-          knex('plans').where({
-            name : 'New Plan 1',
-          })
-            .first()
-            .then((data) => {
-              data.should.not.be(null);
+      describe('GET /plans', () => {
+        xit('should render the plans', (done) => {
+          chai.request(server)
+            .get('/plans')
+            .end((err, res) => {
+              res.redirects.length.should.equal(0);
+              res.status.should.equal(200);
+              res.type.should.equal('text/html');
               done();
             });
         });
-    });
-  });
-  xdescribe('POST /plans/:id', () => {
-    it('should add a new place to the database ', (done) => {
-      chai.request(server)
-        .post('/plans/0')
-        .send({
-          place_name : 'Stiles Switch',
-          address : '6066 N Lamar Blvd',
-          city : 'Austin',
-          state : 'TX',
-          zipcode : 78751,
-          plan_id : 0,
-        })
-        .end((err, res) => {
-          res.redirects.length.should.equal(1);
-          res.status.should.equal(302);
-          res.type.should.equal('text/html');
-          knex('plans').where({
-            name : 'New Plan 1',
-          }).first().then((data) => {
-            data.should.not.be(null);
-            done();
-          });
+      });
+      describe('POST /plans', () => {
+        xit('should add a new plan to the database', (done) => {
+          chai.request(server)
+            .post('/plans')
+            .send({
+              plan_name : 'New Plan 1',
+              place_name : 'Stiles Switch',
+              address : '6066 N Lamar Blvd',
+              city : 'Austin',
+              state : 'TX',
+              zipcode : 78751,
+            })
+            .end((err, res) => {
+              res.status.should.equal(200);
+              res.redirects.length.should.equal(1);
+              res.type.should.equal('text/html');
+              knex('plans').where({
+                name : 'New Plan 1',
+              })
+                .first()
+                .then((data) => {
+                  data.should.not.be.null;
+                  data.shoud.not.be.undefined;
+                  done();
+                });
+            });
         });
+      });
+      describe('POST /plans/:id', () => {
+        xit('should add a new place to the database', (done) => {
+          chai.request(server)
+            .post('/plans/1')
+            .send({
+              place_name : 'Stiles Switch',
+              address : '6066 N Lamar Blvd',
+              city : 'Austin',
+              state : 'TX',
+              zipcode : 78751,
+            })
+            .end((err, res) => {
+              res.status.should.equal(302);
+              res.type.should.equal('text/html');
+              knex('places').where({
+                id : 1,
+              }).first().then((data) => {
+                data.should.not.be.null;
+                data.should.not.be.undefined;
+                done();
+              });
+            });
+        });
+      });
     });
   });
-});

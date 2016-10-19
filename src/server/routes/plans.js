@@ -3,6 +3,8 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt-nodejs');
 const methodOverride = require('method-override');
 const knex = require('../db/connection.js');
+const Plans = require('../modules/plans');
+const Places = require('../modules/places');
 
 router.get('/', function(req, res) {
   res.render('pages/plans');
@@ -10,13 +12,28 @@ router.get('/', function(req, res) {
 
 //handles adding a new plan with a new place
 router.post('/', (req, res) => {
-  // let user = req.session.user;
-  //
-  // if(!user) {
-  //   return res.redirect('back');
-  // }
+  let user = req.session.user;
 
-  res.sendStatus(404);
+  if(!user) {
+    return res.redirect('back');
+  }
+
+  Plans.insert({
+    name : req.body.name,
+  })
+    .then((plan) => {
+      Places.insert({
+        plan_id : plan.id,
+        name : req.body.place_name,
+        address : req.body.address,
+        city : req.body.city,
+        state : req.body.state,
+        zipcode : req.body.zipcode,
+      })
+        .then(() => {
+          res.redirect('back');
+        });
+    });
 
 });
 

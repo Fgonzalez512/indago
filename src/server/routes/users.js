@@ -56,6 +56,7 @@ router.get('/login', function(req, res) {
 
 router.post('/login', function(req, res) {
 
+
   Users.withEmail(req.body.email)
     .then(function(user) {
 
@@ -80,7 +81,6 @@ router.post('/login', function(req, res) {
           res.redirect('/');
 
         } else {
-
           res.render('pages/login');
         }
       });
