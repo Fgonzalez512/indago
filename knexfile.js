@@ -21,13 +21,14 @@ module.exports = {
       directory: __dirname + '/src/server/db/seeds'
     },
   },
-  staging: {
+  aws_env: {
     client: 'pg',
     connection: {
-      host:'postgres://indago-stg.cnq4ko059scz.us-east-1.rds.amazonaws.com:5432',
-      user:process.env.DB_USERNAME,
-      password:process.env.DB_PASSWORD,
-      databaseName: `${databaseName}_stg`
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      databaseName: process.env.DB_NAME,
     },
     migrations: {
       directory: __dirname + '/src/server/db/migrations'

@@ -5,10 +5,8 @@ const Places = require('../modules/places');
 router.get('/', function(req, res, next) {
   Places.get.list()
     .then((places) => {
-
-      res.render('pages/places', {
-        places: 'asdasdasasd'
-      });
+      res.locals.places = places;
+      res.render('pages/places');
 
     });
 });
