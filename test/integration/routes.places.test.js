@@ -17,19 +17,29 @@ describe('routes : places', () => {
     done();
   });
 
-  describe('GET /places', () => {
+  describe('GET /places/', () => {
     it('should render the places', (done) => {
       chai.request(server)
         .get('/places')
         .end((err, res) => {
           res.redirects.length.should.equal(0);
           res.status.should.equal(200);
-          res.type.should.equal('text/html');
-          res.text.should.contain('<h1>Welcome to Express!</h1>');
-          res.text.should.contain('<h2>The sum is 3</h2>');
+          // res.type.should.equal('text/html');
           done();
         });
     });
   });
-
+  // describe('POST /places', () => {
+  //   it('should add a place to the database', (done) => {
+  //     chai.request(server)
+  //       .post('/places')
+  //       .send()
+  //       .end((err, res) => {
+  //         res.redirects.length.should.equal(0);
+  //         res.status.should.equal(200);
+  //         // res.type.should.equal('text/html');
+  //         done();
+  //       });
+  //   });
+  // });
 });

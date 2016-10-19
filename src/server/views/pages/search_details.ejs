@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>search details</title>
+  </head>
+  <body>
+    <div>
+      <%= result.name %>
+      <%= result.formatted_address %>
+      <%= result.formatted_phone_number %>
+      <%= result.rating %>
+      <form action="/places" method="POST">
+        <select>
+          <option value="tripA">trip A</option>
+          <option value="tripB">trip B</option>
+          <option value="tripC">trip C</option>
+        </select>
+        <input type="submit" name="name" value="add to trip">
+      </form>
+      <% result.reviews.forEach((review) => { %>
+        <div class="review">
+        <% if (result.reviews.indexOf(review) < 5) { %>
+          <li>
+            author:
+            <%= review.author_name %>
+          </li>
+          <li>
+            photo url:
+            <%= review.profile_photo_url %>
+          </li>
+          <li>
+            rating
+            <%= review.rating %>
+          </li>
+          <li>
+            review:
+            <%= review.text %>
+          </li>
+          <li>
+            posted:
+            <%= review.time %>
+          </li>
+        <% } %>
+        </div>
+        <hr>
+      <% }); %>
+    </div>
+  </body>
+</html>

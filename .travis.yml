@@ -1,13 +1,12 @@
 language:
 - node_js
 node_js:
-- 6.8.1
+- 6.2.2
 env:
   global:
-  - NODE_ENV=test
+  # - NODE_ENV=test
 install:
 - npm install
-- bash -c 'echo "SESSION_SECRET="$(openssl rand -hex 64)' >> .env
 script:
  - npm run coverage
  - npm run codecov
