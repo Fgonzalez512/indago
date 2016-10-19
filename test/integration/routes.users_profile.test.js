@@ -33,7 +33,7 @@ describe('routes : users_profile', () => {
       });
   });
 
-  describe.only('GET /user/profile/:user_id', () => {
+  describe('GET /user/profile/:user_id', () => {
     xit('should render the user profile', (done) => {
       chai.request(server)
         .get('/user/profile/' + userOne.id)
