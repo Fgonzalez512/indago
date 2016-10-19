@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/robertCSS', function(req, res, next) {
-  res.render('pages/fav-places');
+  res.render('pages/myplan');
 });
 
 module.exports = router;

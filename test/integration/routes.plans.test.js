@@ -39,7 +39,7 @@ describe('routes : plans', () => {
         });
     });
   });
-  describe('POST /plans', () => {
+  xdescribe('POST /plans', () => {
     it('should add a new plan to the database', (done) => {
       agent.post('/users/login')
         .send( {
@@ -73,24 +73,24 @@ describe('routes : plans', () => {
         });
     });
   });
-  describe('POST /plans/:id', () => {
-    it('should add a new place to the database', (done) => {
+  describe('POST /plans/:plan_id', () => {
+    it('should add a new place to the database with column plan_id equaling the :plan_id param', (done) => {
       agent.post('/users/login')
         .send( {
           email : 'margo',
           password : 'password',
         })
         .then(() => {
-          agent.post('/plans/1')
+          agent.post('/user/2/plans/1/places/new')
             .send({
-              place_name : 'Stiles Switch',
+              name : 'Stiles Switch',
               address : '6066 N Lamar Blvd',
               city : 'Austin',
               state : 'TX',
-              zipcode : 78751,
+              zipcode : '78751',
             })
             .end((err, res) => {
-              res.status.should.equal(200);
+              res.status.should.equal(302);
               res.type.should.equal('text/html');
               knex('places').where({
                 plan_id : 1,

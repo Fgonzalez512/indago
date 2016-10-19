@@ -18,9 +18,13 @@ router.post('/', function(req, res, next) {
   let lat = latAndLong[0];
   let long = latAndLong[1];
 
-  googlePlaces.nearbySearch(lat, long, req.body.keyword, (data) => {
+  googlePlaces.nearbySearch(lat, long, req.body.keyword, (placesData) => {
+
+    // let rejectedPlaces = ['7-Eleven', 'Domino\'s Pizza'];
+    // let filteredResults = placesData.results.filter;
+
     res.render('pages/search', {
-      results: data.results,
+      results: placesData.results,
     });
   });
 });
