@@ -6,7 +6,7 @@ $(function() {
 
 
   // Initialize collapse button
-  $(".button-collapse").sideNav();
+  $('.button-collapse').sideNav();
   // Sidebar collapsible menu
   $('.collapsible').collapsible();
 

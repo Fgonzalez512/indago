@@ -1,9 +1,13 @@
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = process.env.NODE_ENV || 'test';
+
 
 const chai = require('chai');
 // const should = chai.should();
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
+
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+console.log('process.env.DB_NAME', process.env.DB_NAME);
 
 const server = require('../../src/server/app');
 
@@ -18,7 +22,8 @@ describe('routes : auth', () => {
   });
 
   describe('GET /auth', () => {
-    it('should render the auth', (done) => {
+
+    xit('should render the auth', (done) => {
       chai.request(server)
         .get('/auth')
         .end((err, res) => {
