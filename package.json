@@ -6,7 +6,7 @@
     "author": "",
     "license": "ISC",
     "engines": {
-        "node": "6.2.2"
+        "node": "6.8.1"
     },
     "main": "./src/server/server.js",
     "scripts": {
