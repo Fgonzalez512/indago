@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../modules/users');
+const bcrypt = require('bcrypt-nodejs');
 
 router.get('/:user_id/', function (req, res, next) {
   var user_id = req.params.user_id;
@@ -18,28 +19,26 @@ router.get('/:user_id/', function (req, res, next) {
 router.patch('/:user_id/', function (req, res, next) {
   console.log(req.body);
   var user_id = req.params.user_id;
-  User.update(req.body)
-    .then(function(){
-      //res.render('./pages/user_edit');
-      res.redirect('/users/login');
+  if (req.body.password.length === 0 ){
+    User.update({ id: user_id,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      username: req.body.username,
+      email: req.body.email })
+      .then(function(){
+        //res.render('./pages/user_edit');
+        res.redirect('/');
+      });
+  } else {
+    req.body.password = bcrypt.hashSync(req.body.password);
+    User.update(req.body).then(function(){
+
+      res.redirect('/');
     });
+  }
 });
 
-
-//
-//
-// router.get('/user/:username', function(req, res){
-//   res.send('user ' + req.params.username);
-//   return knex('user')
-//   .update({
-//     user_id: req.body.user_id,
-//     username: req.body.username,
-//     email: req.body.email
-//   }, '*')
-//   .where('id', req.params.id);
-// });
-
-
+// bcrypt.hashSync('password');
   //knex
 
   //get updated information from req.body

@@ -39,8 +39,13 @@ describe('routes : plans', () => {
         });
     });
   });
+<<<<<<< HEAD
   xdescribe('POST /plans', () => {
     it('should add a new plan to the database', (done) => {
+=======
+  describe('POST /plans', () => {
+    xit('should add a new plan to the database', (done) => {
+>>>>>>> 157509acd9cd263e043a02356db31f103f60d839
       agent.post('/users/login')
         .send( {
           email : 'margo',
@@ -73,7 +78,8 @@ describe('routes : plans', () => {
         });
     });
   });
-  describe('POST /plans/:plan_id', () => {
+
+  describe('POST /users/:user_id/plans/:plan_id/new', () => {
     it('should add a new place to the database with column plan_id equaling the :plan_id param', (done) => {
       agent.post('/users/login')
         .send( {
@@ -81,7 +87,7 @@ describe('routes : plans', () => {
           password : 'password',
         })
         .then(() => {
-          agent.post('/user/2/plans/1/places/new')
+          agent.post('/users/2/plans/1/places/new')
             .send({
               name : 'Stiles Switch',
               address : '6066 N Lamar Blvd',
