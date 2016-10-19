@@ -8,6 +8,11 @@ const knex = require('../db/connection.js');
 //   res.render('pages/plans');
 // });
 
+//handles adding a new place to a plan
+router.post('/', (req, res) => {
+  res.send(404);
+});
+
 router.get('/cities/:city', function(req, res, next) {
   let cityID = req.params.city;
   knex('plans').where('city', cityID).first().then((city) => {
