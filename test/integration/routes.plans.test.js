@@ -39,13 +39,8 @@ describe('routes : plans', () => {
         });
     });
   });
-<<<<<<< HEAD
-  xdescribe('POST /plans', () => {
-    it('should add a new plan to the database', (done) => {
-=======
   describe('POST /plans', () => {
     xit('should add a new plan to the database', (done) => {
->>>>>>> 157509acd9cd263e043a02356db31f103f60d839
       agent.post('/users/login')
         .send( {
           email : 'margo',

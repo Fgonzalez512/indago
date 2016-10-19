@@ -10,6 +10,8 @@ router.get('/', function(req, res) {
   res.render('pages/plans');
 });
 
+// router.get('')
+
 //handles adding a new plan with a new place
 router.post('/', (req, res) => {
   let user = req.session.user;
@@ -51,9 +53,10 @@ router.post('/:plan_id', (req, res) => {
 router.get('/cities/:city', function(req, res) {
   let cityID = req.params.city;
   res.locals.page_type = cityID;
+
   knex('plans').where('city', cityID).orderBy('upvote', 'DESC').then((plans) => {
     res.render('pages/plans', {
-      plans: plans
+      plans: plans,
     });
   });
 });
