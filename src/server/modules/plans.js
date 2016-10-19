@@ -11,7 +11,7 @@ const Plans = {
   by_user_id: function(user_id) {
     return knex('plans')
       .where({
-        user_id : user_id,
+        user_id: user_id,
       });
   },
   insert: function(plan) {
