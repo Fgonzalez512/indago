@@ -179,25 +179,30 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* -------------------- Feed.ejs --------------------*/
 
-.city-t {
+
+.card {
+  margin-bottom: 0 !important;
+}
+/*.city-t {
   font-size: 1em;
   text-align: center;
   width: 100%;
   height: 3em;
-}
+}*/
 
 .card-left {
   text-align: left;
 }
-.card-right1 {
-  width: 10%;
-  text-align: right;
-  margin-left: 85%;
+
+.card-bottom {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  border: 1px solid #dce0e0;
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.6)
 }
 
-.card-right2 {
-  text-align: right;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+.fa-2x {
+  margin-left: 25%;
 }
