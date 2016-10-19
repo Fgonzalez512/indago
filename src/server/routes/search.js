@@ -1,16 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const googlePlaces = require('../../../src/server/modules/google-places.js');
+const googlePlaces = require('../modules/google-places.js');
 const Plans = require('../modules/plans');
-
 // const radarSearch = googlePlaces.radarSearch;
 // const nearbySearch = googlePlaces.nearbySearch;
 // const placeDetails = googlePlaces.details;
 
-router.get('/', function (req, res, next) {
-
+router.get('/', function(req, res, next) {
   res.render('pages/search', {
-    results : [],
+    results: [],
   });
 });
 
@@ -22,7 +20,7 @@ router.post('/', function(req, res, next) {
 
   googlePlaces.nearbySearch(lat, long, req.body.keyword, (data) => {
     res.render('pages/search', {
-      results : data.results,
+      results: data.results,
     });
   });
 });

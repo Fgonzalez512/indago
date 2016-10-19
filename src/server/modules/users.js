@@ -12,6 +12,9 @@ const User = {
     return knex('users')
       .insert(user)
       .returning(['id', 'first_name', 'last_name', 'email', 'username']);
+  },
+  all: function() {
+    return knex('users');
   }
 };
 

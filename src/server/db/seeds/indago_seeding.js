@@ -1,13 +1,21 @@
+const Seed = require('../seed_data');
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
+  return Promise.all([
+    knex('users').del(),
+    knex('plans').del(),
+    knex('places').del(),
+    knex.raw('ALTER SEQUENCE users_id_seq RESTART WITH 1'),
+    knex.raw('ALTER SEQUENCE plans_id_seq RESTART WITH 1'),
+    knex.raw('ALTER SEQUENCE places_id_seq RESTART WITH 1')
+  ])
+    .then(() => {
       return Promise.all([
         // Inserts seed entries
-        knex('table_name').insert({id: 1, colName: 'rowValue1'}),
-        knex('table_name').insert({id: 2, colName: 'rowValue2'}),
-        knex('table_name').insert({id: 3, colName: 'rowValue3'})
+        knex('users').insert(Seed.users),
+        knex('plans').insert(Seed.plans),
+        knex('places').insert(Seed.places)
       ]);
     });
 };

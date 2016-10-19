@@ -1,3 +1,5 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'test';
+
 const should = require('chai').should();
 const googlePlaces = require('../../src/server/modules/google-places.js');
 
@@ -25,7 +27,7 @@ describe('the google places module', () => {
       googlePlaces.nearbySearch('-33.8670522', '151.1957362', 'food', (body) => {
         body.should.have.all.keys('html_attributions', 'next_page_token', 'results', 'status');
         body.results[0].should.have.keys('geometry', 'icon', 'id', 'name',
-        'opening_hours', 'photos', 'place_id', 'rating', 'scope', 'reference', 'types', 'vicinity');
+          'opening_hours', 'photos', 'place_id', 'rating', 'scope', 'reference', 'types', 'vicinity');
         done();
       });
     });

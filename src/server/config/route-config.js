@@ -13,7 +13,7 @@
     const search = require('../routes/search');
 
     // *** register routes *** //
-    app.use('/', auth);
+    app.use(auth);
     app.use('/', index);
     app.use('/users', users);
     app.use('/places', places);
