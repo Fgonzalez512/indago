@@ -5,8 +5,10 @@ const bcrypt = require('bcrypt-nodejs');
 const methodOverride = require('method-override');
 const Users = require('../modules/users');
 const users_profile = require('./users_profile');
+const knex = require('../db/connection.js');
 
-router.use('/profile',users_profile);
+
+router.use('/profile', users_profile);
 
 router.get('/signup', function(req, res) {
   res.locals.loggedIn = req.session.loggedIn || false;
@@ -87,8 +89,19 @@ router.post('/login', function(req, res) {
     });
 });
 
+router.get('/:id/plans', function(req, res, next) {
+  var userID = Number.parseInt(req.session.user.id);
+  knex('plans').where('user_id', '=', userID).then(function(info) {
+    console.log(info);
+    res.render('pages/plans', {
+      info: info,
+    });
+  });
+});
+
 router.get('/logout', function(req, res) {
-  req.session = null;
+  req.session.user = null;
+  req.session.loggedIn = false;
   res.redirect('/users/login');
 });
 
