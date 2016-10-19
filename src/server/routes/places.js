@@ -13,13 +13,13 @@ router.get('/', function(req, res, next) {
     });
 });
 
-// router.post('/', function(req, res, next) {
-//   Places.insert()
-//     .then((places) => {
-//
-//       res.render('pages/places', places);
-//
-//     });
-// });
+router.post('/', function(req, res, next) {
+  Places.insert()
+    .then((places) => {
+
+      res.render('pages/places', places);
+
+    });
+});
 
 module.exports = router;
