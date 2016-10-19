@@ -59,6 +59,34 @@ h1, h2, h3, h4, h5, h6, p {
   padding-left: 2%;
 }
 
+.dropdown-content a {
+  width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+@media screen and (max-width:600px) {
+  .navBar {
+    display: none;
+  }
+  .mobile-nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5% 1.5% 0 1.5%;
+  }
+  .side-bar-icon {
+    font-size: 3rem !important;
+    color: #1560bd;
+  }
+  .mobile-logo {
+    color: #1560bd;
+    font-size: 2rem;
+  }
+}
 
 /* -------------------- Nav Bar (Logged In) --------------------*/
 
