@@ -7,6 +7,10 @@ node_js:
 #   # - NODE_ENV=test
 install:
 - npm install
+- npm run knex migrate:rollback
+- npm run knex migrate:latest
+- npm run knex seed:run
+
 script:
  - npm run coverage
  - npm run codecov

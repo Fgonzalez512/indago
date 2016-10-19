@@ -33,11 +33,11 @@ router.get('/details/:google_places_id', (req, res, next) => {
     return googlePlaces.details(req.params.google_places_id, (data) => {
       res.render('pages/search_details', {
         result : data.result,
-        user_plans : [],
+        user_plans : null,
       });
     });
   }
-  
+
   Plans.by_user_id(user.id).then((user_plans) => {
     googlePlaces.details(req.params.google_places_id, (data) => {
       res.render('pages/search_details', {

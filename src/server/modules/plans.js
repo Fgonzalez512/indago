@@ -17,8 +17,8 @@ const Plans = {
   insert: function(plan) {
     return knex('plans')
       .insert(plan)
-      //TODO: reformat database and return proper columns
-      .returning();
+      //TODO: return all necessary columns
+      .returning('id');
   }
 };
 

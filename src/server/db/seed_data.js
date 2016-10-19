@@ -17,45 +17,45 @@ const data = {
     password: password_hash
   }, ],
   plans: [{
-      user_id: 1,
-      city: 'Austin',
-      name: 'Music Day!'
-    }, {
-      user_id: 2,
-      city: 'San Francisco',
-      name: 'Coffee House Crawl'
-    }, {
-      user_id: 1,
-      city: 'New York',
-      name: 'Bar Hopping'
-    }, {
-      user_id: 1,
-      city: 'Seattle',
-      name: 'Music Day!'
-    }, {
-      user_id: 1,
-      city: 'Miami',
-      name: 'Bar Hopping'
-    }, {
-      user_id: 1,
-      city: 'Chicago',
-      name: 'Coffee House Crawl'
-    }, {
-      user_id: 1,
-      name: 'Go Diego Go!',
-      city: 'Austin',
-      state: 'TX'
-    }, {
-      user_id: 1,
-      name: 'Galvanize',
-      city: 'Austin',
-      state: 'TX'
-    }, {
-      user_id: 2,
-      name: 'Lake Pflugerville',
-      city: 'Pflugerville',
-      state: 'TX'
-    },
+    user_id: 1,
+    city: 'Austin',
+    name: 'Music Day!'
+  }, {
+    user_id: 2,
+    city: 'San Francisco',
+    name: 'Coffee House Crawl'
+  }, {
+    user_id: 1,
+    city: 'New York',
+    name: 'Bar Hopping'
+  }, {
+    user_id: 1,
+    city: 'Seattle',
+    name: 'Music Day!'
+  }, {
+    user_id: 1,
+    city: 'Miami',
+    name: 'Bar Hopping'
+  }, {
+    user_id: 1,
+    city: 'Chicago',
+    name: 'Coffee House Crawl'
+  }, {
+    user_id: 1,
+    name: 'Go Diego Go!',
+    city: 'Austin',
+    state: 'TX'
+  }, {
+    user_id: 1,
+    name: 'Galvanize',
+    city: 'Austin',
+    state: 'TX'
+  }, {
+    user_id: 2,
+    name: 'Lake Pflugerville',
+    city: 'Pflugerville',
+    state: 'TX'
+  },
 
   ],
   places: [{
