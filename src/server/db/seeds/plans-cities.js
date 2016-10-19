@@ -5,12 +5,12 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       return Promise.all([
         // Inserts seed entries
-        knex('plans').insert({city: 'Austin'}),
-        knex('plans').insert({city: 'San Francisco'}),
-        knex('plans').insert({city: 'New York'}),
-        knex('plans').insert({city: 'Seattle'}),
-        knex('plans').insert({city: 'Miami'}),
-        knex('plans').insert({city: 'Chicago'})
+        knex('plans').insert({city: 'Austin', name: 'Music Day!'}),
+        knex('plans').insert({city: 'San Francisco', name: 'Coffee House Crawl'}),
+        knex('plans').insert({city: 'New York', name: 'Bar Hopping'}),
+        knex('plans').insert({city: 'Seattle', name: 'Music Day!'}),
+        knex('plans').insert({city: 'Miami', name: 'Bar Hopping'}),
+        knex('plans').insert({city: 'Chicago', name: 'Coffee House Crawl'})
       ]);
     });
 };
