@@ -6,8 +6,9 @@
     "author": "",
     "license": "ISC",
     "engines": {
-        "node": "6.8.1"
+        "node": "6.2.2"
     },
+    "engine-strict": true,
     "main": "./src/server/server.js",
     "scripts": {
         "start": "nodemon ./src/server/server.js",
