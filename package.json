@@ -10,7 +10,7 @@
   },
   "main": "./src/server/server.js",
   "scripts": {
-    "start": "node ./src/server/server.js",
+    "start": "nodemon ./src/server/server.js",
     "test": "NODE_ENV=test ./node_modules/mocha/bin/_mocha",
     "stop": "pm2 delete all",
     "dev": "NODE_ENV=development nodemon ./src/server/server.js",
