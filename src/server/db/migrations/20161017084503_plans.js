@@ -2,6 +2,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTableIfNotExists('plans',(table)=>{
     table.increments();
+    table.integer('user_id').defaultTo(1).notNullable();
     table.integer('plan_type_id').defaultTo(1).notNullable();
     table.date('date');
     table.boolean('is_favorite').defaultTo(false).notNullable();
