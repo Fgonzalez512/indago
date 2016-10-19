@@ -18,7 +18,7 @@ const Places = {
   },
   set: {
     insert: (place) => {
-      return knex('places').insert(place).returning('*');
+      return knex('places').insert(place).returning(['id']);
     }
   }
 };
