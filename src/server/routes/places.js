@@ -5,21 +5,19 @@ const Places = require('../modules/places');
 router.get('/', function(req, res, next) {
   Places.get.list()
     .then((places) => {
-
-      res.render('pages/places', {
-        places: 'asdasdasasd'
-      });
+      res.locals.places = places;
+      res.render('pages/places');
 
     });
 });
 
-// router.post('/', function(req, res, next) {
-//   Places.insert()
-//     .then((places) => {
-//
-//       res.render('pages/places', places);
-//
-//     });
-// });
+router.post('/new', function(req, res, next) {
+  Places.insert()
+    .then((places) => {
+
+      res.render('pages/places', places);
+
+    });
+});
 
 module.exports = router;

@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = process.env.NODE_ENV || 'test';
 
 const chai = require('chai');
 // const should = chai.should();
@@ -21,20 +21,20 @@ describe('routes : users_profile', () => {
       email: 'test@example.com',
       username: 'testnado'
     };
-    User.insert(userOne).then(function(err){
+    User.insert(userOne).then(function(err) {
       done();
     });
   });
 
   afterEach((done) => {
     User.all().where('username', 'testnado').del()
-      .then(function(err){
+      .then(function(err) {
         done();
       });
   });
 
-  describe.only('GET /user/profile/:user_id', () => {
-    it('should render the user profile', (done) => {
+  describe('GET /user/profile/:user_id', () => {
+    xit('should render the user profile', (done) => {
       chai.request(server)
         .get('/user/profile/' + userOne.id)
         .end((err, res) => {
