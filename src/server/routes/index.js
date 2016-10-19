@@ -16,8 +16,8 @@ router.get('/', function(req, res, next) {
   }
 });
 
-router.get('/myplan', function(req, res, next) {
-  res.render('pages/myplan');
+router.get('/robertCSS', function(req, res, next) {
+  res.render('pages/fav-places');
 });
 
 module.exports = router;
