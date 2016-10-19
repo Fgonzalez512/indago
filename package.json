@@ -10,7 +10,6 @@
     },
     "main": "./src/server/server.js",
     "scripts": {
-        "prestart": "knex migrate:latest",
         "start": "node ./src/server/server.js",
         "pretest": "knex migrate:latest --env test && knex seed:run --env test",
         "test": "mocha",
