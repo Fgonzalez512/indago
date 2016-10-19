@@ -1,7 +1,7 @@
 codecov:
   token: 31dae9c9-55eb-4363-9cd9-3ca22852477c
   notify:
-    require_ci_to_pass: true
+    require_ci_to_pass: false
 comment:
   behavior: default
   layout: header, diff
