@@ -18,6 +18,15 @@ router.get('/cities/:city', function(req, res, next) {
   });
 });
 
+router.post('/new', function(req, res, next) {
+  Plans.insert()
+    .then((places) => {
+
+      res.render('pages/places', places);
+
+    });
+});
+
 
 // router.post('/:plan_id/upvote', (req, res)=> {
 //   knex('plans').where({
