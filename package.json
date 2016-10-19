@@ -21,7 +21,10 @@
         "codecov": "codecov",
         "knex": "knex",
         "pm2": "pm2",
-        "gulp": "gulp"
+        "gulp": "gulp",
+        "istanbul": "istanbul",
+        "codecov": "codecov",
+        "mocha": "mocha"
     },
     "repository": {
         "type": "git",
