@@ -1,5 +1,3 @@
-process.env.NODE_ENV = 'test';
-
 const chai = require('chai');
 // const should = chai.should();
 const chaiHttp = require('chai-http');
@@ -36,11 +34,15 @@ describe('routes : search', () => {
     it('should poplulate the page with search results', (done) => {
       chai.request(server)
         .post('/search')
-      //add in form data here
-        .send({ location : '51.503186,-0.126446'})
-        .send({ keyword : 'museum' })
+        //add in form data here
+        .send({
+          location: '51.503186,-0.126446'
+        })
+        .send({
+          keyword: 'museum'
+        })
         .end((err, res) => {
-        // res.redirects.length.should.equal(1);
+          // res.redirects.length.should.equal(1);
           res.status.should.equal(200);
           res.type.should.equal('text/html');
           res.text.should.include('<input type="text" name="keyword">');

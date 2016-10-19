@@ -2,9 +2,9 @@ language:
 - node_js
 node_js:
 - 6.2.2
-env:
-  global:
-  # - NODE_ENV=test
+# env:
+#   global:
+#   # - NODE_ENV=test
 install:
 - npm install
 script:
