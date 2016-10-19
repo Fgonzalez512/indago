@@ -86,6 +86,16 @@ h1, h2, h3, h4, h5, h6, p {
     color: #1560bd;
     font-size: 2rem;
   }
+  .bigContainer{
+    display: none;
+  }
+  .smallContainer{
+    width: 90% !important;
+    border: none !important;
+  }
+  .side-nav a {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
 }
 
 /* -------------------- Nav Bar (Logged In) --------------------*/
