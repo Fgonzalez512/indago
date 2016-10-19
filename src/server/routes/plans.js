@@ -1,17 +1,20 @@
 const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
+const bcrypt = require('bcrypt-nodejs');
+const methodOverride = require('method-override');
+const Users = require('../modules/users');
+const knex = require('../db/connection.js');
 
-const indexController = require('../controllers/index');
+router.get('/', function(req, res) {
+  res.render('pages/plans');
+});
 
-router.get('/', function (req, res, next) {
-  const renderObject = {};
-  renderObject.title = 'Welcome to Express!';
-  indexController.sum(1, 2, (error, results) => {
-    if (error) return next(error);
-    if (results) {
-      renderObject.sum = results;
-      res.render('index', renderObject);
-    }
+router.get('/cities/:city', function(req, res, next) {
+  let cityID = req.params.city;
+  knex('plans').where('city', cityID).first().then((city)=>{
+    res.render('pages/plans', {
+      city:city,
+    });
   });
 });
 
