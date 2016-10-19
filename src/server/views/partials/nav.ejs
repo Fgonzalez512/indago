@@ -1,5 +1,58 @@
 
 <%if (loggedIn) {%>
+<!-- Mobile Nav -->
+<ul id="slide-out" class="side-nav">
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header">City<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#">Austin</a></li>
+            <li><a href="#">San Francisco</a></li>
+            <li><a href="#">New York</a></li>
+            <li><a href="#">Seattle</a></li>
+            <li><a href="#">Miami</a></li>
+            <li><a href="#">Chicago</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header">Plans<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#">My Plans</a></li>
+            <li><a href="#">Favorite Plans</a></li>
+            <li><a href="#">Favorite Places</a></li>
+            <li><a href="#">Create Plan</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header">User<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#">Edit</a></li>
+            <li><a href="/users/logout">Log Out</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div class="mobile-nav">
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons side-bar-icon">menu</i></a>
+  <a class="logo mobile-logo" href="/">indago</a>
+</div>
+
 <div class="navBar">
     <a class="logo" href="/">indago</a>
     <a class="dropdown-button navBarDrop" href="#" data-activates="dropdown3"> City </a>
@@ -25,6 +78,33 @@
   <li><a href="/users/logout">Log Out</a></li>
 </ul>
 <% } else { %>
+  <!-- Mobile Nav -->
+<ul id="slide-out" class="side-nav">
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header">City<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#">Austin</a></li>
+            <li><a href="#">San Francisco</a></li>
+            <li><a href="#">New York</a></li>
+            <li><a href="#">Seattle</a></li>
+            <li><a href="#">Miami</a></li>
+            <li><a href="#">Chicago</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li><a href="/users/signup"> Sign Up </a></li>
+  <li><a href="/users/login"> Login </a></li>
+</ul>
+<div class="mobile-nav">
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons side-bar-icon">menu</i></a>
+  <a class="logo mobile-logo" href="/">indago</a>
+</div>
+
 <div class="navBar">
     <a class="logo" href="/">indago</a>
     <a class="dropdown-button navBarDrop" href="#" data-activates="dropdown4"> City </a>
