@@ -39,7 +39,6 @@ describe('routes : plans', () => {
         });
     });
   });
-
   xdescribe('POST /plans', () => {
     it('should add a new plan to the database', (done) => {
       agent.post('/users/login')
@@ -62,7 +61,7 @@ describe('routes : plans', () => {
               res.redirects.length.should.equal(1);
               res.type.should.equal('text/html');
               knex('plans').where({
-                name: 'New Plan 1',
+                name: 'New Plan 1'
               })
                 .first()
                 .then((data) => {
@@ -75,7 +74,7 @@ describe('routes : plans', () => {
     });
   });
 
-  xdescribe('POST /users/:user_id/plans/:plan_id/new', () => {
+  describe('POST /users/:user_id/plans/:plan_id/new', () => {
     it('should add a new place to the database with column plan_id equaling the :plan_id param', (done) => {
       agent.post('/users/login')
         .send({

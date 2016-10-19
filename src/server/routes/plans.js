@@ -41,16 +41,6 @@ router.post('/', (req, res, next) => {
 
 });
 
-router.post('/:user_id/plans/:plan_id/places/new', (req, res) => {
-
-  if (res.locals.loggedIn) {
-    Places.insert(res.body).then((result) => {
-
-      res.redirect('/users/' + res.locals.user.id + '/plans/' + res.locals.user.id);
-
-    });
-  }
-});
 
 
 router.get('/cities/:city', function(req, res) {

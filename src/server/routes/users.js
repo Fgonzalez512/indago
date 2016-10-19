@@ -6,6 +6,18 @@ const methodOverride = require('method-override');
 const Users = require('../modules/users');
 const users_profile = require('./users_profile');
 const knex = require('../db/connection.js');
+const Places = require('../modules/places');
+
+router.post('/:user_id/plans/:plan_id/places/new', (req, res) => {
+  console.log(req.body);
+  if (res.locals.loggedIn) {
+    Places.insert(res.body).then((result) => {
+
+      res.redirect('/users/' + res.locals.user.id + '/plans/' + res.locals.user.id);
+
+    });
+  }
+});
 
 
 router.use('/profile', users_profile);
