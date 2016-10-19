@@ -77,16 +77,4 @@ describe('routes : search', () => {
         });
     });
   });
-  describe('GET /search/details/:google_places_id', () => {
-    it('should contain a dropdown', (done) => {
-      chai.request(server)
-        .get('/search/details/ChIJ7dgNbsvLRIYRFhpmxL4qLVA')
-        .end((err, res) => {
-          res.status.should.equal(200);
-          res.type.should.equal('text/html');
-          res.text.should.include('Scubaland Adventures');
-          done();
-        });
-    });
-  });
 });

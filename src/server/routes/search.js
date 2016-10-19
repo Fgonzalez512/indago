@@ -27,8 +27,17 @@ router.post('/', function(req, res, next) {
 
 router.get('/details/:google_places_id', (req, res, next) => {
 
-  let user = req.session.user[0];
+  let user = req.session.user || null;
 
+  if (!user) {
+    return googlePlaces.details(req.params.google_places_id, (data) => {
+      res.render('pages/search_details', {
+        result : data.result,
+        user_plans : [],
+      });
+    });
+  }
+  
   Plans.by_user_id(user.id).then((user_plans) => {
     googlePlaces.details(req.params.google_places_id, (data) => {
       res.render('pages/search_details', {

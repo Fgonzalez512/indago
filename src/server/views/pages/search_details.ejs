@@ -10,14 +10,18 @@
       <%= result.formatted_address %>
       <%= result.formatted_phone_number %>
       <%= result.rating %>
-      <form action="/places" method="POST">
+      <% if(user_plans) { %>
+      <form action="/plans" method="POST">
         <select>
-          <option value="tripA">A (DUMMY)</option>
-          <option value="tripB">B (DUMMY)</option>
-          <option value="tripC">C (DUMMY)</option>
+          <% user_plans.forEach((plan) => { %>
+            <option name="plan" value=<%plan.id%>>
+              <%= plan.name %>
+            </option>
+          <% }); %>
         </select>
         <input type="submit" name="name" value="add to trip">
       </form>
+      <% } %>
       <!-- need route here -->
       <form action="index.html" method="POST">
         <fieldset>
@@ -25,7 +29,7 @@
           <label for="name">title</label>
           <input type="text" name="name">
           <!-- fill out proper data for new trip and new place here -->
-          <input type="hidden" name="city" value="<%=result.city%">
+          <input type="hidden" name="city" value="<%=result.city%>">
         </fieldset>
       </form>
       <% result.reviews.forEach((review) => { %>
