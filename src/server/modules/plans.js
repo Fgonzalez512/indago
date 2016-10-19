@@ -17,7 +17,6 @@ const Plans = {
   insert: function(plan) {
     return knex('plans')
       .insert(plan)
-      //TODO: return all necessary columns
       .returning('*');
   }
 };

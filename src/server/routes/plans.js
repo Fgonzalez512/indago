@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const knex = require('../db/connection.js');
 const Plans = require('../modules/plans');
-const Places = require('../modules/Places');
+const Places = require('../modules/places');
 
 
 router.get('/', function(req, res) {
@@ -39,11 +39,17 @@ router.post('/', (req, res, next) => {
     res.sendStatus(503);
   }
 
-
 });
 
-router.post('/:plan_id', (req, res) => {
-  res.sendStatus('404');
+router.post('/:user_id/plans/:plan_id/places/new', (req, res) => {
+
+  if (res.locals.loggedIn) {
+    Places.insert(res.body).then((result) => {
+
+      res.redirect('/users/' + res.locals.user.id + '/plans/' + res.locals.user.id);
+
+    });
+  }
 });
 
 
