@@ -11,6 +11,7 @@
   const session = require('cookie-session');
   const flash = require('connect-flash');
   const morgan = require('morgan');
+  const methodOverride = require('method-override');
   // const nunjucks = require('nunjucks');
   const helmet = require('helmet');
 
@@ -61,7 +62,9 @@
     if (process.env.NODE_ENV !== 'test') {
       app.use(morgan('dev'));
     }
-    // app.use(cookieParser());
+
+    app.use(methodOverride('_method'));
+
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
       extended: false
