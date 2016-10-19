@@ -90,11 +90,14 @@ router.post('/login', function(req, res) {
 });
 
 router.get('/:id/plans', function(req, res, next) {
-  var userID = Number.parseInt(req.session.user.id);
-  knex('plans').where('user_id', '=', userID).then(function(info) {
-    console.log(info);
+
+  var userID = Number.parseInt(req.params.id);
+
+  res.locals.page_type = 'My Plans';
+
+  knex('plans').where('user_id', '=', userID).then(function(plans) {
     res.render('pages/plans', {
-      info: info,
+      plans: plans,
     });
   });
 });
