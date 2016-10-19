@@ -10,11 +10,7 @@ router.get('/', function(req, res) {
 
 router.get('/cities/:city', function(req, res, next) {
   let cityID = req.params.city;
-
   res.locals.page_type = cityID;
-
-  console.log(res.locals.page_type);
-
   knex('plans').where('city', cityID).then((plans) => {
     console.log(plans);
     res.render('pages/plans', {
@@ -24,18 +20,18 @@ router.get('/cities/:city', function(req, res, next) {
 });
 
 
-router.post('/:plan_id/upvote', (req, res)=> {
+router.post('/:plan_id/upvote', (req, res) => {
   knex('plans').where({
-    id : req.params.id,
-  })
+      id: req.params.id,
+    })
     .first()
     .then((id) => {
       var newScore = (++id.upvote);
       knex('plans').where({
-        id : req.params.id,
-      })
+          id: req.params.id,
+        })
         .update({
-          upvote : newScore,
+          upvote: newScore,
         }).then(() => {
           res.redirect('back');
         });

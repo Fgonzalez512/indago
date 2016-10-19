@@ -206,3 +206,71 @@ h1, h2, h3, h4, h5, h6, p {
 .fa-2x {
   margin-left: 25%;
 }
+
+.card-bottom-right {
+  text-align: right;
+  width: 100%;
+  padding-right: 1%;
+}
+
+/* -------------------- My Plan (Single).ejs --------------------*/
+
+.searchBar input[type=text]{
+  width: 50%;
+}
+
+.bigC {
+  border-bottom: 1px solid #dce0e0;
+}
+
+.resultsPlan {
+  display: flex;
+  font-size: 1.5rem;
+}
+
+.resultsPlan p:first-child {
+  padding-left: 0.5rem;
+  padding-right: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.resultsPlan p:nth-child(2) {
+  border: 1px solid #dce0e0;
+  width: 75px;
+  height: 75px;
+  margin-right: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resultsPlan p:nth-child(3) {
+  display: flex;
+  align-items: center;
+}
+
+.resultsPlanButton {
+  display: flex;
+}
+
+.resultsPlanButton a {
+  color: rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+  padding-left: 1%;
+  padding-right: 1%;
+  cursor: pointer;
+  font-size: 1.15rem;
+}
+
+.resultsPlanButton a:hover {
+  color: #1560bd;
+}
+
+.resultsPlanButton button {
+  margin-left: 1%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: red;
+}
