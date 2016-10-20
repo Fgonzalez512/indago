@@ -35,46 +35,41 @@
         });
       });
     </script>
+    <% include ../partials/head %>
+    <title>Search Details</title>
   </head>
   <body>
-    <div>
-      <ul>
-      <li>
-        <%= result.name %>
-      </li>
-      <li>
-      <%= result.formatted_address %>
-      </li>
-      <li>
-      <%= result.formatted_phone_number %>
-      </li>
-      <li>
-      <%= result.rating %>
-      </li>
-    </ul>
+    <% include ../partials/nav %>
+    <div class="container">
+      <header class="homePage">
+        <h3>Search Details</h3>
+        <h5><%= result.name %></h5>
+        <h5><%= result.formatted_address %></h5>
+        <h5><%= result.formatted_phone_number %></h5>
+        <h5>Rating: <%= result.rating %></h5>
+      </header>
       <% if(user_plans) { %>
-      <form id="addPlace" action="#" method="GET">
-        <select>
+      <form action="/plans" method="POST">
+        <select class="search-details-select">
           <% user_plans.forEach((plan) => { %>
-            <option id="planID" name="plan_id" value=<%plan.id%>>
-              <%= plan.name %>
+            <option name="plan_id" value=<%plan.id%>>
+<%= plan.name %>
             </option>
           <% }); %>
         </select>
-        <input type="hidden" name="name" id="name" value=<%= result.name %>>
-        <input type="hidden" name="address" id="address" value=<%= result.address_components[0].long_name + ' ' + result.address_components[1].long_name %>
-        <input type="hidden" name="city" id="city" value=<%= result.address_components[2].long_name %>>
-        <input type="hidden" name="state" id="state" value=<%=result.address_components[3].long_name%>>
-        <input type="hidden" name="zipcode" id="zipcode" value=<%=result.address_components[4].short_name%>>
-        <select name="time" id="time">
+        <input type="hidden" name="name" value=<%= result.name %>>
+        <input type="hidden" name="address" value=<%= result.address_components[0].long_name + ' ' + result.address_components[1].long_name %>
+        <input type="hidden" name="city" value=<%= result.address_components[2].long_name %>>
+        <input type="hidden" name="state" value=<%=result.address_components[3].long_name%>>
+        <input type="hidden" name="zipcode" value=<%=result.address_components[4].short_name%>>
+        <select class="search-details-select" name="time">
           <option value="9:00 AM">9:00 AM</option>
           <option value="12:00 PM">12:00 PM</option>
           <option value="3:00 PM">3:00 PM</option>
           <option value="6:00 PM">6:00 PM</option>
           <option value="9:00 PM">9:00 PM</option>
         </select>
-        <input type="hidden" id="userID" value="user.id">
-        <input type="submit" value="add to plan">
+        <button class="btn waves-effect waves-light" type="submit">Add to plan</button>
       </form>
       <% } %>
       <!-- need route here -->
@@ -91,35 +86,22 @@
           <input type="submit" value="add to plan">
         </fieldset>
       </form> -->
-      <h3>reviews:</h3>
-      <hr>
-      <% result.reviews.forEach((review) => { %>
-        <div class="review">
-        <% if (result.reviews.indexOf(review) < 5) { %>
-          <li>
-            author:
-            <%= review.author_name %>
-          </li>
-          <li>
-            photo url:
-            <%= review.profile_photo_url %>
-          </li>
-          <li>
-            rating
-            <%= review.rating %>
-          </li>
-          <li>
-            review:
-            <%= review.text %>
-          </li>
-          <li>
-            posted:
-            <%= review.time %>
-          </li>
-        <% } %>
-        </div>
+      <div class="innerContainer">
+        <h5>Reviews:</h5>
         <hr>
-      <% }); %>
+        <% result.reviews.forEach((review) => { %>
+          <div class="review">
+          <% if (result.reviews.indexOf(review) < 5) { %>
+            <h6><strong>Author:</strong> <%= review.author_name %></h6>
+            <!-- <h6>Photo url:<%= review.h6rofile_h6hoto_url %></h6> -->
+            <h6><strong>Rating:</strong> <%= review.rating %></h6>
+            <h6><strong>Review:</strong> <%= review.text %></h6>
+            <!-- <h6>Posted:<%= review.time %></h6> -->
+          <% } %>
+          </div>
+          <hr>
+        <% }); %>
+      </div>
     </div>
   </body>
 </html>

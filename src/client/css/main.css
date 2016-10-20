@@ -26,6 +26,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-left: 1px solid #dce0e0;
 }
 
 .navBar .navBarDrop {
@@ -195,6 +196,10 @@ p {
   margin: auto;
 }
 
+button {
+  background-color: #1560bd !important;
+}
+
 /* -------------------- Feed.ejs --------------------*/
 
 
@@ -334,4 +339,48 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* -------------------- myplan.ejs --------------------*/
+
+.selectCity {
+  color: #1560bd
+}
+
+.select-dropdown li {
+  color: #1560bd
+}
+
+/* -------------------- collections.ejs --------------------*/
+
+.avatar .secondary-content {
+  color: #1560bd;
+}
+
+/* -------------------- search.ejs --------------------*/
+
+
+.searchEdit input[type=text]:focus {
+  border-bottom: 1px solid #1560bd !important;
+}
+
+.icons option {
+  color: #1560bd;
+}
+
+/* -------------------- search-details.ejs --------------------*/
+
+.search-details-select {
+  width: 50%;
+  padding: 0;
+}
+
+strong {
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.innerContainer {
+  border: 1px solid #dce0e0;
+  margin-top: 2%;
 }

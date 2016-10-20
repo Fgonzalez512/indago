@@ -9,7 +9,6 @@ router.get('/', function(req, res, next) {
   res.locals.page_type = 'All Plans';
 
   Plans.list().then((plans) => {
-
     res.render('pages/plans', {
       plans: plans
     });
