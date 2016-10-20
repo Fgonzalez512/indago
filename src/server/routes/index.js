@@ -8,9 +8,9 @@ router.get('/', function(req, res, next) {
   res.render('index');
 
 });
-router.get('/404', function(req, res, next) {
+router.get('/error', function(req, res, next) {
 
-  res.render('pages/404_page');
+  res.render('pages/error');
 
 });
 router.get('/robertCSS', function(req, res, next) {

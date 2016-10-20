@@ -6,10 +6,6 @@ const Promise = require('promise');
 
 
 
-// router.get('')
-
-<<<<<<< HEAD
-
 router.get('/:id/upvote', (req, res) => {
   let planID = req.params.id;
   knex('plans').where('id', planID).first().then((id) => {
@@ -29,9 +25,6 @@ router.get('/cities/:city', function(req, res) {
   res.locals.page_type = cityID;
 
   knex('plans').where('city', cityID).orderBy('upvote', 'DESC').then((plans) => {
-=======
-  knex('plans').orderBy('city', 'asc').then((plans) => {
->>>>>>> 4ade65a4134bf2b58049ea1f8c07fe29d51be5ae
     res.render('pages/plans', {
       plans: plans,
     });
