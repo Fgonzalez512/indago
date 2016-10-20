@@ -14,7 +14,7 @@ const Plans = require('../modules/plans');
 router.post('/:user_id/plans/new/place/new', (req, res, next) => {
   if (res.locals.loggedIn) {
     let newPlan = {
-      user_id:res.locals.user.id,
+      user_id: res.locals.user.id,
       name: req.body.place_name
     };
     let newPlace = {
@@ -46,25 +46,12 @@ router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
     Places.insert(newPlace).then((result) => {
       res.redirect('back');
     });
-  }else {
+  } else {
     res.redirect('/login');
   }
 });
 
 //creates new plan
-router.post('/:user_id/plans/new', (req, res,next) => {
-  if (res.locals.loggedIn) {
-    let newPlan = req.body;
-    newPlan.user_id = req.params.user_id;
-    Plans.insert(newPlan).then((result) => {
-      res.redirect('/');
-    });
-  }else {
-    res.redirect('/');
-  }
-});
-
-
 router.post('/:user_id/plans/new', (req, res) => {
   if (res.locals.loggedIn) {
     let newPlan = req.body;
@@ -72,7 +59,7 @@ router.post('/:user_id/plans/new', (req, res) => {
     Plans.insert(newPlan).then((result) => {
       res.redirect('/');
     });
-  }else {
+  } else {
     res.redirect('/');
   }
 });
@@ -159,17 +146,17 @@ router.get('/:id/plans', function(req, res) {
 
 router.get('/:user_id/plans/:plan_id/favorite', (req, res) => {
   let planID = req.params.plan_id;
-  Plans.by_id(planID).then((planCopy)=>{
+  Plans.by_id(planID).then((planCopy) => {
     planCopy.user_id = res.locals.user.id;
     planCopy.is_favorite = true;
-    Places.listWithPlanID(planCopy.id).then((placesCopy)=>{
+    Places.listWithPlanID(planCopy.id).then((placesCopy) => {
       delete planCopy['id'];
-      Plans.insert(planCopy).then(planNew=>{
-        placesCopy = placesCopy.map((place)=> {
+      Plans.insert(planCopy).then(planNew => {
+        placesCopy = placesCopy.map((place) => {
           place.plan_id = planNew.id;
           delete place['id'];
         });
-        Places.insert(placesCopy).then((placesNew)=>{
+        Places.insert(placesCopy).then((placesNew) => {
           res.redirect('/pages/plans');
         });
       });
