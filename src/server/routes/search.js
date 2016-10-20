@@ -38,12 +38,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-  //deprecated
-  // let latAndLong = req.body.location.split(',');
-  // let lat = latAndLong[0];
-  // let long = latAndLong[1];
-  console.log('=-=-=-=-=-=-=-=LOCATION BELOW=-=-=-=-=-=-=-=-=');
-  console.log(req.body.location);
   let lat = locations[req.body.location].lat;
   let long = locations[req.body.location].long;
 
