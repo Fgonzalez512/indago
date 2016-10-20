@@ -4,6 +4,7 @@
       <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
       <script>
       $(document).ready(function () {
+
         $('.submit').click(function () {
           var pathname = window.location.pathname;
           var hostname = window.location.hostname;
@@ -12,10 +13,14 @@
             type : 'POST',
             url : 'http://'+hostname+':3000'+pathname,
             data : {
-              booya : 'booya',
+                name : $('#name').val(),
+                location : $('#location').val(),
+                date : $('#date').val(),
             },
           });
+
         });
+
       });
     </script>
   </head>
@@ -25,11 +30,11 @@
         <!-- <div class="col s1 m1 l1 searchBar">
           <input type="text" name="search" value placeholder="Search">
         </div> -->
-        <form action="#" method="POST">
+        <form action="/search" method="POST">
           <label for="name">plan name</label>
           <input type="text" name="name">
           <label for="location">select city:</label>
-          <select name="location">
+          <select name="location" id="location">
             <option value="austin">Austin</option>
             <option vlaue="san_francisco">San Francisco</option>
             <option value="new_york">New York</option>
@@ -40,10 +45,10 @@
           <label for="date">date</label>
           <input type="text" name="date">
         <label for="keyword">
-          search for a place to add to your plan:
+          create your plan and search for a place to add to your plan:
         </label>
         <input type="text" name="keyword">
-        <input type="submit" class="submit" value="search">
+        <input type="submit" class="submit" value="create">
       </form>
         <!-- <form class="deletePlanForm" action="">
           <button id="deletePlan"type="submit">Delete Plan</button>
