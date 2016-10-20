@@ -5,17 +5,8 @@ const should = chai.should();
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
-// const bcrypt = require('bcrypt-nodejs');
-// const password_hash = bcrypt.hashSync('password');
-// console.log(password_hash);
-// console.log('^^^^^password_hash above^^^^^');
-
 const server = require('../../src/server/server');
 const knex = require('../../src/server/db/connection');
-
-
-
-// let cookie = response.res.req._headers.cookie.slice(8, 382);
 
 var agent = chai.request.agent(server);
 
