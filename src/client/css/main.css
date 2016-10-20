@@ -227,9 +227,11 @@ p {
 }
 
 .card-bottom-right {
+  border: 1px solid red;
+  color: #1560bd;
   text-align: right;
   width: 100%;
-  padding-right: 1%;
+  margin-right: 80%;
 }
 
 /* -------------------- My Plan (Single).ejs --------------------*/
