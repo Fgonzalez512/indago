@@ -14,7 +14,7 @@
             url : 'http://'+hostname+':3000'+pathname,
             data : {
                 name : $('#name').val(),
-                location : $('#location').val(),
+                city : $('#location').val(),
                 date : $('#date').val(),
             },
           });
@@ -32,7 +32,7 @@
         </div> -->
         <form action="/search" method="POST">
           <label for="name">plan name</label>
-          <input type="text" name="name">
+          <input type="text" name="name" id="name">
           <label for="location">select city:</label>
           <select name="location" id="location">
             <option value="austin">Austin</option>
@@ -43,7 +43,7 @@
             <option value="chicago">Chicago</option>
           </select>
           <label for="date">date</label>
-          <input type="text" name="date">
+          <input type="text" name="date" id="date">
         <label for="keyword">
           create your plan and search for a place to add to your plan:
         </label>
