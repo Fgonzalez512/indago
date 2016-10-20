@@ -8,6 +8,41 @@ const knex = require('../db/connection.js');
 const Places = require('../modules/places');
 const Plans = require('../modules/plans');
 
+
+
+//handles adding a new plan with a new place
+router.post('/new', (req, res, next) => {
+
+  if (res.locals.loggedIn) {
+
+    let newPlan = {
+      user_id:res.locals.user.id,
+      name: req.body.place_name
+    };
+    let newPlace = {
+      name: req.body.plan_name,
+      address: req.body.plan_name,
+      city: req.body.plan_name,
+      state: req.body.plan_name,
+      zipcode: req.body.plan_name,
+
+    };
+    Plans.insert(newPlan)
+      .then((plan) => {
+        newPlace.plan_id = plan.id;
+        Places.insert(newPlace)
+          .then((place) => {
+            res.redirect('/users/' + res.locals.user.id + '/plans/' + plan.id);
+          });
+      });
+
+  } else {
+    res.sendStatus(503);
+  }
+
+});
+
+
 router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
 
   if (res.locals.loggedIn) {
