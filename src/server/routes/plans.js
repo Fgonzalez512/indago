@@ -74,6 +74,11 @@ router.get('/:plan_id', function(req, res, next) {
     Plans.by_id(plan_id),
     Places.listWithPlanID(plan_id)
   ]).then((result)=>{
+    if (res.locals.loggedIn) {
+      if (res.locals.user.id === result[0].user_id ) {
+        res.locals.is_editable = true;
+      }
+    }
     res.render('pages/plan-details',{plan:result[0],places:result[1]});
   });
 
