@@ -4,10 +4,16 @@ const Plans = require('../modules/plans');
 const Places = require('../modules/places');
 
 
-router.get('/', function(req, res) {
+router.get('/', function(req, res, next) {
 
-  res.render('pages/plans');
+  res.locals.page_type = 'All Plans';
 
+  Plans.list().then((plans) => {
+
+    res.render('pages/plans', {
+      plans: plans
+    });
+  });
 });
 
 // router.get('')

@@ -2,21 +2,12 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'test';
 
 const chai = require('chai');
 const should = chai.should();
+const expect = chai.expect;
 const chaiHttp = require('chai-http');
-chai.use(chaiHttp);
-
-// const bcrypt = require('bcrypt-nodejs');
-// const password_hash = bcrypt.hashSync('password');
-// console.log(password_hash);
-// console.log('^^^^^password_hash above^^^^^');
-
 const server = require('../../src/server/server');
 const knex = require('../../src/server/db/connection');
 
-
-
-// let cookie = response.res.req._headers.cookie.slice(8, 382);
-
+chai.use(chaiHttp);
 var agent = chai.request.agent(server);
 
 describe('routes : plans', () => {
@@ -27,7 +18,7 @@ describe('routes : plans', () => {
         email: 'margo',
         password: 'password',
       })
-      .then((res)=>{
+      .then((res) => {
         done();
       });
   });
@@ -36,14 +27,13 @@ describe('routes : plans', () => {
     done();
   });
 
-  xdescribe('GET /plans', () => {
+  describe('GET /plans', () => {
     it('should render the plans', (done) => {
       chai.request(server)
         .get('/plans')
-        .end((res) => {
-          res.redirects.length.should.equal(0);
-          res.status.should.equal(200);
+        .end((err, res) => {
           res.type.should.equal('text/html');
+          expect(res.text).to.contain('All Plans');
           done();
         });
     });
@@ -52,10 +42,14 @@ describe('routes : plans', () => {
   describe('POST /plans', () => {
     it('should add a new plan to the database', (done) => {
       agent.post('/users/2/plans/new')
-        .send({name: 'New Plan 1'})
+        .send({
+          name: 'New Plan 1'
+        })
         .then((res) => {
           knex('plans')
-            .where({name: 'New Plan 1'})
+            .where({
+              name: 'New Plan 1'
+            })
             .first()
             .then((data) => {
               data.should.not.be.undefined;
