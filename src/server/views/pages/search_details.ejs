@@ -3,38 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>search details</title>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script>
-      $(document).ready(function () {
-        var url;
-        var hostname = window.location.hostname;
-        var planID = $('#planID').val();
-        var userID = $('#userID').val();
-
-        $('#addPlace').submit(function () {
-
-          //toggle including port No. on dev/deployment
-          if(hostname === 'localhost' || hostname === '127.0.0.1') {
-            url = 'http://'+hostname+':3000/users/'+userID+'/plans/'+planID+'/new';
-          } else {
-            url = 'http://'+hostname+'/users/'+userID+'/plans/'+planID+'/new';
-          }
-
-          $.ajax({
-            type : 'POST',
-            url : url,
-            data : {
-              name : $('#name'),
-              address : $('#address'),
-              city : $('#city'),
-              state : $('#state'),
-              zipcode : $('#zipcode'),
-              time : $('#time'),
-            }
-          });
-        });
-      });
-    </script>
     <% include ../partials/head %>
     <title>Search Details</title>
   </head>
@@ -49,7 +17,7 @@
         <h5>Rating: <%= result.rating %></h5>
       </header>
       <% if(user_plans) { %>
-      <form action="/plans" method="POST">
+        <fieldset>
         <select class="search-details-select">
           <% user_plans.forEach((plan) => { %>
             <option name="plan_id" value=<%plan.id%>>
@@ -69,23 +37,11 @@
           <option value="6:00 PM">6:00 PM</option>
           <option value="9:00 PM">9:00 PM</option>
         </select>
+        <a href="/users/<%=user.id%>/plans"
         <button class="btn waves-effect waves-light" type="submit">Add to plan</button>
-      </form>
+        <a>
+      </fieldset>
       <% } %>
-      <!-- need route here -->
-      <!-- <form action="index.html" method="POST">
-        <fieldset>
-          <legend>add to new plan</legend>
-          <label for="plan_name">plan title</label>
-          <input type="text" name="plan_name">
-          <input type="hidden" name="place_name" value=<%= result.name %>>
-          <input type="hidden" name="place_address" value=<%= result.address_components[0].long_name + ' ' + result.address_components[1].long_name %>
-          <input type="hidden" name="place_city" value=<%= result.address_components[2].long_name %>>
-          <input type="hidden" name="place_state" value=<%=result.address_components[3].long_name%>>
-          <input type="hidden" name="place_zipcode" value=<%=result.address_components[4].short_name%>>
-          <input type="submit" value="add to plan">
-        </fieldset>
-      </form> -->
       <div class="innerContainer">
         <h5>Reviews:</h5>
         <hr>

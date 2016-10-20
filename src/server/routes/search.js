@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-
+  
   if (req.body.name) {
     // req.flash('created a new plan: ', req.body.name);
 
@@ -50,6 +50,7 @@ router.post('/', function(req, res, next) {
   let long = locations[req.body.location].long;
 
   googlePlaces.nearbySearch(lat, long, req.body.keyword, (placesData) => {
+    // console.log(placesData.results);
 
     // for filtering out uninteresting place results that are seen often. should move this to a database if it gets really big.
     // let rejectedPlaces = ['7-Eleven', 'Domino\'s Pizza'];
