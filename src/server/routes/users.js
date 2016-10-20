@@ -7,39 +7,46 @@ const users_profile = require('./users_profile');
 const knex = require('../db/connection.js');
 const Places = require('../modules/places');
 const Plans = require('../modules/plans');
-///users/2/plans/new
+
+router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
+
+
+  if (res.locals.loggedIn) {
+
+    let newPlace = req.body;
+
+    newPlace.plan_id = parseInt(req.params.plan_id);
+
+    Places.insert(newPlace).then((result) => {
+
+      res.redirect('/');
+
+    });
+
+  }else {
+    res.redirect('/');
+  }
+});
 
 router.post('/:user_id/plans/new', (req, res,next) => {
 
-  console.log('req.params.user_id',req.params.user_id);
-  let newPlan = req.body;
-  newPlan.user_id = req.params.user_id;
+  if (res.locals.loggedIn) {
 
-  Plans.insert(newPlan).then((result) => {
+    let newPlan = req.body;
 
-    res.redirect('/index');
+    newPlan.user_id = req.params.user_id;
 
-  });
+    Plans.insert(newPlan).then((result) => {
+
+      res.redirect('/');
+
+    });
+
+  }else {
+    res.redirect('/');
+  }
+
 });
-
-router.post('/:user_id/plans/:plan_id/places/new', (req, res,next) => {
-
-  let newPlace = req.body;
-  newPlace.plan_id = parseInt(req.params.plan_id);
-
-  Places.insert(newPlace).then(() => {
-    res.redirect('/index');
-
-  });
-  // }else {
-  //   res.redirect('/index');
-  // }
-});
-
-
-
-
-
 
 router.use('/profile', users_profile);
 

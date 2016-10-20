@@ -11,6 +11,8 @@ router.get('/', function(req, res, next) {
     });
 });
 
+
+
 router.post('/new', function(req, res, next) {
   Places.insert()
     .then((places) => {
