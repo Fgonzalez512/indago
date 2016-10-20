@@ -69,8 +69,9 @@ router.get('/details/:google_places_id', (req, res, next) => {
   if (!user) {
     return googlePlaces.details(req.params.google_places_id, (data) => {
       res.render('pages/search_details', {
-        result: data.result,
-        user_plans: null,
+        result : data.result,
+        user_plans : null,
+        user_id : null,
       });
     });
   }
@@ -79,7 +80,8 @@ router.get('/details/:google_places_id', (req, res, next) => {
     googlePlaces.details(req.params.google_places_id, (data) => {
       res.render('pages/search_details', {
         result: data.result,
-        user_plans: user_plans,
+        user_plans : user_plans,
+        user_id : user.id,
       });
     });
   });

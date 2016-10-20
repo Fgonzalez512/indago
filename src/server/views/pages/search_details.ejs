@@ -3,6 +3,38 @@
   <head>
     <meta charset="utf-8">
     <title>search details</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script>
+      $(document).ready(function () {
+        var url;
+        var hostname = window.location.hostname;
+        var planID = $('#planID').val();
+        var userID = $('#userID').val();
+
+        $('#addPlace').submit(function () {
+
+          //toggle including port No. on dev/deployment
+          if(hostname === 'localhost' || hostname === '127.0.0.1') {
+            url = 'http://'+hostname+':3000/users/'+userID+'/plans/'+planID+'/new';
+          } else {
+            url = 'http://'+hostname+'/users/'+userID+'/plans/'+planID+'/new';
+          }
+
+          $.ajax({
+            type : 'POST',
+            url : url,
+            data : {
+              name : $('#name'),
+              address : $('#address'),
+              city : $('#city'),
+              state : $('#state'),
+              zipcode : $('#zipcode'),
+              time : $('#time'),
+            }
+          });
+        });
+      });
+    </script>
   </head>
   <body>
     <div>
@@ -21,26 +53,27 @@
       </li>
     </ul>
       <% if(user_plans) { %>
-      <form action="/plans" method="POST">
+      <form id="addPlace" action="#" method="GET">
         <select>
           <% user_plans.forEach((plan) => { %>
-            <option name="plan_id" value=<%plan.id%>>
+            <option id="planID" name="plan_id" value=<%plan.id%>>
               <%= plan.name %>
             </option>
           <% }); %>
         </select>
-        <input type="hidden" name="name" value=<%= result.name %>>
-        <input type="hidden" name="address" value=<%= result.address_components[0].long_name + ' ' + result.address_components[1].long_name %>
-        <input type="hidden" name="city" value=<%= result.address_components[2].long_name %>>
-        <input type="hidden" name="state" value=<%=result.address_components[3].long_name%>>
-        <input type="hidden" name="zipcode" value=<%=result.address_components[4].short_name%>>
-        <select name="time">
+        <input type="hidden" name="name" id="name" value=<%= result.name %>>
+        <input type="hidden" name="address" id="address" value=<%= result.address_components[0].long_name + ' ' + result.address_components[1].long_name %>
+        <input type="hidden" name="city" id="city" value=<%= result.address_components[2].long_name %>>
+        <input type="hidden" name="state" id="state" value=<%=result.address_components[3].long_name%>>
+        <input type="hidden" name="zipcode" id="zipcode" value=<%=result.address_components[4].short_name%>>
+        <select name="time" id="time">
           <option value="9:00 AM">9:00 AM</option>
           <option value="12:00 PM">12:00 PM</option>
           <option value="3:00 PM">3:00 PM</option>
           <option value="6:00 PM">6:00 PM</option>
           <option value="9:00 PM">9:00 PM</option>
         </select>
+        <input type="hidden" id="userID" value="user.id">
         <input type="submit" value="add to plan">
       </form>
       <% } %>
