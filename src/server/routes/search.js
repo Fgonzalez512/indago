@@ -4,44 +4,44 @@ const googlePlaces = require('../modules/google-places.js');
 const Plans = require('../modules/plans');
 
 const locations = {
-  austin : {
-    lat : '30.2729',
-    long : '-97.7444',
+  austin: {
+    lat: '30.2729',
+    long: '-97.7444',
   },
-  san_francisco : {
-    lat : '37.773972',
-    long : '-122.431297',
+  san_francisco: {
+    lat: '37.773972',
+    long: '-122.431297',
   },
-  new_york : {
-    lat : '40.712784',
-    long : '-74.005941',
+  new_york: {
+    lat: '40.712784',
+    long: '-74.005941',
   },
-  seattle : {
-    lat : '47.608013',
-    long : '-122.335167',
+  seattle: {
+    lat: '47.608013',
+    long: '-122.335167',
   },
-  miami : {
-    lat : '25.761681',
-    long : '-80.191788',
+  miami: {
+    lat: '25.761681',
+    long: '-80.191788',
   },
-  chicago : {
-    lat : '41.881832',
-    long : '-87.623177',
+  chicago: {
+    lat: '41.881832',
+    long: '-87.623177',
   },
 };
 
 router.get('/', function(req, res, next) {
 
   res.render('pages/search', {
-    results : [],
-    createdPlan : null,
+    collection: [],
+    createdPlan: null,
   });
 
 });
 
 router.post('/', function(req, res, next) {
 
-  if(req.body.name) {
+  if (req.body.name) {
     // req.flash('created a new plan: ', req.body.name);
 
   }
@@ -56,8 +56,8 @@ router.post('/', function(req, res, next) {
     // let filteredResults = placesData.results.filter;
 
     res.render('pages/search', {
-      results : placesData.results,
-      createdPlan : req.body,
+      collection: placesData.results,
+      createdPlan: req.body,
     });
   });
 });
@@ -69,8 +69,8 @@ router.get('/details/:google_places_id', (req, res, next) => {
   if (!user) {
     return googlePlaces.details(req.params.google_places_id, (data) => {
       res.render('pages/search_details', {
-        result : data.result,
-        user_plans : null,
+        result: data.result,
+        user_plans: null,
       });
     });
   }
@@ -78,8 +78,8 @@ router.get('/details/:google_places_id', (req, res, next) => {
   Plans.by_user_id(user.id).then((user_plans) => {
     googlePlaces.details(req.params.google_places_id, (data) => {
       res.render('pages/search_details', {
-        result : data.result,
-        user_plans : user_plans,
+        result: data.result,
+        user_plans: user_plans,
       });
     });
   });
