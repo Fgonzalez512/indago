@@ -31,13 +31,13 @@ describe('routes : index', () => {
   });
 
   describe('GET /404', () => {
-    xit('should throw an error', (done) => {
+    it('should throw an error', (done) => {
       chai.request(server)
-        .get('/error')
+        .get('/404')
         .end((err, res) => {
           res.redirects.length.should.equal(0);
           res.status.should.equal(404);
-          res.type.should.equal('application/json');
+          // res.type.should.equal('application/json');
           done();
         });
     });

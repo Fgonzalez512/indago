@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 
 });
 router.get('/error', function(req, res, next) {
-
+  console.log('pages/error');
   res.render('pages/error');
 
 });

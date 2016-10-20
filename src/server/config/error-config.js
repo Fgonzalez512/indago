@@ -12,20 +12,21 @@
       err.status = 404;
       next(err);
     });
-
-    // development error handler (will print stacktrace)
-    // if (app.get('env') === 'development') {
-    //   app.use(function(err, req, res, next) {
-    //     res.status(err.status || 500).send({
-    //       message: err.message,
-    //       error: err
-    //     });
-    //   });
-    // }
+    //
+    //development error handler (will print stacktrace)
+    if (app.get('env') === 'development') {
+      app.use(function(err, req, res, next) {
+        res.status(err.status || 500).send({
+          message: err.message,
+          error: err
+        });
+      });
+    }
 
     // production error handler (no stacktraces leaked to user)
     app.use(function(err, req, res, next) {
-      res.redirect('/404');
+      res.status(404);
+      res.render('pages/error');
       // res.status(err.status || 500).send({
       //   message: err.message,
       //   error: {}
