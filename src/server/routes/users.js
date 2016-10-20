@@ -245,7 +245,7 @@ router.get('/:id/fav-plans', function(req, res) {
 
 
 router.get('/:id/plans/new', function(req, res) {
-  res.render('pages/myplan');
+  res.render('pages/my_new_plan');
 });
 
 router.get('/logout', function(req, res) {
