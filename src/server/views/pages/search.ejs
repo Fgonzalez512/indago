@@ -3,6 +3,9 @@
   <head>
   </head>
   <body>
+    <% if (createdPlan) { %>
+      <p class="created-plan-message">created a new plan named <%= createdPlan.name %></p>
+      <% }  else { %>
     <form action="/search" method="POST">
       <label for="keyword">
         I'm looking for
@@ -21,6 +24,7 @@
       </select>
       <input type="submit">
     </form>
+    <% } %>
     <% results.forEach((place) => { %>
       <!-- filter out convenience stores -->
         <p class="search-result">
@@ -44,7 +48,7 @@
           <%= place.vicinity %>
           </div>
           <a href="/search/details/<%=place.place_id%>">
-            details
+            details/add to plan
           </a>
         </p>
         <hr>

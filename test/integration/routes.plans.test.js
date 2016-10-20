@@ -8,6 +8,7 @@ const server = require('../../src/server/server');
 const knex = require('../../src/server/db/connection');
 
 chai.use(chaiHttp);
+
 var agent = chai.request.agent(server);
 
 describe('routes : plans', () => {
