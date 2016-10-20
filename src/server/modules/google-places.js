@@ -29,7 +29,7 @@ const googlePlaces = {
         return callback(JSON.parse(body));
       }
       console.error(error);
-      console.log('response status:' + response.statusCode);
+      console.log('response status: ' + response.statusCode);
     });
   },
 
