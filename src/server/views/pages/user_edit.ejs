@@ -1,43 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- js -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="/js/main.js"></script>
-
-
-    <!-- css -->
-
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300" rel="stylesheet">
-
-    <!-- meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title><%= "Indago" %></title>
+    <head>
+       <% include ../partials/head %>
 
   </head>
   <body>
-    <nav>
-      <div class="navBar">
-          <a class="logo" href="/">indago</a>
-          <input type="text" name="searchNav" value placeholder="City">
-          <a class="dropdown-button" href="#" data-activates="dropdown1"> Plans </a>
-          <a class="dropdown-button" href="#" data-activates="dropdown2"href="#" data-activates="dropdown2"> User </a>
-      </div>
-      <ul id="dropdown2" class="dropdown-content">
-        <li><a href="#">Edit</a></li>
-        <li><a href="/users/logout">Log Out</a></li>
-      </ul>
-    </nav>
+    <% include ../partials/nav %>
+
     <div class="container">
       <header class="homePage">s
         <h3> Change your profile information</h3>
