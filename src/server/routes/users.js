@@ -115,7 +115,7 @@ router.get('/:id/plans', function(req, res, next) {
 });
 
 router.get('/:id/plans/new', function(req, res, next) {
-  res.render('pages/new_plan');
+  res.render('pages/myplan');
 });
 
 router.get('/logout', function(req, res) {
