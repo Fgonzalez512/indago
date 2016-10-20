@@ -18,28 +18,30 @@
       </header>
       <% if(user_plans) { %>
         <fieldset>
-        <select class="search-details-select">
+        <select class="search-details-select" id="planID">
           <% user_plans.forEach((plan) => { %>
-            <option name="plan_id" value=<%plan.id%>>
+            <option value=<%=plan.id%>>
 <%= plan.name %>
             </option>
           <% }); %>
         </select>
-        <input type="hidden" name="name" value=<%= result.name %>>
-        <input type="hidden" name="address" value=<%= result.address_components[0].long_name + ' ' + result.address_components[1].long_name %>
-        <input type="hidden" name="city" value=<%= result.address_components[2].long_name %>>
-        <input type="hidden" name="state" value=<%=result.address_components[3].long_name%>>
-        <input type="hidden" name="zipcode" value=<%=result.address_components[4].short_name%>>
-        <select class="search-details-select" name="time">
+        <input type="hidden" id="name" value=<%= result.name %>>
+        <input type="hidden" id="address" value=<%=result.formatted_address%>>
+        <!-- <input type="hidden" id="address" value=<%= result.address_components[0].short_name + ' ' + result.address_components[1].short_name %>
+        <input type="hidden" id="city" value=<%= result.address_components[2].short_name %>>
+        <input type="hidden" id="state" value=<%=result.address_components[3].short_name%>>
+        <input type="hidden" id="zipcode" value=<%=result.address_components[4].short_name%>> -->
+        <input type="hidden" id="userID" value=<%= user.id %>>
+        <select class="search-details-select" id="start_time">
           <option value="9:00 AM">9:00 AM</option>
           <option value="12:00 PM">12:00 PM</option>
           <option value="3:00 PM">3:00 PM</option>
           <option value="6:00 PM">6:00 PM</option>
           <option value="9:00 PM">9:00 PM</option>
         </select>
-        <a href="/users/<%=user.id%>/plans"
-        <button class="btn waves-effect waves-light" type="submit">Add to plan</button>
-        <a>
+        <!-- <a href="/users/<%=user.id%>/plans" -->
+        <button class="btn waves-effect waves-light" type="submit" id="addPlace">Add to plan</button>
+        <!-- <a> -->
       </fieldset>
       <% } %>
       <div class="innerContainer">

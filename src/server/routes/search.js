@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  
+
   if (req.body.name) {
     // req.flash('created a new plan: ', req.body.name);
 

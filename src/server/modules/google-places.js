@@ -7,7 +7,6 @@ const googlePlaces = {
 
   //sends a query that gets a response containing data about all the places within a 32000 meter radius that match a keyword, sorted by Google's 'prominence' metric.
   nearbySearch: (lat, long, keyword, callback) => {
-    console.log('got a nearbySearch request!');
     request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + long + '&radius=32000&keyword=' + keyword + '&key=' + key, (error, response, body) => {
       if (!error && response.statusCode == 200) {
         if (body.error_message) {

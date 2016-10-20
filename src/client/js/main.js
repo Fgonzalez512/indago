@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
 
   $('.dropdown-button').dropdown({
     hover: false
@@ -39,7 +39,7 @@ $(function() {
 
   });
 
-  $('#addPlace').submit(function () {
+  $('#addPlace').click(function () {
 
     var hostname = window.location.hostname;
     var planID = $('#planID').val();
@@ -47,23 +47,23 @@ $(function() {
 
       //toggle including port No. on dev/deployment
     if(hostname === 'localhost' || hostname === '127.0.0.1') {
-      url = 'http://'+hostname+':3000/users/'+userID+'/plans/'+planID+'/new';
+      url = 'http://'+hostname+':3000/users/'+userID+'/plans/'+planID+'/places/new';
     } else {
-      url = 'http://'+hostname+'/users/'+userID+'/plans/'+planID+'/new';
+      url = 'http://'+hostname+'/users/'+userID+'/plans/'+planID+'/places/new';
     }
 
     $.ajax({
       type : 'POST',
       url : url,
       data : {
-        name : $('#name'),
-        address : $('#address'),
-        city : $('#city'),
-        state : $('#state'),
-        zipcode : $('#zipcode'),
-        time : $('#time'),
+        plan_id : $('#planID').val(),
+        name : $('#name').val(),
+        address : $('#address').val(),
+        city : $('#city').val(),
+        state : $('#state').val(),
+        zipcode : $('#zipcode').val(),
+        time : $('#time').val(),
       }
     });
   });
-
 });

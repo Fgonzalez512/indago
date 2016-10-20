@@ -8,25 +8,6 @@
         <!-- <div class="col s1 m1 l1 searchBar">
           <input type="text" name="search" value placeholder="Search">
         </div> -->
-        <div class="bigContainer">
-            <div class="smallContainer">
-                <h3> Create Plan </h3>
-                <form id="postPlanAndSearchPlace" class="formEdit" action="/search" method="POST">
-                  <input type="text" name="name" id="name" value placeholder="Plan Name">
-                  <select class="selectCity"name="location" id="location">
-                    <option class="option" value="austin">Austin</option>
-                    <option vlaue="san_francisco">San Francisco</option>
-                    <option value="new_york">New York</option>
-                    <option value="seattle">Seattle</option>
-                    <option value="miami">Miami</option>
-                    <option value="chicago">Chicago</option>
-                  </select>
-                  <input type="text" name="date" id="date" value placeholder="Date">
-                  <input type="text" name="keyword" value placeholder="Search">
-                  <button class="btn waves-effect waves-light submit" type="submit" name="action" value="create">Submit</button>
-                </form>
-            </div>
-        </div>
-
+    <% include ../partials/create-plan %>
   </body>
 </html>
