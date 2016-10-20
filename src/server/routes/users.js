@@ -198,20 +198,6 @@ router.get('/:id/plans', function(req, res) {
     });
   });
 });
-//we need to attach the userID of the user that's favoriting places to the places table - maybe during the POST request when they click the favorite button?
-
-// router.get('/:id/fav-places', function(req, res, next) {
-//
-//   var userID = Number.parseInt(req.params.id);
-//
-//   res.locals.page_type = 'My Favorite Places';
-//
-//   knex('places').where('user_id', '=', userID).then(function(places) {
-//     res.render('pages/fav-places', {
-//       places: places,
-//     });
-//   });
-// });
 
 router.get('/:user_id/plans/:plan_id/favorite', (req, res) => {
   let planID = req.params.plan_id;
@@ -238,6 +224,25 @@ router.get('/:id/fav-plans', function(req, res) {
   knex('plans').where('is_favorite', '=', true).then(function(plans) {
     res.render('pages/plans', {
       plans: plans,
+    });
+  });
+});
+//pretty sure this is right but you might want to look it over
+router.get('/:user_id/places/:place_id/favorite', (req, res) => {
+  let placeID = req.params.place_id;
+  Places.withID(placeID).then((placeCopy)=>{
+    placeCopy.is_favorite = true;
+    Places.insert(placeCopy).then(placeNew=> {
+      res.redirect('pages/fav-places');
+    });
+  });
+});
+
+router.get('/:id/fav-places', function(req, res) {
+  res.locals.page_type = 'My Favorite Places';
+  knex('places').where('is_favorite', '=', true).then(function(places) {
+    res.render('pages/fav-places', {
+      places: places,
     });
   });
 });
