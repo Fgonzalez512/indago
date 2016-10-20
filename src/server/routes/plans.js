@@ -19,11 +19,12 @@ router.get('/', function(req, res, next) {
 // router.get('')
 
 //handles adding a new plan with a new place
-router.post('/', (req, res, next) => {
+router.post('/new', (req, res, next) => {
 
   if (res.locals.loggedIn) {
 
     let newPlan = {
+      user_id:res.locals.user.id,
       name: req.body.place_name
     };
     let newPlace = {
