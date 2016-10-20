@@ -157,7 +157,7 @@ router.get('/:user_id/plans/:plan_id/favorite', (req, res) => {
           delete place['id'];
         });
         Places.insert(placesCopy).then((placesNew) => {
-          res.redirect('/pages/plans');
+          res.redirect('back');
         });
       });
     });
