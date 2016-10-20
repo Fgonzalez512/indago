@@ -30,47 +30,6 @@ $(document).ready(function() {
     }
   });
 
-  //don't allow the form to submit if the values are invalid
-
-  $('.textField').on('input', function() {
-
-    var fieldValues = [$('#planName').val(), $('#planLocation').val(), $('#planDate').val(),];
-
-    var validValues = fieldValues.filter(function(value) {
-      return !!value;
-    });
-
-    if (fieldValues.length === validValues.length) {
-      $('.submit').removeClass('hidden-submit');
-    } else {
-      $('.submit').addClass('hidden-submit');
-    }
-  });
-
-  $('#postPlanAndSearchPlace').submit(function () {
-
-    var pathname = window.location.pathname;
-    var hostname = window.location.hostname;
-
-    //toggle including port No. on deployment
-    if(hostname === 'localhost' || hostname === '127.0.0.1') {
-      url = 'http://'+hostname+':3000'+pathname;
-    } else {
-      url = 'http://'+hostname+pathname;
-    }
-
-    $.ajax({
-      type : 'POST',
-      url : url,
-      data : {
-        name : $('#planName').val(),
-        city : $('#planLocation').val(),
-        date : $('#planDate').val(),
-      },
-    });
-
-  });
-
   $('#addPlace').click(function () {
 
     var hostname = window.location.hostname;

@@ -43,6 +43,7 @@
       </fieldset>
       <% } %>
       <div class="innerContainer">
+        <% if(result.reviews) {%>
         <h5>Reviews:</h5>
         <hr>
         <% result.reviews.forEach((review) => { %>
@@ -57,6 +58,7 @@
           </div>
           <hr>
         <% }); %>
+        <% } %>
       </div>
     </div>
   </body>

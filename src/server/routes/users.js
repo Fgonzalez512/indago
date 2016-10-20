@@ -54,10 +54,14 @@ router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
 //creates new plan
 router.post('/:user_id/plans/new', (req, res) => {
   if (res.locals.loggedIn) {
-    let newPlan = req.body;
+    let newPlan = {
+      name : req.body.name,
+      city : req.body.location,
+      date : req.body.date,
+    };
     newPlan.user_id = req.params.user_id;
     Plans.insert(newPlan).then((result) => {
-      res.redirect('/');
+      res.redirect('/search/'+req.body.location+'/'+req.body.keyword);
     });
   } else {
     res.redirect('/');
