@@ -8,7 +8,7 @@ const knex = require('../db/connection.js');
 const Places = require('../modules/places');
 const Plans = require('../modules/plans');
 
-router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
+router.post('/:user_id/plans/:plan_id/places/new', (req, res) => {
 
   if (res.locals.loggedIn) {
 
@@ -27,7 +27,7 @@ router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
   }
 });
 
-router.post('/:user_id/plans/new', (req, res,next) => {
+router.post('/:user_id/plans/new', (req, res) => {
 
   if (res.locals.loggedIn) {
 
@@ -128,7 +128,7 @@ router.post('/login', function(req, res) {
     });
 });
 
-router.get('/:id/plans', function(req, res, next) {
+router.get('/:id/plans', function(req, res) {
 
   var userID = Number.parseInt(req.params.id);
 
@@ -142,7 +142,7 @@ router.get('/:id/plans', function(req, res, next) {
 });
 //we need to attach the userID of the user that's favoriting places to the places table - maybe during the POST request when they click the favorite button?
 
-// router.get('/:id/fav-places', function(req, res, next) {
+// router.get('/:id/fav-places', function(req, res) {
 //
 //   var userID = Number.parseInt(req.params.id);
 //
@@ -155,12 +155,28 @@ router.get('/:id/plans', function(req, res, next) {
 //   });
 // });
 
-router.get('/:id/fav-plans', function(req, res, next) {
+router.get('/:user_id/plans/:plan_id/favorite', (req, res) => {
+  let planID = req.params.plan_id;
+  Plans.by_id(planID).then((planCopy)=>{
+    planCopy.user_id = res.locals.user.id;
+    planCopy.is_favorite = true;
+    Places.listWithPlanID(planCopy.id).then((placesCopy)=>{
+      delete planCopy['id'];
+      Plans.insert(planCopy).then(planNew=>{
+        placesCopy = placesCopy.map((place)=> {
+          place.plan_id = planNew.id;
+          delete place['id'];
+        });
+        Places.insert(placesCopy).then((placesNew)=>{
+          res.redirect('/pages/plans');
+        });
+      });
+    });
+  });
+});
 
-  var userID = Number.parseInt(req.params.id);
-
+router.get('/:id/fav-plans', function(req, res) {
   res.locals.page_type = 'My Favorite Plans';
-
   knex('plans').where('is_favorite', '=', true).then(function(plans) {
     res.render('pages/plans', {
       plans: plans,
@@ -168,7 +184,9 @@ router.get('/:id/fav-plans', function(req, res, next) {
   });
 });
 
-router.get('/:id/plans/new', function(req, res, next) {
+
+
+router.get('/:id/plans/new', function(req, res) {
   res.render('pages/myplan');
 });
 
