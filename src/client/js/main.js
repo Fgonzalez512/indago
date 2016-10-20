@@ -4,6 +4,9 @@ $(document).ready(function() {
     hover: false
   });
 
+  $('.backToSearch').click(function() {
+    window.history.back();
+  });
 
   // Initialize collapse button
   $('.button-collapse').sideNav();
