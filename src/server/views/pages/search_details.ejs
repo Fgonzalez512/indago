@@ -17,7 +17,7 @@
         <h5>Rating: <%= result.rating %></h5>
       </header>
       <% if(user_plans) { %>
-        <fieldset>
+        <div class="searchInformation">
         <select class="search-details-select" id="planID">
           <% user_plans.forEach((plan) => { %>
             <option value=<%=plan.id%>>

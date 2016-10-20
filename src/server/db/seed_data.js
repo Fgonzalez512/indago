@@ -62,22 +62,25 @@ const data = {
   ],
   places: [{
     plan_id: 1,
-    name: 'Go Diego Go!',
+    name: 'Pinballz!',
     city: 'Austin',
-    state: 'TX'
+    state: 'TX',
+    photo_url: 'https://wwcdn.weddingwire.com/vendor/750001_755000/754857/thumbnails/800x800_1427470934503-pinballz-wall.jpg'
   }, {
     plan_id: 1,
     name: 'Galvanize',
     city: 'Austin',
     state: 'TX',
-    is_favorite: true
+    is_favorite: true,
+    photo_url: 'http://www.texastechpulse.com/images/logos/galvanizesign1.jpg'
 
   }, {
     plan_id: 1,
     name: 'Lake Pflugerville',
     city: 'Pflugerville',
     state: 'TX',
-    is_favorite: true
+    is_favorite: true,
+    photo_url: 'http://www.pflugervilletx.gov/images/pages/N824/Lake%20air%202.jpg'
   }]
 };
 
