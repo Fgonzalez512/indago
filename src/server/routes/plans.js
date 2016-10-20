@@ -2,20 +2,39 @@ const router = require('express').Router();
 const knex = require('../db/connection.js');
 const Plans = require('../modules/plans');
 const Places = require('../modules/places');
+const Promise = require('promise');
 
 
-router.get('/', function(req, res, next) {
 
-  res.locals.page_type = 'All Plans';
+// router.get('')
 
-  Plans.list().then((plans) => {
-    res.render('pages/plans', {
-      plans: plans
+
+router.get('/:id/upvote', (req, res) => {
+  let planID = req.params.id;
+  knex('plans').where('id', planID).first().then((id) => {
+    var newScore = (++id.upvote);
+    knex('plans').where({
+      id: planID
+    }).update({
+      upvote: newScore,
+    }).then(() => {
+      res.redirect('back');
     });
   });
 });
 
-// router.get('')
+router.get('/cities/:city', function(req, res) {
+  let cityID = req.params.city;
+  res.locals.page_type = cityID;
+
+  knex('plans').where('city', cityID).orderBy('upvote', 'DESC').then((plans) => {
+    res.render('pages/plans', {
+      plans: plans,
+    });
+  });
+});
+
+
 
 //handles adding a new plan with a new place
 router.post('/new', (req, res, next) => {
@@ -49,33 +68,31 @@ router.post('/new', (req, res, next) => {
 
 });
 
+router.get('/:plan_id', function(req, res, next) {
+  let plan_id = req.params.plan_id;
+
+  res.locals.is_editable = false;
+
+  Promise.all([
+    Plans.by_id(plan_id),
+    Places.listWithPlanID(plan_id)
+  ]).then((result)=>{
+    res.render('pages/plan-details',{plan:result[0],places:result[1]});
+  });
+
+});
 
 
-router.get('/cities/:city', function(req, res) {
-  let cityID = req.params.city;
-  res.locals.page_type = cityID;
+router.get('/', function(req, res, next) {
 
-  knex('plans').where('city', cityID).orderBy('upvote', 'DESC').then((plans) => {
+  res.locals.page_type = 'All Plans';
+
+  Plans.list().then((plans) => {
     res.render('pages/plans', {
-      plans: plans,
+      plans: plans
     });
   });
 });
-
-router.get('/:id/upvote', (req, res) => {
-  let planID = req.params.id;
-  knex('plans').where('id', planID).first().then((id) => {
-    var newScore = (++id.upvote);
-    knex('plans').where({
-      id: planID
-    }).update({
-      upvote: newScore,
-    }).then(() => {
-      res.redirect('back');
-    });
-  });
-});
-
 
 
 module.exports = router;
