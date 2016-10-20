@@ -26,6 +26,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-left: 1px solid #dce0e0;
 }
 
 .navBar .navBarDrop {
@@ -197,9 +198,12 @@ p {
 
 /* -------------------- Feed.ejs --------------------*/
 
-
 .card {
-  margin-bottom: 0 !important;
+  margin: 0.25rem !important;
+}
+
+.row .col {
+  padding: 0 !important;
 }
 
 .card-left {
@@ -207,14 +211,14 @@ p {
 }
 
 .card-bottom {
-  margin: 0;
+  width: 99%;
+  margin: auto;
   display: flex;
   align-items: center;
   border: 1px solid #dce0e0;
   font-size: 1.5rem;
   color: rgba(0, 0, 0, 0.6);
   padding-left: 20px;
-
 }
 
 .fa-2x {
@@ -344,4 +348,76 @@ p {
   cursor: pointer;
   color: red;
   box-shadow: none;
+}
+
+/* -------------------- my_new_plan.ejs --------------------*/
+
+.selectCity {
+  color: #1560bd
+}
+
+.select-dropdown li {
+  color: #1560bd
+}
+
+/* -------------------- collections.ejs --------------------*/
+
+.avatar .secondary-content {
+  color: #1560bd;
+}
+
+/* -------------------- search.ejs --------------------*/
+
+.searchEdit input[type=text]:focus {
+  border-bottom: 1px solid #1560bd !important;
+}
+
+.icons option {
+  color: #1560bd;
+}
+
+.btn {
+  background-color: #1560bd !important;
+  margin-left: 25%;
+}
+
+.input-field input[type=text]{
+  width: 75%;
+}
+
+
+/* -------------------- search-details.ejs --------------------*/
+
+.search-details-select {
+  width: 50%;
+  padding: 0;
+}
+
+strong {
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.innerContainer {
+  border: 1px solid #dce0e0;
+  margin-top: 2%;
+  padding-left: 1%;
+}
+
+.searchInformation{
+  border: 1px solid #dce0e0;
+  padding-left: 1%;
+}
+
+.searchInformation button{
+  margin-left: 0;
+  margin-bottom: 1%;
+}
+
+.invalid {
+  border : 3px solid #ff0000;
+}
+
+.hidden-submit {
+  visibility: hidden;;
 }

@@ -3,90 +3,63 @@
   <head>
     <meta charset="utf-8">
     <title>search details</title>
+    <% include ../partials/head %>
+    <title>Search Details</title>
   </head>
   <body>
-    <div>
-      <ul>
-      <li>
-        <%= result.name %>
-      </li>
-      <li>
-      <%= result.formatted_address %>
-      </li>
-      <li>
-      <%= result.formatted_phone_number %>
-      </li>
-      <li>
-      <%= result.rating %>
-      </li>
-    </ul>
+    <% include ../partials/nav %>
+    <div class="container">
+      <header class="homePage">
+        <h3>Search Details</h3>
+        <h5><%= result.name %></h5>
+        <h5><%= result.formatted_address %></h5>
+        <h5><%= result.formatted_phone_number %></h5>
+        <h5>Rating: <%= result.rating %></h5>
+      </header>
       <% if(user_plans) { %>
-      <form action="/plans" method="POST">
-        <select>
+        <div class="searchInformation">
+        <select class="search-details-select" id="planID">
           <% user_plans.forEach((plan) => { %>
-            <option name="plan_id" value=<%plan.id%>>
-              <%= plan.name %>
+            <option value=<%=plan.id%>>
+<%= plan.name %>
             </option>
           <% }); %>
         </select>
-        <input type="hidden" name="name" value=<%= result.name %>>
-        <input type="hidden" name="address" value=<%= result.address_components[0].long_name + ' ' + result.address_components[1].long_name %>
-        <input type="hidden" name="city" value=<%= result.address_components[2].long_name %>>
-        <input type="hidden" name="state" value=<%=result.address_components[3].long_name%>>
-        <input type="hidden" name="zipcode" value=<%=result.address_components[4].short_name%>>
-        <select name="time">
+        <input type="hidden" id="name" value=<%= result.name %>>
+        <input type="hidden" id="address" value=<%=result.formatted_address%>>
+        <!-- <input type="hidden" id="address" value=<%= result.address_components[0].short_name + ' ' + result.address_components[1].short_name %>
+        <input type="hidden" id="city" value=<%= result.address_components[2].short_name %>>
+        <input type="hidden" id="state" value=<%=result.address_components[3].short_name%>>
+        <input type="hidden" id="zipcode" value=<%=result.address_components[4].short_name%>> -->
+        <input type="hidden" id="userID" value=<%= user.id %>>
+        <select class="search-details-select" id="start_time">
           <option value="9:00 AM">9:00 AM</option>
           <option value="12:00 PM">12:00 PM</option>
           <option value="3:00 PM">3:00 PM</option>
           <option value="6:00 PM">6:00 PM</option>
           <option value="9:00 PM">9:00 PM</option>
         </select>
-        <input type="submit" value="add to plan">
-      </form>
+        <!-- <a href="/users/<%=user.id%>/plans" -->
+        <button class="btn waves-effect waves-light backToSearch" type="submit" id="addPlace">Add to plan</button>
+        <!-- <a> -->
+      </div>
       <% } %>
-      <!-- need route here -->
-      <!-- <form action="index.html" method="POST">
-        <fieldset>
-          <legend>add to new plan</legend>
-          <label for="plan_name">plan title</label>
-          <input type="text" name="plan_name">
-          <input type="hidden" name="place_name" value=<%= result.name %>>
-          <input type="hidden" name="place_address" value=<%= result.address_components[0].long_name + ' ' + result.address_components[1].long_name %>
-          <input type="hidden" name="place_city" value=<%= result.address_components[2].long_name %>>
-          <input type="hidden" name="place_state" value=<%=result.address_components[3].long_name%>>
-          <input type="hidden" name="place_zipcode" value=<%=result.address_components[4].short_name%>>
-          <input type="submit" value="add to plan">
-        </fieldset>
-      </form> -->
-      <h3>reviews:</h3>
-      <hr>
-      <% result.reviews.forEach((review) => { %>
-        <div class="review">
-        <% if (result.reviews.indexOf(review) < 5) { %>
-          <li>
-            author:
-            <%= review.author_name %>
-          </li>
-          <li>
-            photo url:
-            <%= review.profile_photo_url %>
-          </li>
-          <li>
-            rating
-            <%= review.rating %>
-          </li>
-          <li>
-            review:
-            <%= review.text %>
-          </li>
-          <li>
-            posted:
-            <%= review.time %>
-          </li>
-        <% } %>
-        </div>
+      <div class="innerContainer">
+        <h5>Reviews:</h5>
         <hr>
-      <% }); %>
+        <% result.reviews.forEach((review) => { %>
+          <div class="review">
+          <% if (result.reviews.indexOf(review) < 5) { %>
+            <h6><strong>Author:</strong> <%= review.author_name %></h6>
+            <!-- <h6>Photo url:<%= review.h6rofile_h6hoto_url %></h6> -->
+            <h6><strong>Rating:</strong> <%= review.rating %></h6>
+            <h6><strong>Review:</strong> <%= review.text %></h6>
+            <!-- <h6>Posted:<%= review.time %></h6> -->
+          <% } %>
+          </div>
+          <hr>
+        <% }); %>
+      </div>
     </div>
   </body>
 </html>

@@ -10,14 +10,11 @@ const Plans = require('../modules/plans');
 
 
 
-
 //handles adding a new plan with a new place
-router.post('/plans/new/place/new', (req, res, next) => {
-
+router.post('/:user_id/plans/new/place/new', (req, res, next) => {
   if (res.locals.loggedIn) {
-
     let newPlan = {
-      user_id:res.locals.user.id,
+      user_id: res.locals.user.id,
       name: req.body.place_name
     };
     let newPlace = {
@@ -26,7 +23,6 @@ router.post('/plans/new/place/new', (req, res, next) => {
       city: req.body.plan_name,
       state: req.body.plan_name,
       zipcode: req.body.plan_name,
-
     };
     Plans.insert(newPlan)
       .then((plan) => {
@@ -36,76 +32,53 @@ router.post('/plans/new/place/new', (req, res, next) => {
             res.redirect('/');
           });
       });
-
   } else {
     res.sendStatus(503);
   }
-
 });
 
 
 //add a new plan for
 router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
-
   if (res.locals.loggedIn) {
-
     let newPlace = req.body;
-
     newPlace.plan_id = parseInt(req.params.plan_id);
-
     Places.insert(newPlace).then((result) => {
-
-      res.redirect('/');
-
+      res.redirect('back');
     });
-
-  }else {
-    res.redirect('/');
+  } else {
+    res.redirect('/login');
   }
 });
 
 //creates new plan
-router.post('/:user_id/plans/new', (req, res,next) => {
-
+router.post('/:user_id/plans/new', (req, res) => {
   if (res.locals.loggedIn) {
-
     let newPlan = req.body;
-
     newPlan.user_id = req.params.user_id;
-
     Plans.insert(newPlan).then((result) => {
-
       res.redirect('/');
-
     });
-
-  }else {
+  } else {
     res.redirect('/');
   }
-
 });
-
-
 
 router.use('/profile', users_profile);
 
 router.get('/signup', function(req, res) {
   res.locals.loggedIn = req.session.loggedIn || false;
   res.render('pages/signup');
-
 });
 
 router.post('/signup', function(req, res) {
-
   Users.withEmail(req.body.email)
     .then(function(user) {
       if (!user) {
         let pBcryptHash = new Promise((resolve) => {
           resolve(bcrypt.hashSync(req.body.password));
         });
-
         pBcryptHash.then((hashed_password) => {
-
           Users.insert({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
@@ -119,11 +92,8 @@ router.post('/signup', function(req, res) {
 
             res.locals.user = newUser;
             res.locals.loggedIn = true;
-
             res.redirect('/');
-
           });
-
         });
       } else {
         res.send('User created');
@@ -137,19 +107,14 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', function(req, res) {
-
-
   Users.withEmail(req.body.email)
     .then(function(user) {
-
       if (!user) {
         res.redirect('/users/signup');
       }
-
       let pBcryptCompare = new Promise((resolve) => {
         resolve(bcrypt.compareSync(req.body.password, user.password));
       });
-
       pBcryptCompare.then((result) => {
 
         if (result) {
@@ -169,39 +134,38 @@ router.post('/login', function(req, res) {
     });
 });
 
-router.get('/:id/plans', function(req, res, next) {
-
+router.get('/:id/plans', function(req, res) {
   var userID = Number.parseInt(req.params.id);
-
   res.locals.page_type = 'My Plans';
-
   knex('plans').where('user_id', '=', userID).then(function(plans) {
     res.render('pages/plans', {
       plans: plans,
     });
   });
 });
-//we need to attach the userID of the user that's favoriting places to the places table - maybe during the POST request when they click the favorite button?
 
-// router.get('/:id/fav-places', function(req, res, next) {
-//
-//   var userID = Number.parseInt(req.params.id);
-//
-//   res.locals.page_type = 'My Favorite Places';
-//
-//   knex('places').where('user_id', '=', userID).then(function(places) {
-//     res.render('pages/fav-places', {
-//       places: places,
-//     });
-//   });
-// });
+router.get('/:user_id/plans/:plan_id/favorite', (req, res) => {
+  let planID = req.params.plan_id;
+  Plans.by_id(planID).then((planCopy) => {
+    planCopy.user_id = res.locals.user.id;
+    planCopy.is_favorite = true;
+    Places.listWithPlanID(planCopy.id).then((placesCopy) => {
+      delete planCopy['id'];
+      Plans.insert(planCopy).then(planNew => {
+        placesCopy = placesCopy.map((place) => {
+          place.plan_id = planNew.id;
+          delete place['id'];
+        });
+        Places.insert(placesCopy).then((placesNew) => {
+          res.redirect('back');
+        });
+      });
+    });
+  });
+});
 
-router.get('/:id/fav-plans', function(req, res, next) {
-
-  var userID = Number.parseInt(req.params.id);
-
+router.get('/:id/fav-plans', function(req, res) {
   res.locals.page_type = 'My Favorite Plans';
-
   knex('plans').where('is_favorite', '=', true).then(function(plans) {
     res.render('pages/plans', {
       plans: plans,
@@ -209,7 +173,29 @@ router.get('/:id/fav-plans', function(req, res, next) {
   });
 });
 
-router.get('/:id/plans/new', function(req, res, next) {
+//pretty sure this is right but you might want to look it over
+router.get('/:user_id/places/:place_id/favorite', (req, res) => {
+  let placeID = req.params.place_id;
+  Places.withID(placeID).then((placeCopy)=>{
+    placeCopy.is_favorite = true;
+    Places.insert(placeCopy).then(placeNew=> {
+      res.redirect('pages/fav-places');
+    });
+  });
+});
+
+router.get('/:id/fav-places', function(req, res) {
+  res.locals.page_type = 'My Favorite Places';
+  knex('places').where('is_favorite', '=', true).then(function(places) {
+    res.render('pages/fav-places', {
+      places: places,
+    });
+  });
+});
+
+
+
+router.get('/:id/plans/new', function(req, res) {
   res.render('pages/my_new_plan');
 });
 
