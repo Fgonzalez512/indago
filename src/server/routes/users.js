@@ -8,7 +8,7 @@ const knex = require('../db/connection.js');
 const Places = require('../modules/places');
 const Plans = require('../modules/plans');
 
-router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
+router.post('/:user_id/plans/:plan_id/places/new', (req, res) => {
 
   if (res.locals.loggedIn) {
 
@@ -27,7 +27,7 @@ router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
   }
 });
 
-router.post('/:user_id/plans/new', (req, res,next) => {
+router.post('/:user_id/plans/new', (req, res) => {
 
   if (res.locals.loggedIn) {
 
@@ -128,7 +128,7 @@ router.post('/login', function(req, res) {
     });
 });
 
-router.get('/:id/plans', function(req, res, next) {
+router.get('/:id/plans', function(req, res) {
 
   var userID = Number.parseInt(req.params.id);
 
@@ -175,7 +175,7 @@ router.get('/:user_id/plans/:plan_id/favorite', (req, res) => {
   });
 });
 
-router.get('/:id/fav-plans', function(req, res, next) {
+router.get('/:id/fav-plans', function(req, res) {
   res.locals.page_type = 'My Favorite Plans';
   knex('plans').where('is_favorite', '=', true).then(function(plans) {
     res.render('pages/plans', {
@@ -186,7 +186,7 @@ router.get('/:id/fav-plans', function(req, res, next) {
 
 
 
-router.get('/:id/plans/new', function(req, res, next) {
+router.get('/:id/plans/new', function(req, res) {
   res.render('pages/myplan');
 });
 
