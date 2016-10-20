@@ -21,7 +21,7 @@
         <select class="search-details-select" id="planID">
           <% user_plans.forEach((plan) => { %>
             <option value=<%=plan.id%>>
-<%= plan.name %>
+              <%= plan.name %>
             </option>
           <% }); %>
         </select>
@@ -39,9 +39,9 @@
           <option value="6:00 PM">6:00 PM</option>
           <option value="9:00 PM">9:00 PM</option>
         </select>
-        <!-- <a href="/users/<%=user.id%>/plans" -->
+        <a href="/users/<%=user.id%>/plans">
         <button class="btn waves-effect waves-light backToSearch" type="submit" id="addPlace">Add to plan</button>
-        <!-- <a> -->
+      </a>
       </div>
       <% } %>
       <div class="innerContainer">
