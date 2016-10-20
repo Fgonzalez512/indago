@@ -17,7 +17,7 @@
         <h5>Rating: <%= result.rating %></h5>
       </header>
       <% if(user_plans) { %>
-        <fieldset>
+        <div class="searchInformation">
         <select class="search-details-select" id="planID">
           <% user_plans.forEach((plan) => { %>
             <option value=<%=plan.id%>>
@@ -40,9 +40,9 @@
           <option value="9:00 PM">9:00 PM</option>
         </select>
         <!-- <a href="/users/<%=user.id%>/plans" -->
-        <button class="btn waves-effect waves-light" type="submit" id="addPlace">Add to plan</button>
+        <button class="btn waves-effect waves-light backToSearch" type="submit" id="addPlace">Add to plan</button>
         <!-- <a> -->
-      </fieldset>
+      </div>
       <% } %>
       <div class="innerContainer">
         <h5>Reviews:</h5>

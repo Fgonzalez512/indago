@@ -196,10 +196,6 @@ p {
   margin: auto;
 }
 
-.searchButton button {
-  background-color: #1560bd !important;
-}
-
 /* -------------------- Feed.ejs --------------------*/
 
 .card {
@@ -344,7 +340,17 @@ p {
   align-items: center;
 }
 
-/* -------------------- myplan.ejs --------------------*/
+/* -------------------- user_edit.ejs --------------------*/
+.deleteUserButton button{
+  margin-top: 5%;
+  background-color: transparent !important;
+  border: none;
+  cursor: pointer;
+  color: red;
+  box-shadow: none;
+}
+
+/* -------------------- my_new_plan.ejs --------------------*/
 
 .selectCity {
   color: #1560bd
@@ -362,7 +368,6 @@ p {
 
 /* -------------------- search.ejs --------------------*/
 
-
 .searchEdit input[type=text]:focus {
   border-bottom: 1px solid #1560bd !important;
 }
@@ -370,6 +375,16 @@ p {
 .icons option {
   color: #1560bd;
 }
+
+.btn {
+  background-color: #1560bd !important;
+  margin-left: 25%;
+}
+
+.input-field input[type=text]{
+  width: 75%;
+}
+
 
 /* -------------------- search-details.ejs --------------------*/
 
@@ -386,4 +401,23 @@ strong {
 .innerContainer {
   border: 1px solid #dce0e0;
   margin-top: 2%;
+  padding-left: 1%;
+}
+
+.searchInformation{
+  border: 1px solid #dce0e0;
+  padding-left: 1%;
+}
+
+.searchInformation button{
+  margin-left: 0;
+  margin-bottom: 1%;
+}
+
+.invalid {
+  border : 3px solid #ff0000;
+}
+
+.hidden-submit {
+  visibility: hidden;;
 }

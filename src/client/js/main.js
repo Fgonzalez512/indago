@@ -4,6 +4,9 @@ $(document).ready(function() {
     hover: false
   });
 
+  $('.back').click(function() {
+    window.history.back();
+  });
 
   // Initialize collapse button
   $('.button-collapse').sideNav();
@@ -19,6 +22,35 @@ $(document).ready(function() {
 
 
   var url;
+
+  //validate user input, prevent empty values
+  $('.textField').on('input', function () {
+    $(this).addClass('invalid');
+    var name = $(this).val();
+    if (name) {
+      $(this).removeClass('invalid');
+    }
+    else {
+      $(this).addClass('invalid');
+    }
+  });
+
+  //don't allow the form to submit if the values are invalid
+
+  $('.textField').on('input', function() {
+
+    var fieldValues = [$('#planName').val(), $('#planLocation').val(), $('#planDate').val(),];
+
+    var validValues = fieldValues.filter(function(value) {
+      return !!value;
+    });
+
+    if (fieldValues.length === validValues.length) {
+      $('.submit').removeClass('hidden-submit');
+    } else {
+      $('.submit').addClass('hidden-submit');
+    }
+  });
 
   $('#postPlanAndSearchPlace').submit(function () {
 
@@ -36,9 +68,9 @@ $(document).ready(function() {
       type : 'POST',
       url : url,
       data : {
-        name : $('#name').val(),
-        city : $('#location').val(),
-        date : $('#date').val(),
+        name : $('#planName').val(),
+        city : $('#planLocation').val(),
+        date : $('#planDate').val(),
       },
     });
 
