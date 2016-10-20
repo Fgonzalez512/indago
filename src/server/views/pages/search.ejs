@@ -12,18 +12,18 @@
         in
       </label>
       <select name="location">
-        <option value="30.2729,-97.7444">Austin</option>
-        <option vlaue="37.773972,-122.431297">San Francisco</option>
-        <option value="40.712784,-74.005941">New York</option>
-        <option value="47.608013,-122.335167">Seattle</option>
-        <option value="25.761681,-80.191788">Miami</option>
-        <option value="41.881832,-87.623177">Chicago</option>
+        <option value="austin">Austin</option>
+        <option vlaue="san_francisco">San Francisco</option>
+        <option value="new_york">New York</option>
+        <option value="seattle">Seattle</option>
+        <option value="maimi">Miami</option>
+        <option value="chicago">Chicago</option>
       </select>
       <input type="submit">
     </form>
     <% results.forEach((place) => { %>
+      <!-- filter out convenience stores -->
         <p class="search-result">
-          <!-- <%= JSON.stringify(place) %> -->
           <div class="place-name">
             <%= place.name; %>
           </div>

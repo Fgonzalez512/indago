@@ -37,10 +37,10 @@ describe('routes : search', () => {
         .post('/search')
         //add in form data here
         .send({
-          location: '51.503186,-0.126446'
+          location: 'austin'
         })
         .send({
-          keyword: 'museum'
+          keyword: 'beer'
         })
         .end((err, res) => {
           // res.redirects.length.should.equal(1);

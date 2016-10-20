@@ -1,59 +1,57 @@
-const express = require('express');
 const router = require('express').Router();
-const bcrypt = require('bcrypt-nodejs');
-const methodOverride = require('method-override');
 const knex = require('../db/connection.js');
 const Plans = require('../modules/plans');
 const Places = require('../modules/places');
 
+
 router.get('/', function(req, res) {
+
   res.render('pages/plans');
+
 });
+
+// router.get('')
 
 //handles adding a new plan with a new place
-router.post('/', (req, res) => {
-  let user = req.session.user;
+router.post('/', (req, res, next) => {
 
-  if(!user) {
-    return res.redirect('back');
+  if (res.locals.loggedIn) {
+
+    let newPlan = {
+      name: req.body.place_name
+    };
+    let newPlace = {
+      name: req.body.plan_name,
+      address: req.body.plan_name,
+      city: req.body.plan_name,
+      state: req.body.plan_name,
+      zipcode: req.body.plan_name,
+
+    };
+    Plans.insert(newPlan)
+      .then((plan) => {
+        newPlace.plan_id = plan.id;
+        Places.insert(newPlace)
+          .then((place) => {
+            res.redirect('/users/' + res.locals.user.id + '/plans/' + plan.id);
+          });
+      });
+
+  } else {
+    res.sendStatus(503);
   }
 
-  Plans.insert({
-    name : req.body.name,
-  })
-    .then((plan) => {
-      Places.insert({
-        plan_id : plan.id,
-        name : req.body.place_name,
-        address : req.body.address,
-        city : req.body.city,
-        state : req.body.state,
-        zipcode : req.body.zipcode,
-      })
-        .then(() => {
-          res.redirect('back');
-        });
-    });
-
 });
 
-router.post('/:plan_id', (req, res) => {
-  // let user = req.sesson.user;
-  //
-  // if(!user) {
-  //   return res.redirect('back');
-  // }
-
-  res.sendStatus('404');
-});
 
 
 router.get('/cities/:city', function(req, res) {
   let cityID = req.params.city;
   res.locals.page_type = cityID;
+
   knex('plans').where('city', cityID).orderBy('upvote', 'DESC').then((plans) => {
     res.render('pages/plans', {
-      plans: plans
+      plans: plans,
     });
   });
 });

@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <% include ../partials/head %>
+  <!-- <head>
+     include ../partials/head //removed ejs brackets for now
     <title>My Plan</title>
-  </head>
+  </head> -->
   <body>
-    <% include ../partials/nav %>
+    <!--  include ../partials/nav  // removed ejs brackets for now-->
     <div class="container">
-      <header class="homePage">
-        <h3>Plan Name</h3>
-        <h5>City Name</h5>
-        <h5>Date</h5>
-      </header>
-        <div class="col s1 m1 l1 searchBar">
+        <!-- <div class="col s1 m1 l1 searchBar">
           <input type="text" name="search" value placeholder="Search">
-        </div>
-        <form class="deletePlanForm" action="">
+        </div> -->
+        <form action="/search" method="POST">
+          <label for="name">plan name</label>
+          <input type="text" name="name">
+          <label for="location">select city:</label>
+          <select name="location">
+            <option value="austin">Austin</option>
+            <option vlaue="san_francisco">San Francisco</option>
+            <option value="new_york">New York</option>
+            <option value="seattle">Seattle</option>
+            <option value="miami">Miami</option>
+            <option value="chicago">Chicago</option>
+          </select>
+          <label for="date">date</label>
+          <input type="text" name="date">
+        <label for="keyword">
+          search for a place to add to your plan:
+        </label>
+        <input type="text" name="keyword">
+        <input type="submit" value="search">
+      </form>
+        <!-- <form class="deletePlanForm" action="">
           <button id="deletePlan"type="submit">Delete Plan</button>
         </form>
         <div class="bigC">
@@ -65,7 +80,7 @@
               <button id="deletePlan"type="submit">Delete</button>
             </form>
           </div>
-        </div>
+        </div> -->
     </div>
   </body>
 </html>

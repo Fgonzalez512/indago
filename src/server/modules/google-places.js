@@ -21,7 +21,7 @@ const googlePlaces = {
 
   details : (placeID, callback) => {
     request(baseURI + 'details/json?placeid=' + placeID + '&key=' + key, (error, response, body) => {
-      if(!error && response.statusCode == 200) {
+      if (!error && response.statusCode == 200) {
         if (body.error_message) {
           console.error('error: ' + body.error_message, 'status: ' + body.status);
           return;
@@ -30,6 +30,20 @@ const googlePlaces = {
       }
       console.error(error);
       console.log('response status:' + response.statusCode);
+    });
+  },
+
+  getPhoto : (photoReference, callback) => {
+    request(baseURI + 'photo?maxwidth=200&photoreference=' + photoReference + '&key=' + key, (error, response, body) => {
+      if (!error && response.statusCode == 200) {
+        if (body.error_message) {
+          console.error('error: ' + body.error_message + 'status: ' + body.status);
+          return;
+        }
+        return callback(body);
+      }
+      console.error(error);
+      console.log('response status: ' + response.statusCode);
     });
   },
 
@@ -48,7 +62,7 @@ const googlePlaces = {
       console.log('response status:' + response.statusCode);
     });
   },
-  
+
 };
 
 module.exports = googlePlaces;
