@@ -202,9 +202,12 @@ button {
 
 /* -------------------- Feed.ejs --------------------*/
 
-
 .card {
-  margin-bottom: 0 !important;
+  margin: 0.25rem !important;
+}
+
+.row .col {
+  padding: 0 !important;
 }
 
 .card-left {
@@ -212,14 +215,14 @@ button {
 }
 
 .card-bottom {
-  margin: 0;
+  width: 99%;
+  margin: auto;
   display: flex;
   align-items: center;
   border: 1px solid #dce0e0;
   font-size: 1.5rem;
   color: rgba(0, 0, 0, 0.6);
   padding-left: 20px;
-
 }
 
 .fa-2x {
