@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <% include ./partials/head %>
+    <title>Home</title>
+  </head>
+  <body>
+    <% include ./partials/nav %>
+    <div class="container">
+      <header class="homePage">
+        <h3>
+          Explore a perfect day in the city.</h3>
+      </header>
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <select class="icons">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="austin" data-icon="images/sample-1.jpg" class="left circle">Austin</option>
+            <option vlaue="san_francisco" data-icon="images/office.jpg" class="left circle">San Francisco</option>
+            <option value="new_york" data-icon="images/yuna.jpg" class="left circle">New York</option>
+            <option value="seattle" data-icon="images/sample-1.jpg" class="left circle">Seattle</option>
+            <option value="maimi" data-icon="images/office.jpg" class="left circle">Miami</option>
+            <option value="chicago" data-icon="images/yuna.jpg" class="left circle">Chicago</option>
+          </select>
+          <label>Images in select</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <% include ./partials/collection %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

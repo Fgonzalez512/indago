@@ -1,0 +1,18 @@
+<ul class="collection">
+  <% collection.forEach((item) => { %>
+    <li class="collection-item">
+      <img src="images/yuna.jpg" alt="" class="circle">
+      <span class="title"><%= item.name %></span>
+      <p>
+      <% var chips = place.types.filter((type)=>(type !== 'point_of_interest' && type !== 'establishment')) %>
+      <%- include ./partials/chips %>
+      <br>
+      rating:<%= place.rating || 'none'; %>
+    </p>
+    <a href="/search/details/<%=place.place_id%>" class="secondary-content">
+      details/add to plan
+      <i class="material-icons">grade</i>
+    </a>
+</li>
+<% }) %>
+</ul>
