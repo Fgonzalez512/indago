@@ -46,7 +46,6 @@ describe('routes : search', () => {
           // res.redirects.length.should.equal(1);
           res.status.should.equal(200);
           res.type.should.equal('text/html');
-          res.text.should.include('<input type="text" name="keyword">');
           res.text.should.include('<p class="search-result">');
           done();
         });

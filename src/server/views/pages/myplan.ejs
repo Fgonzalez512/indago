@@ -4,14 +4,23 @@
       <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
       <script>
       $(document).ready(function () {
+        var url;
 
-        $('.submit').click(function () {
+        $('#postPlanAndSearchPlace').submit(function () {
+
           var pathname = window.location.pathname;
           var hostname = window.location.hostname;
 
+          //toggle including port No. on deployment
+          if(hostname === 'localhost' || hostname === '127.0.0.1') {
+            url = 'http://'+hostname+':3000'+pathname;
+          } else {
+            url = 'http://'+hostname+pathname;
+          }
+
           $.ajax({
             type : 'POST',
-            url : 'http://'+hostname+':3000'+pathname,
+            url : url,
             data : {
                 name : $('#name').val(),
                 city : $('#location').val(),
@@ -30,7 +39,7 @@
         <!-- <div class="col s1 m1 l1 searchBar">
           <input type="text" name="search" value placeholder="Search">
         </div> -->
-        <form action="/search" method="POST">
+        <form id="postPlanAndSearchPlace"action="/search" method="POST">
           <label for="name">plan name</label>
           <input type="text" name="name" id="name">
           <label for="location">select city:</label>
