@@ -335,3 +335,13 @@ p {
   justify-content: center;
   align-items: center;
 }
+
+/* -------------------- user_edit.ejs --------------------*/
+.deleteUserButton button{
+  margin-top: 5%;
+  background-color: transparent !important;
+  border: none;
+  cursor: pointer;
+  color: red;
+  box-shadow: none;
+}
