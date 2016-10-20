@@ -1,0 +1,14 @@
+<ul class="collection">
+    <% places.forEach((place) => { %>
+    <li class="collection-item avatar">
+      <img src="http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png" alt="" class="circle">
+      <span class="title"><%= place.name %></span>
+      <p><%= place.city %><br>
+      </p>
+      <a href="./places/<%=place.place_id%>" class="secondary-content">
+
+      <i class="material-icons">delete</i>
+      </a>
+    </li>
+      <% }) %>
+  </ul>
