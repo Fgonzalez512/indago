@@ -9,5 +9,7 @@ $(function() {
   $('.button-collapse').sideNav();
   // Sidebar collapsible menu
   $('.collapsible').collapsible();
+  //Search city selector
+  $('select').material_select();
 
 });

@@ -7,12 +7,12 @@ exports.up = function(knex, Promise) {
     table.string('name').defaultTo('').notNullable();
     table.string('address').defaultTo('').notNullable();
     table.string('city').defaultTo('').notNullable();
-    table.string('state', 2).defaultTo('').notNullable();
-    table.string('zipcode', 5).defaultTo('').notNullable();
-    table.time('start_time');
-    table.time('end_time');
-    table.integer('coordinate_x');
-    table.integer('coordinate_y');
+    table.string('state').defaultTo('').notNullable();
+    table.string('zipcode').defaultTo('').notNullable();
+    table.time('start_time').nullable();
+    table.time('end_time').nullable();
+    table.integer('coordinate_x').nullable();
+    table.integer('coordinate_y').nullable();
     table.integer('version').defaultTo(1).notNullable();
     table.integer('plan_version').defaultTo(1).notNullable();
     table.boolean('is_enable').defaultTo(true).notNullable();

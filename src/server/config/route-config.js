@@ -11,6 +11,7 @@
     const places = require('../routes/places');
     const trips = require('../routes/plans');
     const search = require('../routes/search');
+    const usersProfile = require('../routes/users_profile');
 
     // *** register routes *** //
     app.use(auth);
@@ -19,6 +20,7 @@
     app.use('/places', places);
     app.use('/plans', trips);
     app.use('/search', search);
+    app.use('/user/profile', usersProfile);
 
   };
 

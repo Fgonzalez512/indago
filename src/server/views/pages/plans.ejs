@@ -18,8 +18,12 @@
             <div class="city-title card-title card-left"><%= plan.name %></div>
        </div></a></div></div>
         <div class="card-bottom">
+          <div class=""><%= plan.score %></div>
            <div class=""><%= plan.upvote %></div>
            <div class=""><a href="/plans/<%=plan.id%>/upvote"><i class="fa fa-angle-up fa-2x" aria-hidden="true"></i></div>
+            <% if (plan.city !== page_type) { %>
+               <div class="card-bottom-right"><%= plan.city %></div>
+            <% } %>
         </div>
       </div>
       <%}) %>

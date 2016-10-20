@@ -1,53 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <% include ../partials/head %>
+    <title>Home</title>
   </head>
   <body>
-    <form action="/search" method="POST">
-      <label for="keyword">
-        I'm looking for
-      </label>
-      <input type="text" name="keyword">
-      <label for="city">
-        in
-      </label>
-      <select name="location">
-        <option value="30.2729,-97.7444">Austin</option>
-        <option vlaue="37.773972,-122.431297">San Francisco</option>
-        <option value="40.712784,-74.005941">New York</option>
-        <option value="47.608013,-122.335167">Seattle</option>
-        <option value="25.761681,-80.191788">Miami</option>
-        <option value="41.881832,-87.623177">Chicago</option>
-      </select>
-      <input type="submit">
-    </form>
-    <% results.forEach((place) => { %>
-        <p class="search-result">
-          <!-- <%= JSON.stringify(place) %> -->
-          <div class="place-name">
-            <%= place.name; %>
+    <% include ../partials/nav %>
+    <div class="container">
+      <header class="homePage">
+        <h3>
+          Explore a perfect day in the city.</h3>
+      </header>
+      <div class="row">
+        <form action="/search" method="POST">
+        <div class="col s12 m7">
+          <div class="row">
+            <div class="input-field col s12">
+              <input type="text" name="keyword" class="validate">
+              <label for="search" data-error="wrong" data-success="right">Search</label>
+            </div>
           </div>
-          <div class="place-rating">
-            rating: <%= place.rating || 'none'; %>
-          </div>
-          <ul>
-            <% place.types.forEach((type) => { %>
-                <% if(type !== 'point_of_interest' && type !== 'establishment'){%>
-                  <li class="place-type">
-                  <%= type %>
-                  </li>
-                <% } %>
-            <% }); %>
-          </ul>
-          <div class="place-location">
-          location:
-          <%= place.vicinity %>
-          </div>
-          <a href="/search/details/<%=place.place_id%>">
-            details
-          </a>
-        </p>
-        <hr>
-    <% }); %>
+        </div>
+        <div class="input-field col s12 m3">
+          <select class="icons" name="location" required="true" >
+            <option value="" disabled selected>Choose your option</option>
+            <option value="austin" data-icon="images/atx.jpg" class="left circle">Austin</option>
+            <option value="san_francisco" data-icon="images/sf.jpg" class="left circle">San Francisco</option>
+            <option value="new_york" data-icon="images/ny.jpg" class="left circle">New York</option>
+            <option value="seattle" data-icon="images/seattle.jpg" class="left circle">Seattle</option>
+            <option value="maimi" data-icon="images/miami.jpg" class="left circle">Miami</option>
+            <option value="chicago" data-icon="images/chicago.png" class="left circle">Chicago</option>
+          </select>
+          <label>Select city</label>
+        </div>
+        <div class="input-field col s12 m2">
+          <button class="btn waves-effect waves-light" type="submit">Submit
+             <i class="material-icons right">send</i>
+          </button>
+         </div>
+      </form>
+        <div class="input-field col s12 m12">
+          <% include ../partials/collection %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

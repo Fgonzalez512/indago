@@ -23,7 +23,8 @@ const data = {
   }, {
     user_id: 2,
     city: 'San Francisco',
-    name: 'Coffee House Crawl'
+    name: 'Coffee House Crawl',
+    is_favorite: true
   }, {
     user_id: 1,
     city: 'New York',
@@ -31,7 +32,8 @@ const data = {
   }, {
     user_id: 1,
     city: 'Seattle',
-    name: 'Music Day!'
+    name: 'Music Day!',
+    is_favorite: true
   }, {
     user_id: 1,
     city: 'Miami',
@@ -67,12 +69,15 @@ const data = {
     plan_id: 1,
     name: 'Galvanize',
     city: 'Austin',
-    state: 'TX'
+    state: 'TX',
+    is_favorite: true
+
   }, {
     plan_id: 1,
     name: 'Lake Pflugerville',
     city: 'Pflugerville',
-    state: 'TX'
+    state: 'TX',
+    is_favorite: true
   }]
 };
 

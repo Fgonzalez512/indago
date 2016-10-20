@@ -1,5 +1,6 @@
 const databaseName = 'indago';
 
+
 module.exports = {
   development: {
     client: 'pg',

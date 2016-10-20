@@ -8,14 +8,14 @@
     <% include ../partials/nav %>
     <div class="container">
       <header class="homePage">
-        <h3> Explore a perfect day in the city.</h3>
+      <h3>Favorite Places</h3>
       </header>
       <div class="row">
-          <div class="col s12 m6 l4">
-            <% places.forEach((place)=>{ %>
-              <%= place.name %>
-            <% })%>
-          </div>
+        <% places.forEach((card)=>{ %>
+
+            <% include ../partials/card-sm %>
+
+        <% })%>
       </div>
     </div>
   </body>
