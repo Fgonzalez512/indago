@@ -2,11 +2,52 @@
 
 const router = require('express').Router();
 const bcrypt = require('bcrypt-nodejs');
-const methodOverride = require('method-override');
 const Users = require('../modules/users');
 const users_profile = require('./users_profile');
+const knex = require('../db/connection.js');
+const Places = require('../modules/places');
+const Plans = require('../modules/plans');
 
-router.use('/profile',users_profile);
+router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
+
+  if (res.locals.loggedIn) {
+
+    let newPlace = req.body;
+
+    newPlace.plan_id = parseInt(req.params.plan_id);
+
+    Places.insert(newPlace).then((result) => {
+
+      res.redirect('/');
+
+    });
+
+  }else {
+    res.redirect('/');
+  }
+});
+
+router.post('/:user_id/plans/new', (req, res,next) => {
+
+  if (res.locals.loggedIn) {
+
+    let newPlan = req.body;
+
+    newPlan.user_id = req.params.user_id;
+
+    Plans.insert(newPlan).then((result) => {
+
+      res.redirect('/');
+
+    });
+
+  }else {
+    res.redirect('/');
+  }
+
+});
+
+router.use('/profile', users_profile);
 
 router.get('/signup', function(req, res) {
   res.locals.loggedIn = req.session.loggedIn || false;
@@ -56,6 +97,7 @@ router.get('/login', function(req, res) {
 
 router.post('/login', function(req, res) {
 
+
   Users.withEmail(req.body.email)
     .then(function(user) {
 
@@ -80,15 +122,59 @@ router.post('/login', function(req, res) {
           res.redirect('/');
 
         } else {
-
           res.render('pages/login');
         }
       });
     });
 });
 
+router.get('/:id/plans', function(req, res, next) {
+
+  var userID = Number.parseInt(req.params.id);
+
+  res.locals.page_type = 'My Plans';
+
+  knex('plans').where('user_id', '=', userID).then(function(plans) {
+    res.render('pages/plans', {
+      plans: plans,
+    });
+  });
+});
+//we need to attach the userID of the user that's favoriting places to the places table - maybe during the POST request when they click the favorite button?
+
+// router.get('/:id/fav-places', function(req, res, next) {
+//
+//   var userID = Number.parseInt(req.params.id);
+//
+//   res.locals.page_type = 'My Favorite Places';
+//
+//   knex('places').where('user_id', '=', userID).then(function(places) {
+//     res.render('pages/fav-places', {
+//       places: places,
+//     });
+//   });
+// });
+
+router.get('/:id/fav-plans', function(req, res, next) {
+
+  var userID = Number.parseInt(req.params.id);
+
+  res.locals.page_type = 'My Favorite Plans';
+
+  knex('plans').where('is_favorite', '=', true).then(function(plans) {
+    res.render('pages/plans', {
+      plans: plans,
+    });
+  });
+});
+
+router.get('/:id/plans/new', function(req, res, next) {
+  res.render('pages/myplan');
+});
+
 router.get('/logout', function(req, res) {
-  req.session = null;
+  req.session.user = null;
+  req.session.loggedIn = false;
   res.redirect('/users/login');
 });
 

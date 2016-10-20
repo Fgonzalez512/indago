@@ -7,43 +7,57 @@ chai.use(chaiHttp);
 
 const server = require('../../src/server/app');
 
-const User = require('../../src/server/modules/users');
+const Users = require('../../src/server/modules/users');
 
 var userOne;
+var userOneID;
 
 describe('routes : users_profile', () => {
 
   beforeEach((done) => {
     userOne = {
-      id: 1,
       first_name: 'Test',
       last_name: 'Tester',
       email: 'test@example.com',
       username: 'testnado'
     };
-    User.insert(userOne).then(function(err) {
+    Users.insert(userOne).then(function(user) {
+      userOneID = user[0].id;
       done();
     });
   });
 
   afterEach((done) => {
-    User.all().where('username', 'testnado').del()
+    Users.remove(userOneID)
       .then(function(err) {
         done();
       });
   });
 
   describe('GET /user/profile/:user_id', () => {
-    xit('should render the user profile', (done) => {
+    it('should render the user profile', (done) => {
       chai.request(server)
-        .get('/user/profile/' + userOne.id)
+        .get('/user/profile/' + userOneID)
         .end((err, res) => {
-          // res.redirects.length.should.equal(0);
-          // res.status.should.equal(200);
-          // res.type.should.equal('text/html');
           res.text.should.include(userOne.username);
           done();
         });
+    });
+  });
+
+  describe('DELETE /user/profile/:user_id', () => {
+    it('should delete the user', (done) => {
+      chai.request(server)
+        .delete('/user/profile/' + userOneID)
+        .end((err, res) => {
+          Users.all().where('id', userOneID)
+            .then(function(err) {
+              res.redirects[0].should.include('users/login');
+              res.text.should.include('login');
+              done();
+            });
+        });
+
     });
   });
 

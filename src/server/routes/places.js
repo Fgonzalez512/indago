@@ -3,13 +3,14 @@ const router = express.Router();
 const Places = require('../modules/places');
 
 router.get('/', function(req, res, next) {
-  Places.get.list()
+  Places.list()
     .then((places) => {
       res.locals.places = places;
       res.render('pages/places');
-
     });
 });
+
+
 
 router.post('/new', function(req, res, next) {
   Places.insert()

@@ -13,9 +13,23 @@ const User = {
       .insert(user)
       .returning(['id', 'first_name', 'last_name', 'email', 'username']);
   },
+
+  update: function(user) {
+    return knex('users')
+      .update(user)
+      .where({
+        id: user.id
+      });
+  },
   all: function() {
     return knex('users');
-  }
+  },
+  remove: function(user_id) {
+    return knex('users')
+      .where({
+        id: user_id
+      }).del();
+  },
 };
 
 module.exports = User;
