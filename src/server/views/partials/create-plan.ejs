@@ -3,13 +3,14 @@
         <h3> Create Plan </h3>
         <form action="/search" method="POST" id="postPlanAndSearchPlace" class="formEdit" >
           <input type="text" name="name" class="textField" id="planName" placeholder="Plan Name">
-          <select class="selectCity" name="location" id="planLocation">
-            <option class="option" value="austin">Austin</option>
-            <option vlaue="san_francisco">San Francisco</option>
-            <option value="new_york">New York</option>
-            <option value="seattle">Seattle</option>
-            <option value="miami">Miami</option>
-            <option value="chicago">Chicago</option>
+          <select class="selectCity icons" name="location" id="planLocation">
+            <option value="" disabled selected>Select city</option>
+            <option value="austin" data-icon="/images/atx.jpg" class="left circle">Austin</option>
+            <option value="san_francisco" data-icon="/images/sf.jpg" class="left circle">San Francisco</option>
+            <option value="new_york" data-icon="/images/ny.jpg" class="left circle">New York</option>
+            <option value="seattle" data-icon="/images/seattle.jpg" class="left circle">Seattle</option>
+            <option value="maimi" data-icon="/images/miami.jpg" class="left circle">Miami</option>
+            <option value="chicago" data-icon="/images/chicago.png" class="left circle">Chicago</option>
           </select>
           <input type="text" name="date" class="textField" id="planDate" placeholder="Date">
           <input type="text" name="keyword" value placeholder="Search">
