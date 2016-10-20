@@ -17,7 +17,8 @@ router.post('/:user_id/plans/new', (req, res,next) => {
 
   Plans.insert(newPlan).then((result) => {
 
-    res.redirect('/index');
+    //notify client that resource has been created
+    res.sendStatus(201);
 
   });
 });
