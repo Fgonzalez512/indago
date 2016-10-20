@@ -12,9 +12,7 @@ const Plans = require('../modules/plans');
 
 //handles adding a new plan with a new place
 router.post('/:user_id/plans/new/place/new', (req, res, next) => {
-
   if (res.locals.loggedIn) {
-
     let newPlan = {
       user_id:res.locals.user.id,
       name: req.body.place_name
@@ -25,7 +23,6 @@ router.post('/:user_id/plans/new/place/new', (req, res, next) => {
       city: req.body.plan_name,
       state: req.body.plan_name,
       zipcode: req.body.plan_name,
-
     };
     Plans.insert(newPlan)
       .then((plan) => {
@@ -35,29 +32,20 @@ router.post('/:user_id/plans/new/place/new', (req, res, next) => {
             res.redirect('/');
           });
       });
-
   } else {
     res.sendStatus(503);
   }
-
 });
 
 
 //add a new plan for
 router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
-
   if (res.locals.loggedIn) {
-
     let newPlace = req.body;
-
     newPlace.plan_id = parseInt(req.params.plan_id);
-
     Places.insert(newPlace).then((result) => {
-
       res.redirect('back');
-
     });
-
   }else {
     res.redirect('/login');
   }
@@ -65,44 +53,28 @@ router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
 
 //creates new plan
 router.post('/:user_id/plans/new', (req, res,next) => {
-
   if (res.locals.loggedIn) {
-
     let newPlan = req.body;
-
     newPlan.user_id = req.params.user_id;
-
     Plans.insert(newPlan).then((result) => {
-
       res.redirect('/');
-
     });
-
   }else {
     res.redirect('/');
   }
-
 });
 
 
 router.post('/:user_id/plans/new', (req, res) => {
-
   if (res.locals.loggedIn) {
-
     let newPlan = req.body;
-
     newPlan.user_id = req.params.user_id;
-
     Plans.insert(newPlan).then((result) => {
-
       res.redirect('/');
-
     });
-
   }else {
     res.redirect('/');
   }
-
 });
 
 router.use('/profile', users_profile);
@@ -113,16 +85,13 @@ router.get('/signup', function(req, res) {
 });
 
 router.post('/signup', function(req, res) {
-
   Users.withEmail(req.body.email)
     .then(function(user) {
       if (!user) {
         let pBcryptHash = new Promise((resolve) => {
           resolve(bcrypt.hashSync(req.body.password));
         });
-
         pBcryptHash.then((hashed_password) => {
-
           Users.insert({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
@@ -136,11 +105,8 @@ router.post('/signup', function(req, res) {
 
             res.locals.user = newUser;
             res.locals.loggedIn = true;
-
             res.redirect('/');
-
           });
-
         });
       } else {
         res.send('User created');
@@ -154,19 +120,14 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', function(req, res) {
-
-
   Users.withEmail(req.body.email)
     .then(function(user) {
-
       if (!user) {
         res.redirect('/users/signup');
       }
-
       let pBcryptCompare = new Promise((resolve) => {
         resolve(bcrypt.compareSync(req.body.password, user.password));
       });
-
       pBcryptCompare.then((result) => {
 
         if (result) {
@@ -187,11 +148,8 @@ router.post('/login', function(req, res) {
 });
 
 router.get('/:id/plans', function(req, res) {
-
   var userID = Number.parseInt(req.params.id);
-
   res.locals.page_type = 'My Plans';
-
   knex('plans').where('user_id', '=', userID).then(function(plans) {
     res.render('pages/plans', {
       plans: plans,
@@ -227,6 +185,7 @@ router.get('/:id/fav-plans', function(req, res) {
     });
   });
 });
+
 //pretty sure this is right but you might want to look it over
 router.get('/:user_id/places/:place_id/favorite', (req, res) => {
   let placeID = req.params.place_id;
