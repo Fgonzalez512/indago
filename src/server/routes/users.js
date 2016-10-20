@@ -54,12 +54,12 @@ router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
 
     Places.insert(newPlace).then((result) => {
 
-      res.redirect('/');
+      res.redirect('back');
 
     });
 
   }else {
-    res.redirect('/');
+    res.redirect('/login');
   }
 });
 

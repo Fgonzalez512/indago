@@ -50,6 +50,7 @@ router.post('/', function(req, res, next) {
   let long = locations[req.body.location].long;
 
   googlePlaces.nearbySearch(lat, long, req.body.keyword, (placesData) => {
+    // console.log(placesData.results);
 
     // for filtering out uninteresting place results that are seen often. should move this to a database if it gets really big.
     // let rejectedPlaces = ['7-Eleven', 'Domino\'s Pizza'];
@@ -69,8 +70,9 @@ router.get('/details/:google_places_id', (req, res, next) => {
   if (!user) {
     return googlePlaces.details(req.params.google_places_id, (data) => {
       res.render('pages/search_details', {
-        result: data.result,
-        user_plans: null,
+        result : data.result,
+        user_plans : null,
+        user_id : null,
       });
     });
   }
@@ -79,7 +81,8 @@ router.get('/details/:google_places_id', (req, res, next) => {
     googlePlaces.details(req.params.google_places_id, (data) => {
       res.render('pages/search_details', {
         result: data.result,
-        user_plans: user_plans,
+        user_plans : user_plans,
+        user_id : user.id,
       });
     });
   });
