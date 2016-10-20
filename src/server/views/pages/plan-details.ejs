@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <% include ../partials/nav %>
+    <div class="container">
+      <header class="homePage">
+        <h3>Plan Name</h3>
+        <h5>City</h5>
+        <h5>Date</h5>
+      </header>
+        <form class="deletePlanForm" action="">
+          <button id="deletePlan"type="submit">Delete Plan</button>
+        </form>
+        <div class="bigC">
+          <div class="resultsPlan rpt">
+            <p>Time</p>
+            <p>Free space to write</p>
+          </div>
+          <div class="resultsPlan rpb">
+            <p>Picture</p>
+            <p>Place Name</p>
+          </div>
+          <div class="resultsPlanButton">
+            <a href= ""> Edit </a><span> | </span>
+            <form class="deletePlanForm" action="">
+              <button id="deletePlan"type="submit">Delete</button>
+            </form>
+          </div>
+        </div>
+    </div>
+  </body>
+</html>

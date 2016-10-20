@@ -196,7 +196,7 @@ p {
   margin: auto;
 }
 
-button {
+.searchButton button {
   background-color: #1560bd !important;
 }
 
