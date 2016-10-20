@@ -20,7 +20,8 @@
         <div class="card-bottom">
           <div class=""><%= plan.score %></div>
            <div class=""><%= plan.upvote %></div>
-           <div class=""><a href="/plans/<%=plan.id%>/upvote"><i class="fa fa-angle-up fa-2x" aria-hidden="true"></i></div>
+           <div><a href="/plans/<%=plan.id%>/upvote"><i class="fa fa-angle-up fa-2x" aria-hidden="true"></i></a></div>
+           <div><a href=""><i class="fa fa-star-o fa-1x" aria-hidden="true"></i></a></div>
             <% if (plan.city !== page_type) { %>
                <div class="card-bottom-right"><%= plan.city %></div>
             <% } %>
