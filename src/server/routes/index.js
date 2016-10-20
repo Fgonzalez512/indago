@@ -8,9 +8,15 @@ router.get('/', function(req, res, next) {
   res.render('index');
 
 });
+router.get('/404', function(req, res, next) {
 
+  res.render('pages/404_page');
+
+});
 router.get('/robertCSS', function(req, res, next) {
   res.render('pages/my_new_plan');
 });
+
+
 
 module.exports = router;
