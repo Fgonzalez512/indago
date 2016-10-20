@@ -25,7 +25,7 @@ describe('routes : search', () => {
           res.redirects.length.should.equal(0);
           res.status.should.equal(200);
           res.type.should.equal('text/html');
-          res.text.should.include('<input type="text" name="keyword">');
+          res.text.should.include('<input type="text" name="keyword" class="validate">');
           done();
         });
     });
@@ -46,7 +46,7 @@ describe('routes : search', () => {
           // res.redirects.length.should.equal(1);
           res.status.should.equal(200);
           res.type.should.equal('text/html');
-          res.text.should.include('<p class="search-result">');
+          res.text.should.include('<li class="collection-item avatar">');
           done();
         });
     });

@@ -55,7 +55,7 @@ router.post('/', function(req, res, next) {
     // let rejectedPlaces = ['7-Eleven', 'Domino\'s Pizza'];
     // let filteredResults = placesData.results.filter;
 
-    res.render('pages/search2', {
+    res.render('pages/search', {
       collection: placesData.results,
       createdPlan: req.body,
     });
