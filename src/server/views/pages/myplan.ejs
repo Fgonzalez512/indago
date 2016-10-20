@@ -1,20 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- <head>
-     include ../partials/head //removed ejs brackets for now
-    <title>My Plan</title>
-  </head> -->
+  <head>
+      <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+      <script>
+      $(document).ready(function () {
+        var url;
+
+        $('#postPlanAndSearchPlace').submit(function () {
+
+          var pathname = window.location.pathname;
+          var hostname = window.location.hostname;
+
+          //toggle including port No. on deployment
+          if(hostname === 'localhost' || hostname === '127.0.0.1') {
+            url = 'http://'+hostname+':3000'+pathname;
+          } else {
+            url = 'http://'+hostname+pathname;
+          }
+
+          $.ajax({
+            type : 'POST',
+            url : url,
+            data : {
+                name : $('#name').val(),
+                city : $('#location').val(),
+                date : $('#date').val(),
+            },
+          });
+
+        });
+
+      });
+    </script>
+  </head>
   <body>
     <!--  include ../partials/nav  // removed ejs brackets for now-->
     <div class="container">
         <!-- <div class="col s1 m1 l1 searchBar">
           <input type="text" name="search" value placeholder="Search">
         </div> -->
-        <form action="/search" method="POST">
+        <form id="postPlanAndSearchPlace"action="/search" method="POST">
           <label for="name">plan name</label>
-          <input type="text" name="name">
+          <input type="text" name="name" id="name">
           <label for="location">select city:</label>
-          <select name="location">
+          <select name="location" id="location">
             <option value="austin">Austin</option>
             <option vlaue="san_francisco">San Francisco</option>
             <option value="new_york">New York</option>
@@ -23,12 +52,12 @@
             <option value="chicago">Chicago</option>
           </select>
           <label for="date">date</label>
-          <input type="text" name="date">
+          <input type="text" name="date" id="date">
         <label for="keyword">
-          search for a place to add to your plan:
+          create your plan and search for a place to add to your plan:
         </label>
         <input type="text" name="keyword">
-        <input type="submit" value="search">
+        <input type="submit" class="submit" value="create">
       </form>
         <!-- <form class="deletePlanForm" action="">
           <button id="deletePlan"type="submit">Delete Plan</button>

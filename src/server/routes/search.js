@@ -31,23 +31,33 @@ const locations = {
 };
 
 router.get('/', function(req, res, next) {
+
   res.render('pages/search', {
-    results: [],
+    results : [],
+    createdPlan : null,
   });
+
 });
 
 router.post('/', function(req, res, next) {
+
+  if(req.body.name) {
+    // req.flash('created a new plan: ', req.body.name);
+
+  }
 
   let lat = locations[req.body.location].lat;
   let long = locations[req.body.location].long;
 
   googlePlaces.nearbySearch(lat, long, req.body.keyword, (placesData) => {
 
+    // for filtering out uninteresting place results that are seen often. should move this to a database if it gets really big.
     // let rejectedPlaces = ['7-Eleven', 'Domino\'s Pizza'];
     // let filteredResults = placesData.results.filter;
 
     res.render('pages/search', {
-      results: placesData.results,
+      results : placesData.results,
+      createdPlan : req.body,
     });
   });
 });

@@ -13,8 +13,11 @@
       <div class="bigC">
         <h5>Austin</h5>
         <div class="row">
-          <% include ../partials/card-sm %>
+          <% places.forEach((card)=>{ %>
 
+              <% include ../partials/card-sm %>
+
+          <% })%>
         </div>
       </div>
     </div>

@@ -1,6 +1,9 @@
 const knex = require('../db/connection');
 
 const Plans = {
+  list: function(id) {
+    return knex('plans').orderBy('upvote', 'desc');
+  },
   by_id: function(id) {
     return knex('plans')
       .first()
