@@ -16,7 +16,7 @@ router.post('/:user_id/plans/new/place/new', (req, res, next) => {
   if (res.locals.loggedIn) {
 
     let newPlan = {
-      user_id:res.locals.user.id,
+      user_id: res.locals.user.id,
       name: req.body.place_name
     };
     let newPlace = {
@@ -58,13 +58,13 @@ router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
 
     });
 
-  }else {
+  } else {
     res.redirect('/login');
   }
 });
 
 //creates new plan
-router.post('/:user_id/plans/new', (req, res,next) => {
+router.post('/:user_id/plans/new', (req, res, next) => {
 
   if (res.locals.loggedIn) {
 
@@ -78,7 +78,7 @@ router.post('/:user_id/plans/new', (req, res,next) => {
 
     });
 
-  }else {
+  } else {
     res.redirect('/');
   }
 
@@ -99,7 +99,7 @@ router.post('/:user_id/plans/new', (req, res) => {
 
     });
 
-  }else {
+  } else {
     res.redirect('/');
   }
 
@@ -215,17 +215,17 @@ router.get('/:id/plans', function(req, res) {
 
 router.get('/:user_id/plans/:plan_id/favorite', (req, res) => {
   let planID = req.params.plan_id;
-  Plans.by_id(planID).then((planCopy)=>{
+  Plans.by_id(planID).then((planCopy) => {
     planCopy.user_id = res.locals.user.id;
     planCopy.is_favorite = true;
-    Places.listWithPlanID(planCopy.id).then((placesCopy)=>{
+    Places.listWithPlanID(planCopy.id).then((placesCopy) => {
       delete planCopy['id'];
-      Plans.insert(planCopy).then(planNew=>{
-        placesCopy = placesCopy.map((place)=> {
+      Plans.insert(planCopy).then(planNew => {
+        placesCopy = placesCopy.map((place) => {
           place.plan_id = planNew.id;
           delete place['id'];
         });
-        Places.insert(placesCopy).then((placesNew)=>{
+        Places.insert(placesCopy).then((placesNew) => {
           res.redirect('/pages/plans');
         });
       });
@@ -245,7 +245,7 @@ router.get('/:id/fav-plans', function(req, res) {
 
 
 router.get('/:id/plans/new', function(req, res) {
-  res.render('pages/myplan');
+  res.render('pages/my_new_plan');
 });
 
 router.get('/logout', function(req, res) {
