@@ -66,7 +66,6 @@ const googlePlaces = {
       console.log('response status:' + response.statusCode);
     });
   },
-
 };
 
 module.exports = googlePlaces;

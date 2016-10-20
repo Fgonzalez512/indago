@@ -52,6 +52,7 @@ router.use('/profile', users_profile);
 router.get('/signup', function(req, res) {
   res.locals.loggedIn = req.session.loggedIn || false;
   res.render('pages/signup');
+
 });
 
 router.post('/signup', function(req, res) {
@@ -169,7 +170,7 @@ router.get('/:id/fav-plans', function(req, res, next) {
 });
 
 router.get('/:id/plans/new', function(req, res, next) {
-  res.render('pages/myplan');
+  res.render('pages/my_new_plan');
 });
 
 router.get('/logout', function(req, res) {
