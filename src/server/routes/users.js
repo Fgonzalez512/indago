@@ -10,8 +10,9 @@ const Plans = require('../modules/plans');
 
 
 
+
 //handles adding a new plan with a new place
-router.post('/new', (req, res, next) => {
+router.post('/plans/new/place/new', (req, res, next) => {
 
   if (res.locals.loggedIn) {
 
@@ -32,7 +33,7 @@ router.post('/new', (req, res, next) => {
         newPlace.plan_id = plan.id;
         Places.insert(newPlace)
           .then((place) => {
-            res.redirect('/users/' + res.locals.user.id + '/plans/' + plan.id);
+            res.redirect('/');
           });
       });
 
@@ -43,6 +44,7 @@ router.post('/new', (req, res, next) => {
 });
 
 
+//add a new plan for
 router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
 
   if (res.locals.loggedIn) {
@@ -62,6 +64,7 @@ router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
   }
 });
 
+//creates new plan
 router.post('/:user_id/plans/new', (req, res,next) => {
 
   if (res.locals.loggedIn) {
@@ -81,6 +84,8 @@ router.post('/:user_id/plans/new', (req, res,next) => {
   }
 
 });
+
+
 
 router.use('/profile', users_profile);
 
