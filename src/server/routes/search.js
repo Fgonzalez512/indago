@@ -5,27 +5,27 @@ const Plans = require('../modules/plans');
 const queryString = require('query-string');
 
 const locations = {
-  austin: {
+  'Austin' : {
     lat: '30.2729',
     long: '-97.7444',
   },
-  san_francisco: {
+  'San Francisco' : {
     lat: '37.773972',
     long: '-122.431297',
   },
-  new_york: {
+  'New York' : {
     lat: '40.712784',
     long: '-74.005941',
   },
-  seattle: {
+  'Seattle' : {
     lat: '47.608013',
     long: '-122.335167',
   },
-  miami: {
+  'Miami' : {
     lat: '25.761681',
     long: '-80.191788',
   },
-  chicago: {
+  'Chicago' : {
     lat: '41.881832',
     long: '-87.623177',
   },
@@ -47,6 +47,7 @@ router.get('/details/:google_places_id', (req, res, next) => {
 
   Plans.by_user_id(user.id).then((user_plans) => {
     googlePlaces.details(req.params.google_places_id, (data) => {
+      console.log(data.result.photos[0]);
       res.render('pages/search_details', {
         result: data.result,
         user_plans : user_plans,
@@ -60,11 +61,11 @@ router.get('/', function(req, res, next) {
 
   let search = queryString.parse(req.url) || null;
 
+  console.log(search);
+  console.log(req.body);
+
   let location = req.body.location || search['location'] || null;
   let keyword = req.body.keyword || search['/?keyword'] || null;
-
-  console.log('location', location);
-  console.log('keyword', keyword);
 
   let lat;
   let long;
@@ -100,10 +101,6 @@ router.get('/:location/:keyword', function(req, res, next) {
   if (lat && long && keyword) {
 
     googlePlaces.nearbySearch(lat, long, keyword, (placesData) => {
-
-    // for filtering out uninteresting place results that are seen often. should move this to a database if it gets really big:
-    // let rejectedPlaces = ['7-Eleven', 'Domino\'s Pizza'];
-    // let filteredResults = placesData.results.filter;
 
       res.render('pages/search', {
         collection: placesData.results,

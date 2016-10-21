@@ -43,7 +43,7 @@ describe('routes : plans', () => {
     });
   });
 
-  describe('POST /plans', () => {
+  describe('POST /users/:user_id/plans/new', () => {
     it('should add a new plan to the database', (done) => {
       agent.post('/users/2/plans/new')
         .send({
@@ -53,6 +53,9 @@ describe('routes : plans', () => {
           keyword : 'barbecue',
         })
         .end((err, res) => {
+          if(err) {
+            console.error(err);
+          }
           knex('plans')
             .where({
               name: 'New Plan 5',
@@ -67,7 +70,7 @@ describe('routes : plans', () => {
     });
   });
 
-  describe('POST /users/:user_id/plans/:plan_id/new', () => {
+  describe('POST /users/:user_id/plans/:plan_id/places/new', () => {
     it('should add a new place to the database with column plan_id equaling the :plan_id param', (done) => {
       agent.post('/users/2/plans/1/places/new')
         .send({
