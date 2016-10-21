@@ -9,6 +9,25 @@ const Places = require('../modules/places');
 const Plans = require('../modules/plans');
 
 
+//creates new plan
+router.post('/:user_id/plans/new', (req, res) => {
+
+
+  if (res.locals.loggedIn) {
+    let newPlan = {
+      name : req.body.name,
+      city : req.body.location.toUpperCase(),
+      date : req.body.date,
+    };
+    newPlan.user_id = req.params.user_id;
+    Plans.insert(newPlan).then((result) => {
+      res.redirect('/search/'+req.body.location+'/'+req.body.keyword);
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
 
 //handles adding a new plan with a new place
 router.post('/:user_id/plans/new/place/new', (req, res, next) => {
@@ -48,23 +67,6 @@ router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
     });
   } else {
     res.redirect('/login');
-  }
-});
-
-//creates new plan
-router.post('/:user_id/plans/new', (req, res) => {
-  if (res.locals.loggedIn) {
-    let newPlan = {
-      name : req.body.name,
-      city : req.body.location,
-      date : req.body.date,
-    };
-    newPlan.user_id = req.params.user_id;
-    Plans.insert(newPlan).then((result) => {
-      res.redirect('/search/'+req.body.location+'/'+req.body.keyword);
-    });
-  } else {
-    res.redirect('/');
   }
 });
 

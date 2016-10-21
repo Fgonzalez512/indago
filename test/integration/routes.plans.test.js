@@ -43,7 +43,7 @@ describe('routes : plans', () => {
     });
   });
 
-  describe('POST /plans', () => {
+  describe('POST /users/:user_id/plans/new', () => {
     it('should add a new plan to the database', (done) => {
       agent.post('/users/2/plans/new')
         .send({
