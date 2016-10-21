@@ -178,7 +178,6 @@ router.get('/:id/fav-plans', function(req, res) {
   });
 });
 
-//pretty sure this is right but you might want to look it over
 router.get('/:user_id/places/:place_id/favorite', (req, res) => {
   let placeID = req.params.place_id;
   Places.withID(placeID).then((placeCopy)=>{
