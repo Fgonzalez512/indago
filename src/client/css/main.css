@@ -369,7 +369,7 @@ p {
 
 /* -------------------- search.ejs --------------------*/
 
-.searchEdit input[type=text]:focus {
+.searchBarInput input[type=text]:focus {
   border-bottom: 1px solid #1560bd !important;
 }
 
@@ -421,4 +421,10 @@ strong {
 
 .invalid {
   border : 3px solid #ff0000;
+}
+
+/* -------------------- plan-details.ejs --------------------*/
+
+.col.s12.plan-details-header {
+  padding-left: 2%;
 }
