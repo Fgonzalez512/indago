@@ -27,10 +27,6 @@
         </select>
         <input type="hidden" id="name" value=<%= result.name %>>
         <input type="hidden" id="address" value=<%=result.formatted_address%>>
-        <!-- <input type="hidden" id="address" value=<%= result.address_components[0].short_name + ' ' + result.address_components[1].short_name %>
-        <input type="hidden" id="city" value=<%= result.address_components[2].short_name %>>
-        <input type="hidden" id="state" value=<%=result.address_components[3].short_name%>>
-        <input type="hidden" id="zipcode" value=<%=result.address_components[4].short_name%>> -->
         <input type="hidden" id="userID" value=<%= user.id %>>
         <select class="search-details-select" id="start_time">
           <option value="9:00 AM">9:00 AM</option>
