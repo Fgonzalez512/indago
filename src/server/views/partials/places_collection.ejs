@@ -7,15 +7,12 @@
       <span class="title"><%= place.name %></span>
       <p><%= place.city %><br></p>
       <div class="row"><div class="col s6 l2">
-      <input type="time" class="timepicker" value="<%= place.start_time %>" style="color:black" <%= false ? "" :"disabled"; %> >
+      <input type="time" value="<%= place.start_time %>" style="color:black" <%= false ? "" :"disabled"; %> >
       </div></div>
       <a href="./places/<%=place.place_id%>" class="secondary-content">
-        <i class="material-icons">delete</i>
+        <i id="_mode_edit" class="material-icons">mode_edit</i>
+        <i id="delete" class="material-icons">delete</i>
       </a>
     </li>
   <% }) %>
 </ul>
-<script>
-  //
-
-</script>
