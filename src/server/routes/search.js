@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const googlePlaces = require('../modules/google-places.js');
 const Plans = require('../modules/plans');
+const queryString = require('query-string');
 
 const locations = {
   austin: {
@@ -56,27 +57,26 @@ router.get('/details/:google_places_id', (req, res, next) => {
 });
 
 router.get('/', function(req, res, next) {
-  let location = req.body.location || null;
+
+  let search = queryString.parse(req.url) || null;
+
+  let location = req.body.location || search['location'] || null;
+  let keyword = req.body.keyword || search['/?keyword'] || null;
+
+  console.log('location', location);
+  console.log('keyword', keyword);
+
   let lat;
   let long;
-  let keyword;
 
   if (location) {
     lat = locations[location].lat || null;
     long = locations[location].long || null;
-    keyword = req.body.keyword || null;
   }
-
-  console.log('got a search request!');
 
   if (lat && long && keyword) {
 
     googlePlaces.nearbySearch(lat, long, keyword, (placesData) => {
-    // console.log(placesData.results);
-
-    // for filtering out uninteresting place results that are seen often. should move this to a database if it gets really big.
-    // let rejectedPlaces = ['7-Eleven', 'Domino\'s Pizza'];
-    // let filteredResults = placesData.results.filter;
 
       res.render('pages/search', {
         collection: placesData.results,
