@@ -13,22 +13,23 @@ $(function() {
   });
 </script>
 
-<div class="col s12">
+<div class="col s12 plan-details-header">
   <div class="row">
     <div class="input-field col s12" contenteditable="<%= is_editable || false %>">
-      <h2 class="header" >
+      <h3 class="header" >
         <%= plan.name %>
-      </h2>
+      </h3>
     </div>
     <div class="input-field col s12" contenteditable="<%= is_editable || false %>">
-      <h4 class="header">
+      <h5 class="header">
         <%= plan.city %>
-      </h4>
+      </h5>
     </div>
     <div class="col s12 m3 l2">
-      <h4 class="header">
+      <h5 class="header">
         <input type="date" class="datepicker" style="color:black" <%= is_editable ? "" :"disabled"; %> >
       </h5>
+      <a href="/search">Add places</a>
     </div>
   </div>
 </div>
