@@ -19,7 +19,8 @@ const data = {
   plans: [{
     user_id: 1,
     city: 'Austin',
-    name: 'Music Day!'
+    name: 'Music Days!',
+    date:'2017-07-08'
   }, {
     user_id: 2,
     city: 'San Francisco',

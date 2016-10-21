@@ -1,3 +1,18 @@
+<script>
+$(function() {
+
+    var $input = $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 2, // Creates a dropdown of 15 years to control year
+    format: 'mmm dd, yy'
+    })
+    var picker = $input.pickadate('picker')
+
+    picker.set('select', '<%= plan.date %>' , { format: 'yyyy-mm-dd' });
+
+  });
+</script>
+
 <div class="col s12">
   <div class="row">
     <div class="input-field col s12" contenteditable="<%= is_editable || false %>">
@@ -12,7 +27,7 @@
     </div>
     <div class="col s12 m3 l2">
       <h4 class="header">
-        <input type="date" class="datepicker" style="color:black" <%= is_editable ? "" :"disabled"; %> value="<%= (plan.date||"1984-07-08") %>">
+        <input type="date" class="datepicker" style="color:black" <%= is_editable ? "" :"disabled"; %> >
       </h5>
     </div>
   </div>

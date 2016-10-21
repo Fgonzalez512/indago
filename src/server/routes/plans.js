@@ -76,6 +76,15 @@ router.get('/:plan_id', function(req, res, next) {
         res.locals.is_editable = true;
       }
     }
+    // console.log(result[0].date);
+    var y;
+    if(result[0].date){
+      var options = {year:'numeric',month:'numeric', day:'numeric' };
+
+      result[0].date = result[0].date.toISOString().split('T')[0];
+
+    }
+    console.log(result[0].date);
     res.render('pages/plan-details',{plan:result[0],places:result[1]});
   });
 
