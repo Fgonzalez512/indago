@@ -20,7 +20,9 @@ describe('routes : plans', () => {
         password: 'password',
       })
       .end((err, res) => {
-        console.log(err);
+        if (err) {
+          console.log(err);
+        }
         done();
       });
   });
