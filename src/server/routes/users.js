@@ -38,7 +38,7 @@ router.post('/:user_id/plans/new/place/new', (req, res, next) => {
 });
 
 
-//add a new plan for
+//add a new place to a plan
 router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
   if (res.locals.loggedIn) {
     let newPlace = req.body;
@@ -90,6 +90,7 @@ router.post('/signup', function(req, res) {
             username: req.body.username,
             password: hashed_password
           }).then(function(newUser) {
+            console.log(newUser);
 
             req.session.user = newUser;
             req.session.loggedIn = true;
@@ -100,7 +101,7 @@ router.post('/signup', function(req, res) {
           });
         });
       } else {
-        res.send('User created');
+        res.send('User already created');
       }
     });
 });
