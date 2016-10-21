@@ -47,6 +47,7 @@ router.get('/details/:google_places_id', (req, res, next) => {
 
   Plans.by_user_id(user.id).then((user_plans) => {
     googlePlaces.details(req.params.google_places_id, (data) => {
+      console.log(data.result.photos[0]);
       res.render('pages/search_details', {
         result: data.result,
         user_plans : user_plans,
@@ -59,6 +60,9 @@ router.get('/details/:google_places_id', (req, res, next) => {
 router.get('/', function(req, res, next) {
 
   let search = queryString.parse(req.url) || null;
+
+  console.log(search);
+  console.log(req.body);
 
   let location = req.body.location || search['location'] || null;
   let keyword = req.body.keyword || search['/?keyword'] || null;

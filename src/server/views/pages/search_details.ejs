@@ -27,6 +27,7 @@
         </select>
         <input type="hidden" id="name" value=<%= result.name %>>
         <input type="hidden" id="address" value=<%=result.formatted_address%>>
+        <input type="hidden" id="google_photo_ref" value=<%=result.photos[0].photo_reference%>>
         <input type="hidden" id="userID" value=<%= user.id %>>
         <select class="search-details-select" id="start_time">
           <option value="9:00 AM">9:00 AM</option>

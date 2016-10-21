@@ -58,6 +58,8 @@ router.post('/:user_id/plans/new/place/new', (req, res, next) => {
 
 //add a new place to a plan
 router.post('/:user_id/plans/:plan_id/places/new', (req, res, next) => {
+
+  console.log(req.body);
   if (res.locals.loggedIn) {
     let newPlace = req.body;
     newPlace.plan_id = parseInt(req.params.plan_id);

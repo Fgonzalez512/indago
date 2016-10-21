@@ -52,6 +52,7 @@ $(document).ready(function() {
         city : $('#city').val(),
         state : $('#state').val(),
         zipcode : $('#zipcode').val(),
+        google_photo_ref : $('#google_photo_ref').val() || null,
         start_time : $('#start_time').val(),
       }
     });
