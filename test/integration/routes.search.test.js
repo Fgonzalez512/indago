@@ -31,10 +31,10 @@ describe('routes : search', () => {
     });
   });
 
-  describe('POST /search', () => {
-    it('should poplulate the page with search results', (done) => {
+  describe('GET /search', () => {
+    it('should poplulate the page with search results when given a valid body', (done) => {
       chai.request(server)
-        .post('/search')
+        .get('/search')
         //add in form data here
         .send({
           location: 'austin'
@@ -51,19 +51,6 @@ describe('routes : search', () => {
         });
     });
   });
-  //TODO: refactor search to use query strings as described below
-  // xdescribe('GET /search', () => {
-  //   xit('should populate the page with search results', (done) => {
-  //     chai.request(server)
-  //       .get('/search/?location=austin&q=barbecue')
-  //       .end((err, res) => {
-  //         res.status.shoudld.equal(200);
-  //         res.type.should.equal('text/html');
-  //         res.text.should.include();
-  //         done();
-  //       });
-  //   });
-  // });
   describe('GET /search/details/:google_places_id', () => {
     it('should show the details for a specific search item', (done) => {
       chai.request(server)

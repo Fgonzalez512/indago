@@ -19,7 +19,8 @@ const data = {
   plans: [{
     user_id: 1,
     city: 'Austin',
-    name: 'Music Day!'
+    name: 'Music Days!',
+    date:'2017-07-08'
   }, {
     user_id: 2,
     city: 'San Francisco',
@@ -62,22 +63,28 @@ const data = {
   ],
   places: [{
     plan_id: 1,
-    name: 'Go Diego Go!',
+    start_time:'9:00 AM',
+    name: 'Pinballz!',
     city: 'Austin',
-    state: 'TX'
+    state: 'TX',
+    photo_url: 'https://wwcdn.weddingwire.com/vendor/750001_755000/754857/thumbnails/800x800_1427470934503-pinballz-wall.jpg'
   }, {
     plan_id: 1,
+    start_time:'10:00 AM',
     name: 'Galvanize',
     city: 'Austin',
     state: 'TX',
-    is_favorite: true
+    is_favorite: true,
+    photo_url: 'http://www.texastechpulse.com/images/logos/galvanizesign1.jpg'
 
   }, {
     plan_id: 1,
+    start_time:'11:00 AM',
     name: 'Lake Pflugerville',
     city: 'Pflugerville',
     state: 'TX',
-    is_favorite: true
+    is_favorite: true,
+    photo_url: 'http://www.pflugervilletx.gov/images/pages/N824/Lake%20air%202.jpg'
   }]
 };
 

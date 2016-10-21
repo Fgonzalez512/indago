@@ -1,7 +1,7 @@
 const request = require('request');
 const baseURI = 'https://maps.googleapis.com/maps/api/place/';
 //TODO: make the below work without hardcoding the key;
-const key = process.env.GOOGLE_PLACES_API_KEY || 'AIzaSyBzSrtzkd0500etRD3IsxjsKSON9ipJLBo';
+const key = process.env.GOOGLE_PLACES_API_KEY || 'AIzaSyBehx791hFZ10uYgcCoO2KfJ7dYs-BIO44';
 
 const googlePlaces = {
 
@@ -66,7 +66,6 @@ const googlePlaces = {
       console.log('response status:' + response.statusCode);
     });
   },
-
 };
 
 module.exports = googlePlaces;

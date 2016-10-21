@@ -11,6 +11,10 @@ console.log('process.env.DB_NAME', process.env.DB_NAME);
 
 const server = require('../../src/server/app');
 
+const agent = chai.request.agent(server);
+
+const knex = require('../../src/server/db/connection');
+
 describe('routes : auth', () => {
 
   beforeEach((done) => {
@@ -31,6 +35,33 @@ describe('routes : auth', () => {
           res.status.should.equal(200);
           res.type.should.equal('text/html');
           done();
+        });
+    });
+  });
+
+  describe('the login page after signup', () => {
+    xit('should contain a navbar dropdown tab called "my plans", that contains requests to /user/:user_id/[some route]', (done) => {
+      agent.post('/signup')
+        .send({
+          first_name : 'Bob',
+          last_name : 'Smith',
+          email : 'email123@email.com',
+          username : 'bob_smith',
+          password : 'password',
+        })
+        .end((err, res) => {
+          if(err) {
+            console.error(err);
+          }
+          knex('users')
+            .where({
+              email : 'email123@email.com',
+            })
+            .first()
+            .then((user) => {
+              res.redirects.length.should.equal(1);
+              res.text.should.include('<a href="/users/'+user.id+'/plans/new">');
+            });
         });
     });
   });

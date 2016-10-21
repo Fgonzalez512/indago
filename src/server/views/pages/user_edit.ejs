@@ -1,67 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- js -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="/js/main.js"></script>
+<head>
+    <% include ../partials/head %>
 
+</head>
 
-    <!-- css -->
+<body>
+    <% include ../partials/nav %>
 
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300" rel="stylesheet">
+        <div class="container">
+            <header class="homePage">
 
-    <!-- meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title><%= "Indago" %></title>
+            </header>
+            <div class="row">
 
-  </head>
-  <body>
-    <nav>
-      <div class="navBar">
-          <a class="logo" href="/">indago</a>
-          <input type="text" name="searchNav" value placeholder="City">
-          <a class="dropdown-button" href="#" data-activates="dropdown1"> Plans </a>
-          <a class="dropdown-button" href="#" data-activates="dropdown2"href="#" data-activates="dropdown2"> User </a>
-      </div>
-      <ul id="dropdown2" class="dropdown-content">
-        <li><a href="#">Edit</a></li>
-        <li><a href="/users/logout">Log Out</a></li>
-      </ul>
-    </nav>
-    <div class="container">
-      <header class="homePage">s
-        <h3> Change your profile information</h3>
-      </header>
-      <div class="row">
+            </div>
+            <div class="bigContainer">
+                <div class="smallContainer">
+                    <h3>Edit Your Profile</h3>
+                    <form class="formEdit" action="/users/profile/<%= user.id %>?_method=PATCH" method="POST">
+                        <input type="hidden" name="id" value="<%= user.id %>">
+                        <input type="text" value="<%= user.first_name %>" name="first_name" value placeholder="First Name">
+                        <input type="text" value="<%= user.last_name %>" name="last_name" value placeholder="Last Name">
+                        <input type="text" value="<%= user.username %>" name="username" value placeholder="Username">
+                        <input type="text" value="<%= user.email %>" name="email" value placeholder="Email">
+                        <input type="password" name="password" value placeholder="Password">
+                        <button class="btn waves-effect waves-light" type="submit">Submit</button>
+                    </form>
+                    <form class = "formEdit deleteUserButton" method="POST" action="/users/profile/<%= user.id %>?_method=DELETE">
+                        <button class="btn waves-effect waves-light" type="submit">Delete Profile</button>
+                    </form>
+                </div>
+            </div>
 
-      </div>
-      <div class="bigContainer">
-          <div class="smallContainer">
-              <h3>Edit Your Profile</h3>
-              <form class="formEdit" action="/users/profile/<%= user.id %>?_method=PATCH" method="POST">
-                  <input type="hidden" name="id" value="<%= user.id %>">
-                  <input type="text" value="<%= user.first_name %>" name="first_name" value placeholder="First Name">
-                  <input type="text" value="<%= user.last_name %>" name="last_name" value placeholder="Last Name">
-                  <input type="text" value="<%= user.username %>" name="username" value placeholder="Username">
-                  <input type="text" value="<%= user.email %>" name="email" value placeholder="Email">
-                  <input type="password" name="password" value placeholder="Password">
-                  <button class="btn waves-effect waves-light" type="submit">Change Information</button>
-              </form>
-              <form method="POST" action="/users/profile/<%= user.id %>?_method=DELETE">
-                <button type="submit">Delete user</button>
-              </form>
-          </div>
-    </div>
-    <!-- <footer><% include ../partials/footer %></footer> -->
-  </body>
+</body>
+
 </html>

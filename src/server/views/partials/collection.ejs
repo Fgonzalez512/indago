@@ -12,14 +12,12 @@
         "&",
         "key",
         "=",
-        "AIzaSyBzSrtzkd0500etRD3IsxjsKSON9ipJLBo"
+        "AIzaSyBehx791hFZ10uYgcCoO2KfJ7dYs-BIO44"
       ].join('')
-
 
     }else {
       photo_url = item.icon
     }
-
     %>
     <li class="collection-item avatar">
       <img src="<%= photo_url %>" alt="" class="circle">
@@ -27,10 +25,8 @@
       <p>
       <% var chips = item.types.filter((type)=>(type !== 'point_of_interest' && type !== 'establishment')) %>
       <%- include ../partials/chips %>
-
-    <a href="/search/details/<%=item.place_id%>" class="secondary-content">
+      <a href="/search/details/<%=item.place_id%>" class="secondary-content">
       Add to plan
-      <i class="material-icons">grade</i>
     </a>
     </p>
 </li>
