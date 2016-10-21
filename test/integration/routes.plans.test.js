@@ -19,7 +19,8 @@ describe('routes : plans', () => {
         email: 'margo',
         password: 'password',
       })
-      .then((res) => {
+      .end((err, res) => {
+        console.log(err);
         done();
       });
   });
