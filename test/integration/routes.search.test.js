@@ -37,7 +37,7 @@ describe('routes : search', () => {
         .get('/search')
         //add in form data here
         .send({
-          location: 'austin'
+          location: 'Austin'
         })
         .send({
           keyword: 'beer'

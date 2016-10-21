@@ -15,7 +15,7 @@ router.post('/:user_id/plans/new', (req, res) => {
   if (res.locals.loggedIn) {
     let newPlan = {
       name : req.body.name,
-      city : req.body.location.capitalize(),
+      city : req.body.location,
       date : req.body.date,
     };
     newPlan.user_id = req.params.user_id;
