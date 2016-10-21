@@ -63,9 +63,6 @@ router.get('/', function(req, res, next) {
   let location = req.body.location || search['location'] || null;
   let keyword = req.body.keyword || search['/?keyword'] || null;
 
-  console.log('location', location);
-  console.log('keyword', keyword);
-
   let lat;
   let long;
 
@@ -100,10 +97,6 @@ router.get('/:location/:keyword', function(req, res, next) {
   if (lat && long && keyword) {
 
     googlePlaces.nearbySearch(lat, long, keyword, (placesData) => {
-
-    // for filtering out uninteresting place results that are seen often. should move this to a database if it gets really big:
-    // let rejectedPlaces = ['7-Eleven', 'Domino\'s Pizza'];
-    // let filteredResults = placesData.results.filter;
 
       res.render('pages/search', {
         collection: placesData.results,
