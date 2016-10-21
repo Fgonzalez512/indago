@@ -30,38 +30,6 @@ const locations = {
   },
 };
 
-router.get('/', function(req, res, next) {
-
-  res.render('pages/search', {
-    collection: [],
-    createdPlan: null,
-  });
-
-});
-
-router.post('/', function(req, res, next) {
-
-  if (req.body.name) {
-    // req.flash('created a new plan: ', req.body.name);
-
-  }
-
-  let lat = locations[req.body.location].lat;
-  let long = locations[req.body.location].long;
-
-  googlePlaces.nearbySearch(lat, long, req.body.keyword, (placesData) => {
-
-    // for filtering out uninteresting place results that are seen often. should move this to a database if it gets really big.
-    // let rejectedPlaces = ['7-Eleven', 'Domino\'s Pizza'];
-    // let filteredResults = placesData.results.filter;
-
-    res.render('pages/search', {
-      collection: placesData.results,
-      createdPlan: req.body,
-    });
-  });
-});
-
 router.get('/details/:google_places_id', (req, res, next) => {
 
   let user = req.session.user || null;
@@ -69,8 +37,9 @@ router.get('/details/:google_places_id', (req, res, next) => {
   if (!user) {
     return googlePlaces.details(req.params.google_places_id, (data) => {
       res.render('pages/search_details', {
-        result: data.result,
-        user_plans: null,
+        result : data.result,
+        user_plans : null,
+        user_id : null,
       });
     });
   }
@@ -79,10 +48,75 @@ router.get('/details/:google_places_id', (req, res, next) => {
     googlePlaces.details(req.params.google_places_id, (data) => {
       res.render('pages/search_details', {
         result: data.result,
-        user_plans: user_plans,
+        user_plans : user_plans,
+        user_id : user.id,
       });
     });
   });
 });
+
+router.get('/', function(req, res, next) {
+  let location = req.body.location || null;
+  let lat;
+  let long;
+  let keyword;
+
+  if (location) {
+    lat = locations[location].lat || null;
+    long = locations[location].long || null;
+    keyword = req.body.keyword || null;
+  }
+
+  console.log('got a search request!');
+
+  if (lat && long && keyword) {
+
+    googlePlaces.nearbySearch(lat, long, keyword, (placesData) => {
+    // console.log(placesData.results);
+
+    // for filtering out uninteresting place results that are seen often. should move this to a database if it gets really big.
+    // let rejectedPlaces = ['7-Eleven', 'Domino\'s Pizza'];
+    // let filteredResults = placesData.results.filter;
+
+      res.render('pages/search', {
+        collection: placesData.results,
+        createdPlan: req.body,
+      });
+    });
+  } else {
+    res.render('pages/search', {
+      collection: [],
+      createdPlan: {},
+    });
+  }
+});
+
+router.get('/:location/:keyword', function(req, res, next) {
+  let location = req.params.location;
+  let lat = locations[location].lat;
+  let long = locations[location].long;
+  let keyword = req.body.keyword || req.params.keyword;
+
+  if (lat && long && keyword) {
+
+    googlePlaces.nearbySearch(lat, long, keyword, (placesData) => {
+
+    // for filtering out uninteresting place results that are seen often. should move this to a database if it gets really big:
+    // let rejectedPlaces = ['7-Eleven', 'Domino\'s Pizza'];
+    // let filteredResults = placesData.results.filter;
+
+      res.render('pages/search', {
+        collection: placesData.results,
+        createdPlan: req.body,
+      });
+    });
+  } else {
+    res.render('pages/search', {
+      collection: [],
+      createdPlan: null,
+    });
+  }
+});
+
 
 module.exports = router;

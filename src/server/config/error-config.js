@@ -12,8 +12,8 @@
       err.status = 404;
       next(err);
     });
-
-    // development error handler (will print stacktrace)
+    //
+    //development error handler (will print stacktrace)
     if (app.get('env') === 'development') {
       app.use(function(err, req, res, next) {
         res.status(err.status || 500).send({
@@ -25,10 +25,12 @@
 
     // production error handler (no stacktraces leaked to user)
     app.use(function(err, req, res, next) {
-      res.status(err.status || 500).send({
-        message: err.message,
-        error: {}
-      });
+      res.status(404);
+      res.render('pages/error');
+      // res.status(err.status || 500).send({
+      //   message: err.message,
+      //   error: {}
+      // });
     });
 
   };

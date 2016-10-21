@@ -30,6 +30,7 @@
 
   function onError(error) {
     if (error.syscall !== 'listen') {
+      console.log('the Oli and sam test');
       throw error;
     }
     const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
@@ -43,6 +44,7 @@
         process.exit(1);
         break;
       default:
+        console.log('Hey hey hey');
         throw error;
     }
   }
