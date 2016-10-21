@@ -3,11 +3,11 @@ const router = express.Router();
 const knex = require('../db/connection.js');
 
 router.get('/', function(req, res, next) {
-  console.log(req.session.user);
 
   if (req.session.loggedIn === true) {
+    
     return res.render('index', {
-      user : req.session.user || req.session.user[0],
+      user : req.session.user[0] || req.session.user,
     });
   }
   res.render('index');
