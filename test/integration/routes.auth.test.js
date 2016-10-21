@@ -40,8 +40,8 @@ describe('routes : auth', () => {
   });
 
   describe('the login page after signup', () => {
-    xit('should contain a navbar dropdown tab called "my plans", that contains requests to /user/:user_id/[some route]', (done) => {
-      agent.post('/signup')
+    it('should contain a navbar dropdown tab called "my plans", that contains requests to /user/:user_id/[some route]', (done) => {
+      agent.post('/users/signup')
         .send({
           first_name : 'Bob',
           last_name : 'Smith',
@@ -59,8 +59,8 @@ describe('routes : auth', () => {
             })
             .first()
             .then((user) => {
-              res.redirects.length.should.equal(1);
               res.text.should.include('<a href="/users/'+user.id+'/plans/new">');
+              done();
             });
         });
     });
