@@ -2,9 +2,6 @@ const router = require('express').Router();
 const knex = require('../db/connection.js');
 const Plans = require('../modules/plans');
 const Places = require('../modules/places');
-const Promise = require('promise');
-
-
 
 router.get('/:id/upvote', (req, res) => {
   let planID = req.params.id;
