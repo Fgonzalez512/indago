@@ -1,14 +1,33 @@
-<ul class="collection">
-    <% places.forEach((place) => { %>
-    <li class="collection-item avatar">
-      <img src="http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png" alt="" class="circle">
-      <span class="title"><%= place.name %></span>
-      <p><%= place.city %><br>
-      </p>
-      <a href="./places/<%=place.place_id%>" class="secondary-content">
 
+
+<script type="text/javascript">
+
+$('.sortable').sortable().bind('sortupdate', function() {
+console.log("here");
+});
+
+</script>
+
+<ul class="sortable collection">
+  <% places.forEach((place) => { %>
+    <li class="ui-state-default collection-item avatar" draggable=true ondragstart="dragstart_handler(event);">
+    <input class="time_shifter" id="plan_id_<%=place.place_id%>" type="hidden" value="<%= place.start_time %>">
+      <img src="<%= place.photo_url %>" alt="" class="circle">
+      <span class="title"><%= place.name %></span>
+      <p><%= place.city %><br></p>
+      <div class="row">
+
+
+      <div class="input-field col s12 m2">
+        <input type="time" class="timepicker" value="<%= place.start_time %>" style="color:black" <%= is_editable ? "" :"disabled"; %> >
+      </div>
+      </div>
+      <a href="./places/<%=place.place_id%>" class="secondary-content">
       <i class="material-icons">delete</i>
       </a>
     </li>
-      <% }) %>
-  </ul>
+  <% }) %>
+</ul>
+<script>
+    $('.sortable').sortable();
+</script>
