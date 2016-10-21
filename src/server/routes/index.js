@@ -5,7 +5,7 @@ const knex = require('../db/connection.js');
 router.get('/', function(req, res, next) {
 
   if (req.session.loggedIn === true) {
-    
+
     return res.render('index', {
       user : req.session.user[0] || req.session.user,
     });

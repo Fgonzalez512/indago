@@ -22,8 +22,8 @@ describe('routes : plans', () => {
       .end((err, res) => {
         if (err) {
           console.log(err);
-          done();
         }
+        done();
       });
   });
 
