@@ -39,7 +39,7 @@ christopher.w.katzmann@gmail.com
 diego.goding@gmail.com  
 
 * **Frank Gonzalez**  
-[Github](https://github.com/d4rkkn1gh787)  
+[Github](https://github.com/Fgonzalez512)  
 frank.gonzalez628@gmail.com  
 
 * **Robert Varela**  
