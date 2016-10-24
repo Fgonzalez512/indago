@@ -2,7 +2,7 @@
 ### Galvanize Cohort 33 Full-Stack Developer Immersive - Q2 Project
 Indago is a mobile and web application that helps you find the perfect day trip in the city. You can see other users trips and save the best one that matches you. You can also create a custom trip from scratch.  
 
-Status:  
+
 master:[![Build Status](https://travis-ci.org/diegogoding/indago.svg?branch=master)](https://travis-ci.org/diegogoding/scout)
 stable:[![Build Status](https://travis-ci.org/diegogoding/indago.svg?branch=stable)](https://travis-ci.org/diegogoding/scout)
 develop:[![Build Status](https://travis-ci.org/diegogoding/indago.svg?branch=develop)](https://travis-ci.org/diegogoding/scout)
