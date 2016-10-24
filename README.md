@@ -11,3 +11,52 @@ stable:[![codecov](https://codecov.io/gh/diegogoding/indago/branch/stable/graph/
 develop:[![codecov](https://codecov.io/gh/diegogoding/indago/branch/develop/graph/badge.svg)](https://codecov.io/gh/diegogoding/scout)
 
 Current Wireframes: https://ninjamock.com/s/F5NHF
+
+## [Github Link](https://github.com/diegogoding/indago)
+
+##[Indago - Explore: A perfect day in the city](http://indago.io)
+Indago is a mobile and web application that helps you find the perfect day trip in the city. You can see other users trips and save the best one that matches you. You can also create a custom trip from scratch.
+
+###Technical Stack + APIs + Technical Challenges
+* Node
+* jQuery
+* Materialize CSS
+* Knex
+* Express
+* Cookie-Session
+* Google Places API
+* Google Directions API
+* Travis Continious Intergation 
+* AWS CodePipeline
+* AWS RDB Postgres
+* AWS Elastic Beanstalk
+
+###All group members, their github accounts, and email
+
+* **Christopher Katzmann**  
+[Github](https://github.com/cwkatzmann)  
+christopher.w.katzmann@gmail.com  
+
+* **Diego Goding**  
+[Github](https://github.com/diegogoding)  
+diego.goding@gmail.com  
+
+* **Frank Gonzalez**  
+[Github](https://github.com/d4rkkn1gh787)  
+frank.gonzalez628@gmail.com  
+
+* **Robert Varela**  
+[Github](https://github.com/rvarela11) - [Portfoilio](http://www.robertvarela.com)    
+rvarela@utexas.edu  
+
+* **Sam Rosenbluth**  
+[Github](https://github.com/rosenbluth)  
+samuel.rosenbluth@gmail.com  
+
+
+###Wireframe link
+- [Built with NigaMock](https://ninjamock.com/s/F5NHF)
+
+
+### Storyboard link
+- [Built with Trello](https://trello.com/b/zQObQm8X/indago)
